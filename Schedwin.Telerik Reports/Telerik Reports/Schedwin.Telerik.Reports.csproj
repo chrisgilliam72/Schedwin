@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B23FA695-2F27-4C67-A200-EEFC7DACD12D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Schedwin.Reports</RootNamespace>
+    <AssemblyName>Schedwin.Reports.Telerik</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.Reporting, Version=9.1.15.731, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\Reporting Q2 2015\Bin\Telerik.Reporting.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Reporting.XpsRendering, Version=9.1.15.731, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Reporting Q2 2015\Bin\Telerik.Reporting.XpsRendering.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.ReportViewer.Wpf, Version=9.1.15.731, Culture=neutral, PublicKeyToken=a9d7983dfcc261be, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Reporting Q2 2015\Bin\Telerik.ReportViewer.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Navigation.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Airstrip\AirstripLogbook.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Airstrip\AirstripLogbook.Designer.cs">
+      <DependentUpon>AirstripLogbook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CargoManifest\CargoManifestZimbabwe.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CargoManifest\CargoManifestZimbabwe.designer.cs">
+      <DependentUpon>CargoManifestZimbabwe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CargoManifest\CargoManifestNamibia.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CargoManifest\CargoManifestNamibia.designer.cs">
+      <DependentUpon>CargoManifestNamibia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CargoManifest\CargoManifestBotswana.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CargoManifest\CargoManifestBotswana.designer.cs">
+      <DependentUpon>CargoManifestBotswana.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\ReportManager.cs" />
+    <Compile Include="Misc\BusinessKMSReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Misc\BusinessKMSReport.Designer.cs">
+      <DependentUpon>BusinessKMSReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Passenger\PassengerCountSummaryByOperator.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Passenger\PassengerCountSummaryByOperator.Designer.cs">
+      <DependentUpon>PassengerCountSummaryByOperator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot\Pilot28365.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pilot\Pilot28365.Designer.cs">
+      <DependentUpon>Pilot28365.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot\Pilot28365Summary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pilot\Pilot28365Summary.Designer.cs">
+      <DependentUpon>Pilot28365Summary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot\PilotCoFlyingSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pilot\PilotCoFlyingSummary.designer.cs">
+      <DependentUpon>PilotCoFlyingSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot\PilotDetailedSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pilot\PilotDetailedSummary.Designer.cs">
+      <DependentUpon>PilotDetailedSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot\PilotExpiryDates.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pilot\PilotExpiryDates.Designer.cs">
+      <DependentUpon>PilotExpiryDates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot\PilotFlightDutyPeriod.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pilot\PilotFlightDutyPeriod.Designer.cs">
+      <DependentUpon>PilotFlightDutyPeriod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot\PilotFlightTimeACTypeSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pilot\PilotFlightTimeACTypeSummary.Designer.cs">
+      <DependentUpon>PilotFlightTimeACTypeSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot\PilotFlyingHours.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pilot\PilotFlyingHours.Designer.cs">
+      <DependentUpon>PilotFlyingHours.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot\PilotFlyingHoursLast30Days.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pilot\PilotFlyingHoursLast30Days.Designer.cs">
+      <DependentUpon>PilotFlyingHoursLast30Days.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot\PilotFlyingSummary.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pilot\PilotFlyingSummary.Designer.cs">
+      <DependentUpon>PilotFlyingSummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot\PilotStatus.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pilot\PilotStatus.Designer.cs">
+      <DependentUpon>PilotStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot\Report1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pilot\Report1.Designer.cs">
+      <DependentUpon>Report1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Pilot\PilotDutyHours.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Pilot\PilotDutyHours.Designer.cs">
+      <DependentUpon>PilotDutyHours.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportBookViewerWnd.xaml.cs">
+      <DependentUpon>ReportBookViewerWnd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tickets\PassengerSingleLegTickets.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tickets\PassengerSingleLegTickets.designer.cs">
+      <DependentUpon>PassengerSingleLegTickets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tickets\PassengerTickets.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tickets\PassengerTickets.designer.cs">
+      <DependentUpon>PassengerTickets.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Airstrip\AirstripLogbook.resx">
+      <DependentUpon>AirstripLogbook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CargoManifest\CargoManifestZimbabwe.resx">
+      <DependentUpon>CargoManifestZimbabwe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CargoManifest\CargoManifestNamibia.resx">
+      <DependentUpon>CargoManifestNamibia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CargoManifest\CargoManifestBotswana.resx">
+      <DependentUpon>CargoManifestBotswana.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Misc\BusinessKMSReport.resx">
+      <DependentUpon>BusinessKMSReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Passenger\PassengerCountSummaryByOperator.resx">
+      <DependentUpon>PassengerCountSummaryByOperator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot\Pilot28365.resx">
+      <DependentUpon>Pilot28365.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot\Pilot28365Summary.resx">
+      <DependentUpon>Pilot28365Summary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot\PilotCoFlyingSummary.resx">
+      <DependentUpon>PilotCoFlyingSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot\PilotDetailedSummary.resx">
+      <DependentUpon>PilotDetailedSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot\PilotDutyHours.resx">
+      <DependentUpon>PilotDutyHours.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot\PilotExpiryDates.resx">
+      <DependentUpon>PilotExpiryDates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot\PilotFlightDutyPeriod.resx">
+      <DependentUpon>PilotFlightDutyPeriod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot\PilotFlightTimeACTypeSummary.resx">
+      <DependentUpon>PilotFlightTimeACTypeSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot\PilotFlyingHours.resx">
+      <DependentUpon>PilotFlyingHours.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot\PilotFlyingHoursLast30Days.resx">
+      <DependentUpon>PilotFlyingHoursLast30Days.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot\PilotFlyingSummary.resx">
+      <DependentUpon>PilotFlyingSummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot\PilotStatus.resx">
+      <DependentUpon>PilotStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pilot\Report1.resx">
+      <DependentUpon>Report1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Tickets\PassengerSingleLegTickets.resx">
+      <DependentUpon>PassengerSingleLegTickets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tickets\PassengerTickets.resx">
+      <DependentUpon>PassengerTickets.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Reservations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Schedwin.Common\Schedwin.Common.csproj">
+      <Project>{641b45db-09f8-41ba-8a50-1679fe6b0cc9}</Project>
+      <Name>Schedwin.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Schedwin.Data\Schedwin.Data.csproj">
+      <Project>{71ef1439-ae8e-486f-9dfb-ff28cfe81ba0}</Project>
+      <Name>Schedwin.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Schedwin.Scheduling\Schedwin.Scheduling.csproj">
+      <Project>{6ab3cb91-c938-4127-9c43-50be1e0b1fcb}</Project>
+      <Name>Schedwin.Scheduling</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ReportBookViewerWnd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
