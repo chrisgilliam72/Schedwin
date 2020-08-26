@@ -1,0 +1,262 @@
+﻿<UserControl x:Class="Schedwin.WishIntegration.WishBookingLegsCntrlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Schedwin.WishIntegration"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" Height="auto" Width="auto" Background="LightBlue"
+             mc:Ignorable="d" >
+    <UserControl.DataContext>
+        <local:WishBookingLegsCntrlViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <Label Margin="5" Grid.Row="0" Grid.Column="0">Wish Booking Legs</Label>
+        <telerik:RadGridView Margin="5,5,5,5" Grid.Row="1" Grid.Column="0" ShowGroupPanel="False" IsFilteringAllowed="False" RowIndicatorVisibility="Collapsed" AutoGenerateColumns="False"
+                                    ItemsSource="{Binding BookingLegs}" VerticalAlignment="Stretch" MinHeight="100" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                                    EnableRowVirtualization="True" EnableColumnVirtualization="True" SelectedItem="{Binding SelectedLeg}" RowHeight="10" 
+                                    FieldFilterEditorCreated="RadGridView_FieldFilterEditorCreated" >
+            <telerik:RadGridView.Resources>
+                <Style TargetType="telerik:GridViewCell" x:Key="textFont">
+                    <Setter Property="FontSize" Value="9" />
+                </Style>
+            </telerik:RadGridView.Resources>
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn  Width="auto" IsReadOnly="true" CellStyle="{StaticResource textFont}">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate>
+                            <Image Height="20" Width="20" Source="Images\plane16.png" Visibility="{Binding WishResLeg.IsScheduled, Converter={StaticResource BoolToVisConverter}}"/>
+                        </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  Width="auto"  DataMemberBinding="{Binding WishResLeg.WishSectorID}" IsReadOnly="true" CellStyle="{StaticResource textFont}">
+                    <telerik:GridViewDataColumn.Header>
+                        <TextBlock Text="Wish Leg ID" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  Width="auto" DataMemberBinding="{Binding WishResLeg.BookingDate}" DataFormatString="yyyy-MM-dd" IsReadOnly="true"  >
+                    <telerik:GridViewDataColumn.Header>
+                        <TextBlock Text="Flight Date" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewDataColumn.Header>
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding BookingDateBrush }"></Setter>
+                            <Setter Property="FontSize" Value="9" ></Setter>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="ETD" Width="auto" DataMemberBinding="{Binding WishResLeg.ETD}" DataFormatString="HH:mm" MinWidth="75" IsReadOnly="true">
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding ETDBrush }"></Setter>
+                            <Setter Property="FontSize" Value="9" ></Setter>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="ETA" Width="auto" DataMemberBinding="{Binding WishResLeg.ETA}" DataFormatString="HH:mm" MinWidth="75" IsReadOnly="true">
+                    
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding ETABrush }"></Setter>
+                            <Setter Property="FontSize" Value="9" ></Setter>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Charter Type" Width="auto" DataMemberBinding="{Binding WishResLeg.CharterType}" IsReadOnly="True" CellStyle="{StaticResource textFont}"/>
+                <telerik:GridViewCheckBoxColumn Header="FOC" Width="80"  DataMemberBinding="{Binding WishResLeg.FOC}" CellStyle="{StaticResource textFont}"/>
+                <telerik:GridViewCheckBoxColumn Header="Sole use" Width="80"  DataMemberBinding="{Binding WishResLeg.SoleUse}" CellStyle="{StaticResource textFont}"/>
+                <telerik:GridViewDataColumn  Width="auto"  DataMemberBinding="{Binding WishResLeg.FromAP}" IsReadOnly="true" CellStyle="{StaticResource textFont}">
+                    <telerik:GridViewDataColumn.Header>
+                        <TextBlock Text="From AP" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  Width="auto"   DataMemberBinding="{Binding WishResLeg.WishEx}" IsReadOnly="true" >
+                    <telerik:GridViewDataColumn.Header>
+                        <TextBlock Text="Wish Ex" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewDataColumn.Header>
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding WishExBrush }"></Setter>
+                            <Setter Property="FontSize" Value="9" ></Setter>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewComboBoxColumn  Width="auto" MinWidth="75" ItemsSourceBinding="{Binding ExList}" 
+                                                                DataMemberBinding="{Binding SelectedEx}"
+                                                                SelectedValueMemberPath="Description" 
+                                                                DisplayMemberPath="Description" Background="LightBlue"
+                                                                CellStyle="{StaticResource textFont}">
+                    <telerik:GridViewComboBoxColumn.Header>
+                        <TextBlock Text="Ex" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewComboBoxColumn.Header>
+                </telerik:GridViewComboBoxColumn>
+                <telerik:GridViewDataColumn  Width="auto"  DataMemberBinding="{Binding WishResLeg.ToAP}" IsReadOnly="true" CellStyle="{StaticResource textFont}">
+                    <telerik:GridViewDataColumn.Header>
+                        <TextBlock Text="To AP" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  Width="auto"   DataMemberBinding="{Binding WishResLeg.WishFor}" IsReadOnly="true" >
+                    <telerik:GridViewDataColumn.Header >
+                        <TextBlock Text="Wish For" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewDataColumn.Header>
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding WishForBrush }"></Setter>
+                            <Setter Property="FontSize" Value="9" ></Setter>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewComboBoxColumn  Width="auto" MinWidth="75" ItemsSourceBinding="{Binding ForList}" 
+                                                                DataMemberBinding="{Binding SelectedFor}"
+                                                                SelectedValueMemberPath="Description" 
+                                                                DisplayMemberPath="Description" Background="LightBlue"
+                                                                 CellStyle="{StaticResource textFont}">
+                    <telerik:GridViewComboBoxColumn.Header>
+                        <TextBlock Text="For" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewComboBoxColumn.Header>
+                </telerik:GridViewComboBoxColumn>
+                <!--<telerik:GridViewDataColumn Header="Earliest EX" Width="auto" DataMemberBinding="{Binding WishResLeg.EarliestEx,Mode=TwoWay}" DataFormatString="HH:mm" Background="LightBlue" CellStyle="{StaticResource textFont}"/>-->
+                <telerik:GridViewDataColumn  Header="Earliest EX" Width="auto" DataMemberBinding="{ Binding EarliestEx}" CellStyle="{StaticResource textFont}"  Background="LightBlue" DataFormatString="HH:mm"  >
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadTimePicker  TimeInterval="0:15:0"  StartTime="06:00:00" EndTime="18:00:00" DisplayFormat="Short" SelectedValue="{Binding EarliestEx}" >
+                            </telerik:RadTimePicker>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Latest EX" Width="auto" DataMemberBinding="{Binding LatestEx}" Background="LightBlue" CellStyle="{StaticResource textFont}" DataFormatString="HH:mm"  >
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadTimePicker  TimeInterval="0:15:0"  StartTime="06:00:00" EndTime="18:00:00" DisplayFormat="Short" SelectedValue="{Binding LatestEx}" >
+                            </telerik:RadTimePicker>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Earliest For" Width="auto" DataMemberBinding="{Binding EarliestFor}" Background="LightBlue" CellStyle="{StaticResource textFont}" DataFormatString="HH:mm"  >
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadTimePicker  TimeInterval="0:15:0"  StartTime="06:00:00" EndTime="18:00:00" DisplayFormat="Short" SelectedValue="{Binding EarliestFor}" >
+                            </telerik:RadTimePicker>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Latest For" Width="auto" DataMemberBinding="{Binding LatestFor}" Background="LightBlue" CellStyle="{StaticResource textFont}" DataFormatString="HH:mm"  >
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadTimePicker  TimeInterval="0:15:0"  StartTime="06:00:00" EndTime="18:00:00" DisplayFormat="Short" SelectedValue="{Binding LatestFor}" >
+                            </telerik:RadTimePicker>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Budget" Width="80"  DataMemberBinding="{Binding Budget}" IsReadOnly="true" CellStyle="{StaticResource textFont}"/>
+                <telerik:GridViewDataColumn Header="Voucher" Width="auto"  DataMemberBinding="{Binding WishResLeg.Voucher}" CellStyle="{StaticResource textFont}"/>
+                <telerik:GridViewDataColumn Header="Notes" Width="auto"  DataMemberBinding="{Binding WishResLeg.Notes}" IsReadOnly="true">
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding NotesBrush }"></Setter>
+                            <Setter Property="FontSize" Value="9" ></Setter>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                </telerik:GridViewDataColumn>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+        <GridSplitter Grid.Row="1"  Grid.Column="1" Height="5"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+
+        <telerik:RadGridView Margin="5,5,5,5" Grid.Row="2" Grid.Column="0" ShowGroupPanel="False" IsFilteringAllowed="False" RowIndicatorVisibility="Collapsed" AutoGenerateColumns="False"
+                                    ItemsSource="{Binding Cancelledlegs}"  MinHeight="100" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                                     ScrollViewer.HorizontalScrollBarVisibility="Auto" EnableColumnVirtualization="True" RowHeight="10"
+                                     SelectedItem="{Binding SelectedCancelledLeg}" >
+            <telerik:RadGridView.RowStyle>
+                <Style TargetType="{x:Type telerik:GridViewRow}">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="DarkOrange"/>
+                            <Setter Property="Foreground" Value="black"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </telerik:RadGridView.RowStyle>
+            <telerik:RadGridView.Resources>
+                <Style TargetType="telerik:GridViewCell" x:Key="textFont">
+                    <Setter Property="FontSize" Value="9" />
+                </Style>
+            </telerik:RadGridView.Resources>
+            <telerik:RadContextMenu.ContextMenu>
+                <telerik:RadContextMenu x:Name="radContextMenu" IsEnabled="{Binding GridMenuEnabled}" >
+                    <telerik:RadMenuItem Header="Cancel Leg" Click="RadMenuItemCancel_Click" >
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="Images/cancel.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="Delete Leg"  Click="RadMenuItemDelete_Click" >
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="Images/delete.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+                </telerik:RadContextMenu>
+            </telerik:RadContextMenu.ContextMenu>
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn  Width="auto">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Height="20" Width="20" Source="Images\plane16.png" Visibility="{Binding WishResLeg.IsScheduled, Converter={StaticResource BoolToVisConverter}}"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  Width="auto"  DataMemberBinding="{Binding WishResLeg.WishSectorID}" CellStyle="{StaticResource textFont}">
+                    <telerik:GridViewDataColumn.Header>
+                        <TextBlock Text="Wish Leg ID" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  Width="auto" DataMemberBinding="{Binding WishResLeg.BookingDate}"  CellStyle="{StaticResource textFont}">
+                    <telerik:GridViewDataColumn.Header>
+                        <TextBlock Text="Flight Date" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewCheckBoxColumn Header="Sole use" Width="80" CellStyle="{StaticResource textFont}"/>
+                <telerik:GridViewDataColumn  Width="auto"  DataMemberBinding="{Binding WishResLeg.FromAP}" CellStyle="{StaticResource textFont}">
+                    <telerik:GridViewDataColumn.Header>
+                        <TextBlock Text="From" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  Width="auto"   DataMemberBinding="{Binding WishResLeg.WishEx}" CellStyle="{StaticResource textFont}">
+                    <telerik:GridViewDataColumn.Header>
+                        <TextBlock Text="Ex" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  Width="auto"  DataMemberBinding="{Binding WishResLeg.ToAP}" CellStyle="{StaticResource textFont}">
+                    <telerik:GridViewDataColumn.Header>
+                        <TextBlock Text="To" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  Width="auto"  DataMemberBinding="{Binding WishResLeg.WishFor}" CellStyle="{StaticResource textFont}">
+                    <telerik:GridViewDataColumn.Header>
+                        <TextBlock Text="For" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Latest EX" Width="auto" DataMemberBinding="{Binding WishResLeg.LatestEx}" DataFormatString="HH:mm" IsReadOnly="true" CellStyle="{StaticResource textFont}"/>
+                <telerik:GridViewDataColumn Header="Earliest For" Width="auto" DataMemberBinding="{Binding WishResLeg.EarliestFor}" DataFormatString="HH:mm" IsReadOnly="true" CellStyle="{StaticResource textFont}"/>
+                <telerik:GridViewDataColumn Header="Voucher" Width="auto"   DataMemberBinding="{Binding WishResLeg.Voucher}" IsReadOnly="true" CellStyle="{StaticResource textFont}"/>
+                <telerik:GridViewDataColumn Header="Notes" Width="*"  DataMemberBinding="{Binding WishResLeg.Notes}" IsReadOnly="true" CellStyle="{StaticResource textFont}"/>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+    </Grid>
+</UserControl>

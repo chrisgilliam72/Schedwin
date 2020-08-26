@@ -1,0 +1,2201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WISHModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbAircraftTypes">
+          <Key>
+            <PropertyRef Name="pkAircraftTypeId" />
+          </Key>
+          <Property Name="pkAircraftTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbAirstrips">
+          <Key>
+            <PropertyRef Name="pkAirstripId" />
+          </Key>
+          <Property Name="pkAirstripId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AirstripCode" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="25" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbBookingFiles">
+          <Key>
+            <PropertyRef Name="pkBookingId" />
+          </Key>
+          <Property Name="pkBookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PartyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="GuestCount" Type="smallint" Nullable="false" />
+          <Property Name="DefaultRooms" Type="smallint" />
+          <Property Name="DateBookingMade" Type="datetime" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="fkUserId" Type="int" Nullable="false" />
+          <Property Name="fkLockedByUserId" Type="int" />
+          <Property Name="fkAgentId" Type="int" />
+          <Property Name="fkAgencyCode" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="fkOrgAgencyCode" Type="char" MaxLength="6" />
+          <Property Name="fkRate" Type="int" />
+          <Property Name="RulesCheckRequired" Type="char" MaxLength="1" />
+          <Property Name="RulesViolated" Type="char" MaxLength="1" />
+          <Property Name="RepeatParty" Type="char" MaxLength="1" />
+          <Property Name="ExclusiveCamps" Type="char" MaxLength="1" />
+          <Property Name="SpecialAllocation" Type="char" MaxLength="1" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="ItineraryNotes" Type="varchar" MaxLength="1024" />
+          <Property Name="BookingStatus" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="Locked" Type="bit" />
+          <Property Name="TPRef" Type="char" MaxLength="10" />
+          <Property Name="GuideCount" Type="int" />
+          <Property Name="TransactionId" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Paid" Type="bit" Nullable="false" />
+          <Property Name="PCMRef" Type="int" />
+          <Property Name="DontAsk" Type="bit" />
+          <Property Name="WishVersion" Type="float" />
+          <Property Name="TPBranchCluster" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsReverted" Type="bit" />
+          <Property Name="AllowGuestsMax" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbCharterBookings">
+          <Key>
+            <PropertyRef Name="CharterBookingID" />
+          </Key>
+          <Property Name="CharterBookingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_SectorBookingID" Type="int" Nullable="false" />
+          <Property Name="FK_ExPrincipalID" Type="int" Nullable="false" />
+          <Property Name="FK_ForPrincipalID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbGuests">
+          <Key>
+            <PropertyRef Name="pkGuestId" />
+          </Key>
+          <Property Name="pkGuestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Firstname" Type="varchar" MaxLength="60" />
+          <Property Name="Title" Type="varchar" MaxLength="10" />
+          <Property Name="fkResidenceCode" Type="char" MaxLength="2" />
+          <Property Name="fkNationalityCode" Type="char" MaxLength="2" />
+          <Property Name="Weight" Type="smallint" />
+          <Property Name="Age" Type="smallint" />
+          <Property Name="Sharing" Type="char" MaxLength="2" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="IsGuide" Type="smallint" />
+          <Property Name="TPGuestId" Type="int" />
+          <Property Name="PassportNumber" Type="varchar" MaxLength="30" />
+          <Property Name="PassportName" Type="varchar" MaxLength="60" />
+          <Property Name="PassportNationality" Type="varchar" MaxLength="30" />
+          <Property Name="PassportIssued" Type="datetime" />
+          <Property Name="PassportPlace" Type="varchar" MaxLength="30" />
+          <Property Name="PassportExpiry" Type="datetime" />
+          <Property Name="IsRepeatGuest" Type="bit" />
+          <Property Name="IsPrivateGuide" Type="bit" />
+          <Property Name="FK_PrivateGuidID" Type="int" />
+          <Property Name="TPNationality" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbLodgeBookings">
+          <Key>
+            <PropertyRef Name="pkLodgeBookingId" />
+          </Key>
+          <Property Name="pkLodgeBookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkLodgeId" Type="int" />
+          <Property Name="fkSectorBookingId" Type="int" />
+        </EntityType>
+        <EntityType Name="tbLodges">
+          <Key>
+            <PropertyRef Name="pkLodgeId" />
+          </Key>
+          <Property Name="pkLodgeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="fkConcessionId" Type="int" />
+          <Property Name="fkLocationId" Type="int" />
+          <Property Name="fkAirstripId" Type="int" />
+          <Property Name="DisplayInTree" Type="bit" />
+          <Property Name="DisplayInAWISH" Type="bit" />
+          <Property Name="ExpiryTime" Type="int" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Expiry" Type="int" Nullable="false" />
+          <Property Name="fkGroupDivisionId" Type="int" Nullable="false" />
+          <Property Name="Ownership" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fkRegionId" Type="int" Nullable="false" />
+          <Property Name="IsNew" Type="bit" Nullable="false" />
+          <Property Name="GPKey" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="GF_Name" Type="varchar" MaxLength="50" />
+          <Property Name="GF_Country" Type="varchar" MaxLength="50" />
+          <Property Name="GF_Ownership" Type="varchar" MaxLength="100" />
+          <Property Name="GF_Management" Type="varchar" MaxLength="50" />
+          <Property Name="GF_Market" Type="varchar" MaxLength="50" />
+          <Property Name="GF_Brand" Type="varchar" MaxLength="50" />
+          <Property Name="GF_GPDB" Type="varchar" MaxLength="50" />
+          <Property Name="GF_TGKPC" Type="varchar" MaxLength="10" />
+          <Property Name="GF_Region" Type="varchar" MaxLength="50" />
+          <Property Name="GF_Comment" Type="varchar" MaxLength="1024" />
+          <Property Name="GF_ReturnData" Type="bit" />
+          <Property Name="GF_BrandRate" Type="varchar" MaxLength="30" />
+          <Property Name="GF_ReportBeds" Type="smallint" />
+          <Property Name="GF_TotalBeds" Type="smallint" />
+          <Property Name="QV_Marketing" Type="bit" />
+          <Property Name="QV_TPCode" Type="varchar" MaxLength="6" />
+          <Property Name="Longitude" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="Latitude" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="GF_Price_CCY" Type="char" MaxLength="3" />
+          <Property Name="GF_Lessor" Type="varchar" MaxLength="50" />
+          <Property Name="ExclusiveUse" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbPartyGroupGuests">
+          <Key>
+            <PropertyRef Name="fkPartyGroupId" />
+            <PropertyRef Name="fkGuestId" />
+          </Key>
+          <Property Name="fkPartyGroupId" Type="int" Nullable="false" />
+          <Property Name="fkGuestId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbPartyGroups">
+          <Key>
+            <PropertyRef Name="pkPartyGroupId" />
+          </Key>
+          <Property Name="pkPartyGroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="Description" Type="varchar" MaxLength="25" />
+          <Property Name="fkBookingId" Type="int" />
+          <Property Name="IsDefault" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbPrincipals">
+          <Key>
+            <PropertyRef Name="pkPrincipalId" />
+          </Key>
+          <Property Name="pkPrincipalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkPrincipalCode" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="fkLocationCode" Type="char" MaxLength="3" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="fkPrincipalName" Type="nvarchar(max)" />
+          <Property Name="UsedForWishCharters" Type="bit" />
+          <Property Name="FK_PrincipalTypeID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbSectorBookings">
+          <Key>
+            <PropertyRef Name="pkSectorBookingId" />
+          </Key>
+          <Property Name="pkSectorBookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkBookingId" Type="int" />
+          <Property Name="fkSafariId" Type="int" />
+          <Property Name="fkSectorClass" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="fkFromSector" Type="int" />
+          <Property Name="fkToSector" Type="int" />
+          <Property Name="Status" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="ReminderDate" Type="datetime" />
+          <Property Name="fkPartyGroupId" Type="int" />
+          <Property Name="fkMealBasisId" Type="int" />
+          <Property Name="ExpiryDate" Type="datetime" />
+          <Property Name="StartDate" Type="datetime" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="ConfirmedDate" Type="datetime" />
+          <Property Name="fkPrincipalId" Type="int" />
+          <Property Name="fkLocation" Type="char" MaxLength="3" />
+          <Property Name="fkAirstripId" Type="int" />
+          <Property Name="PrincipalReference" Type="varchar" MaxLength="20" />
+          <Property Name="fkAircraftTypeId" Type="int" />
+          <Property Name="fkTransportTypeId" Type="int" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ExclusiveUse" Type="char" MaxLength="1" />
+          <Property Name="StatusModDate" Type="datetime" />
+          <Property Name="Seq" Type="int" />
+          <Property Name="isAgent" Type="bit" />
+          <Property Name="RateOption" Type="varchar" MaxLength="25" />
+          <Property Name="AllowGuestsMax" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbSefBookings">
+          <Key>
+            <PropertyRef Name="pkSefBookingId" />
+          </Key>
+          <Property Name="pkSefBookingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkSefFlightId" Type="int" Nullable="false" />
+          <Property Name="fkSectorBookingId" Type="int" Nullable="false" />
+          <Property Name="ExPrincipalId" Type="int" />
+          <Property Name="ForPrincipalId" Type="int" />
+        </EntityType>
+        <EntityType Name="tbSefFlight">
+          <Key>
+            <PropertyRef Name="pkSefFlightID" />
+          </Key>
+          <Property Name="pkSefFlightID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="fkLocationID" Type="int" Nullable="false" />
+          <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+          <Property Name="EndDateTime" Type="datetime" Nullable="false" />
+          <Property Name="Expiry" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="varchar" MaxLength="25" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="User" Type="nvarchar" MaxLength="50" />
+          <Property Name="fkPrincipalID" Type="int" />
+        </EntityType>
+        <EntityType Name="tbSefFlightLeg">
+          <Key>
+            <PropertyRef Name="pkSefFlightLegID" />
+          </Key>
+          <Property Name="pkSefFlightLegID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkSefFlightScheduleID" Type="int" Nullable="false" />
+          <Property Name="fkSefLegID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbSefFlightSchedule">
+          <Key>
+            <PropertyRef Name="pkSefFlightScheduleID" />
+          </Key>
+          <Property Name="pkSefFlightScheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkSefFlightID" Type="int" Nullable="false" />
+          <Property Name="WeekStartDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbSefLeg">
+          <Key>
+            <PropertyRef Name="pkSefLegID" />
+          </Key>
+          <Property Name="pkSefLegID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkLocationID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+          <Property Name="EndDateTime" Type="datetime" Nullable="false" />
+          <Property Name="fkDepartureAirstripID" Type="int" Nullable="false" />
+          <Property Name="fkArrivalAirstripID" Type="int" Nullable="false" />
+          <Property Name="fkPrincipalId" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="text" />
+        </EntityType>
+        <EntityType Name="tbSefLegSchedule">
+          <Key>
+            <PropertyRef Name="pkSefLegScheduleID" />
+          </Key>
+          <Property Name="pkSefLegScheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkSefLegID" Type="int" Nullable="false" />
+          <Property Name="WeekStartDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbUsers">
+          <Key>
+            <PropertyRef Name="pkUserId" />
+          </Key>
+          <Property Name="pkUserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PersonCode" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ADirectoryGUID" Type="uniqueidentifier" />
+          <Property Name="LastAccess" Type="datetime" />
+          <Property Name="UserLoggedIn" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="UsedResSysCount" Type="int" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tset_WishSchedwinLink">
+          <Key>
+            <PropertyRef Name="pkSchedLinkID" />
+          </Key>
+          <Property Name="pkSchedLinkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fkLodgeId" Type="int" />
+          <Property Name="CampName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ActualCampName" Type="nvarchar" MaxLength="255" />
+          <Property Name="TPCode" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WISH.dbo.vwFlightLegs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwFlightLegs">
+          <Key>
+            <PropertyRef Name="pkSefFlightID" />
+            <PropertyRef Name="flight Description" />
+            <PropertyRef Name="StartDateTime" />
+            <PropertyRef Name="EndDateTime" />
+            <PropertyRef Name="pkSefFlightLegID" />
+          </Key>
+          <Property Name="pkSefFlightLegID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="pkSefFlightID" Type="int" Nullable="false" />
+          <Property Name="flight Description" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="StartDateTime" Type="datetime" Nullable="false" />
+          <Property Name="EndDateTime" Type="datetime" Nullable="false" />
+          <Property Name="fkSefLegID" Type="int" />
+          <Property Name="Flight Active" Type="bit" />
+          <Property Name="Leg Description" Type="varchar" MaxLength="25" />
+          <Property Name="Leg Date" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'WISH.dbo.vwLocations' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwLocations">
+          <Key>
+            <PropertyRef Name="pkLocationId" />
+            <PropertyRef Name="fkLocationCode" />
+          </Key>
+          <Property Name="pkLocationId" Type="int" Nullable="false" />
+          <Property Name="fkLocationCode" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="fkCountryId" Type="int" />
+          <Property Name="NAME" Type="varchar" MaxLength="40" />
+          <Property Name="Description" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <Association Name="FK__tbCharter_fkForPrincipal">
+          <End Role="tbPrincipals" Type="Self.tbPrincipals" Multiplicity="1" />
+          <End Role="tbCharterBookings" Type="Self.tbCharterBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipals">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbCharterBookings">
+              <PropertyRef Name="FK_ForPrincipalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCharter_fkSectorBooking">
+          <End Role="tbSectorBookings" Type="Self.tbSectorBookings" Multiplicity="1" />
+          <End Role="tbCharterBookings" Type="Self.tbCharterBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSectorBookings">
+              <PropertyRef Name="pkSectorBookingId" />
+            </Principal>
+            <Dependent Role="tbCharterBookings">
+              <PropertyRef Name="FK_SectorBookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbBookingFiles_tbUsers">
+          <End Role="tbUsers" Type="Self.tbUsers" Multiplicity="1" />
+          <End Role="tbBookingFiles" Type="Self.tbBookingFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsers">
+              <PropertyRef Name="pkUserId" />
+            </Principal>
+            <Dependent Role="tbBookingFiles">
+              <PropertyRef Name="fkUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbBookingFiles_tbUsers1">
+          <End Role="tbUsers" Type="Self.tbUsers" Multiplicity="0..1" />
+          <End Role="tbBookingFiles" Type="Self.tbBookingFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsers">
+              <PropertyRef Name="pkUserId" />
+            </Principal>
+            <Dependent Role="tbBookingFiles">
+              <PropertyRef Name="fkLockedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbCharter_fkExPrincipal">
+          <End Role="tbPrincipals" Type="Self.tbPrincipals" Multiplicity="1" />
+          <End Role="tbCharterBookings" Type="Self.tbCharterBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipals">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbCharterBookings">
+              <PropertyRef Name="FK_ExPrincipalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbFlightLeg_tbFlightSchedule">
+          <End Role="tbSefFlightSchedule" Type="Self.tbSefFlightSchedule" Multiplicity="1" />
+          <End Role="tbSefFlightLeg" Type="Self.tbSefFlightLeg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSefFlightSchedule">
+              <PropertyRef Name="pkSefFlightScheduleID" />
+            </Principal>
+            <Dependent Role="tbSefFlightLeg">
+              <PropertyRef Name="fkSefFlightScheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbFlightLeg_tbLeg">
+          <End Role="tbSefLeg" Type="Self.tbSefLeg" Multiplicity="1" />
+          <End Role="tbSefFlightLeg" Type="Self.tbSefFlightLeg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSefLeg">
+              <PropertyRef Name="pkSefLegID" />
+            </Principal>
+            <Dependent Role="tbSefFlightLeg">
+              <PropertyRef Name="fkSefLegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbLeg_tbAirstrips">
+          <End Role="tbAirstrips" Type="Self.tbAirstrips" Multiplicity="1" />
+          <End Role="tbSefLeg" Type="Self.tbSefLeg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAirstrips">
+              <PropertyRef Name="pkAirstripId" />
+            </Principal>
+            <Dependent Role="tbSefLeg">
+              <PropertyRef Name="fkDepartureAirstripID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbLeg_tbAirstrips1">
+          <End Role="tbAirstrips" Type="Self.tbAirstrips" Multiplicity="1" />
+          <End Role="tbSefLeg" Type="Self.tbSefLeg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAirstrips">
+              <PropertyRef Name="pkAirstripId" />
+            </Principal>
+            <Dependent Role="tbSefLeg">
+              <PropertyRef Name="fkArrivalAirstripID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbLeg_tbPrincipals">
+          <End Role="tbPrincipals" Type="Self.tbPrincipals" Multiplicity="1" />
+          <End Role="tbSefLeg" Type="Self.tbSefLeg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipals">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbSefLeg">
+              <PropertyRef Name="fkPrincipalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbLegSchedule_tbLeg">
+          <End Role="tbSefLeg" Type="Self.tbSefLeg" Multiplicity="1" />
+          <End Role="tbSefLegSchedule" Type="Self.tbSefLegSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSefLeg">
+              <PropertyRef Name="pkSefLegID" />
+            </Principal>
+            <Dependent Role="tbSefLegSchedule">
+              <PropertyRef Name="fkSefLegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbLodgeBookings_tbLodges">
+          <End Role="tbLodges" Type="Self.tbLodges" Multiplicity="0..1" />
+          <End Role="tbLodgeBookings" Type="Self.tbLodgeBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLodges">
+              <PropertyRef Name="pkLodgeId" />
+            </Principal>
+            <Dependent Role="tbLodgeBookings">
+              <PropertyRef Name="fkLodgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbLodgeBookings_tbSectorBookings">
+          <End Role="tbSectorBookings" Type="Self.tbSectorBookings" Multiplicity="0..1" />
+          <End Role="tbLodgeBookings" Type="Self.tbLodgeBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSectorBookings">
+              <PropertyRef Name="pkSectorBookingId" />
+            </Principal>
+            <Dependent Role="tbLodgeBookings">
+              <PropertyRef Name="fkSectorBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbLodges_tbAirstrips">
+          <End Role="tbAirstrips" Type="Self.tbAirstrips" Multiplicity="0..1" />
+          <End Role="tbLodges" Type="Self.tbLodges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAirstrips">
+              <PropertyRef Name="pkAirstripId" />
+            </Principal>
+            <Dependent Role="tbLodges">
+              <PropertyRef Name="fkAirstripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPartyGroupGuests_tbGuests">
+          <End Role="tbGuests" Type="Self.tbGuests" Multiplicity="1" />
+          <End Role="tbPartyGroupGuests" Type="Self.tbPartyGroupGuests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbGuests">
+              <PropertyRef Name="pkGuestId" />
+            </Principal>
+            <Dependent Role="tbPartyGroupGuests">
+              <PropertyRef Name="fkGuestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPartyGroupGuests_tbPartyGroups">
+          <End Role="tbPartyGroups" Type="Self.tbPartyGroups" Multiplicity="1" />
+          <End Role="tbPartyGroupGuests" Type="Self.tbPartyGroupGuests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPartyGroups">
+              <PropertyRef Name="pkPartyGroupId" />
+            </Principal>
+            <Dependent Role="tbPartyGroupGuests">
+              <PropertyRef Name="fkPartyGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbPartyGroupNames_tbBookingFiles">
+          <End Role="tbBookingFiles" Type="Self.tbBookingFiles" Multiplicity="0..1" />
+          <End Role="tbPartyGroups" Type="Self.tbPartyGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbBookingFiles">
+              <PropertyRef Name="pkBookingId" />
+            </Principal>
+            <Dependent Role="tbPartyGroups">
+              <PropertyRef Name="fkBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSectorBookings_tbAircraftTypes">
+          <End Role="tbAircraftTypes" Type="Self.tbAircraftTypes" Multiplicity="0..1" />
+          <End Role="tbSectorBookings" Type="Self.tbSectorBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAircraftTypes">
+              <PropertyRef Name="pkAircraftTypeId" />
+            </Principal>
+            <Dependent Role="tbSectorBookings">
+              <PropertyRef Name="fkAircraftTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSectorBookings_tbAirstrips">
+          <End Role="tbAirstrips" Type="Self.tbAirstrips" Multiplicity="0..1" />
+          <End Role="tbSectorBookings" Type="Self.tbSectorBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAirstrips">
+              <PropertyRef Name="pkAirstripId" />
+            </Principal>
+            <Dependent Role="tbSectorBookings">
+              <PropertyRef Name="fkAirstripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSectorBookings_tbBookingFiles">
+          <End Role="tbBookingFiles" Type="Self.tbBookingFiles" Multiplicity="0..1" />
+          <End Role="tbSectorBookings" Type="Self.tbSectorBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbBookingFiles">
+              <PropertyRef Name="pkBookingId" />
+            </Principal>
+            <Dependent Role="tbSectorBookings">
+              <PropertyRef Name="fkBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSectorBookings_tbPartyGroups">
+          <End Role="tbPartyGroups" Type="Self.tbPartyGroups" Multiplicity="0..1" />
+          <End Role="tbSectorBookings" Type="Self.tbSectorBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPartyGroups">
+              <PropertyRef Name="pkPartyGroupId" />
+            </Principal>
+            <Dependent Role="tbSectorBookings">
+              <PropertyRef Name="fkPartyGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSectorBookings_tbPrincipals">
+          <End Role="tbPrincipals" Type="Self.tbPrincipals" Multiplicity="0..1" />
+          <End Role="tbSectorBookings" Type="Self.tbSectorBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipals">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbSectorBookings">
+              <PropertyRef Name="fkPrincipalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSectorBookings_tbSectorBookings">
+          <End Role="tbSectorBookings" Type="Self.tbSectorBookings" Multiplicity="0..1" />
+          <End Role="tbSectorBookings1" Type="Self.tbSectorBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSectorBookings">
+              <PropertyRef Name="pkSectorBookingId" />
+            </Principal>
+            <Dependent Role="tbSectorBookings1">
+              <PropertyRef Name="fkFromSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSectorBookings_tbSectorBookings1">
+          <End Role="tbSectorBookings" Type="Self.tbSectorBookings" Multiplicity="0..1" />
+          <End Role="tbSectorBookings1" Type="Self.tbSectorBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSectorBookings">
+              <PropertyRef Name="pkSectorBookingId" />
+            </Principal>
+            <Dependent Role="tbSectorBookings1">
+              <PropertyRef Name="fkToSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSefBookings_tbPrincipalsEx">
+          <End Role="tbPrincipals" Type="Self.tbPrincipals" Multiplicity="0..1" />
+          <End Role="tbSefBookings" Type="Self.tbSefBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipals">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbSefBookings">
+              <PropertyRef Name="ExPrincipalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSefBookings_tbPrincipalsFor">
+          <End Role="tbPrincipals" Type="Self.tbPrincipals" Multiplicity="0..1" />
+          <End Role="tbSefBookings" Type="Self.tbSefBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipals">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbSefBookings">
+              <PropertyRef Name="ForPrincipalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSefBookings_tbSectorBookings">
+          <End Role="tbSectorBookings" Type="Self.tbSectorBookings" Multiplicity="1" />
+          <End Role="tbSefBookings" Type="Self.tbSefBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSectorBookings">
+              <PropertyRef Name="pkSectorBookingId" />
+            </Principal>
+            <Dependent Role="tbSefBookings">
+              <PropertyRef Name="fkSectorBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSefBookings_tbSefFlight">
+          <End Role="tbSefFlight" Type="Self.tbSefFlight" Multiplicity="1" />
+          <End Role="tbSefBookings" Type="Self.tbSefBookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSefFlight">
+              <PropertyRef Name="pkSefFlightID" />
+            </Principal>
+            <Dependent Role="tbSefBookings">
+              <PropertyRef Name="fkSefFlightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSefFlight_tbPrincipals">
+          <End Role="tbPrincipals" Type="Self.tbPrincipals" Multiplicity="0..1" />
+          <End Role="tbSefFlight" Type="Self.tbSefFlight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipals">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbSefFlight">
+              <PropertyRef Name="fkPrincipalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSefFlightSchedule_tbFlight">
+          <End Role="tbSefFlight" Type="Self.tbSefFlight" Multiplicity="1" />
+          <End Role="tbSefFlightSchedule" Type="Self.tbSefFlightSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSefFlight">
+              <PropertyRef Name="pkSefFlightID" />
+            </Principal>
+            <Dependent Role="tbSefFlightSchedule">
+              <PropertyRef Name="fkSefFlightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tset_WishSchedwinLink_tbLodges">
+          <End Role="tbLodges" Type="Self.tbLodges" Multiplicity="0..1" />
+          <End Role="tset_WishSchedwinLink" Type="Self.tset_WishSchedwinLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLodges">
+              <PropertyRef Name="pkLodgeId" />
+            </Principal>
+            <Dependent Role="tset_WishSchedwinLink">
+              <PropertyRef Name="fkLodgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="spSchedwinCharterRetrievalNew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PrincipalID" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="New" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="WISHModelStoreContainer">
+          <EntitySet Name="tbAircraftTypes" EntityType="Self.tbAircraftTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbAirstrips" EntityType="Self.tbAirstrips" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbBookingFiles" EntityType="Self.tbBookingFiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbCharterBookings" EntityType="Self.tbCharterBookings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbGuests" EntityType="Self.tbGuests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbLodgeBookings" EntityType="Self.tbLodgeBookings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbLodges" EntityType="Self.tbLodges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbPartyGroupGuests" EntityType="Self.tbPartyGroupGuests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbPartyGroups" EntityType="Self.tbPartyGroups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbPrincipals" EntityType="Self.tbPrincipals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbSectorBookings" EntityType="Self.tbSectorBookings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbSefBookings" EntityType="Self.tbSefBookings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbSefFlight" EntityType="Self.tbSefFlight" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbSefFlightLeg" EntityType="Self.tbSefFlightLeg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbSefFlightSchedule" EntityType="Self.tbSefFlightSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbSefLeg" EntityType="Self.tbSefLeg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbSefLegSchedule" EntityType="Self.tbSefLegSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbUsers" EntityType="Self.tbUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tset_WishSchedwinLink" EntityType="Self.tset_WishSchedwinLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwFlightLegs" EntityType="Self.vwFlightLegs" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwFlightLegs].[pkSefFlightLegID] AS [pkSefFlightLegID], 
+    [vwFlightLegs].[pkSefFlightID] AS [pkSefFlightID], 
+    [vwFlightLegs].[flight Description] AS [flight Description], 
+    [vwFlightLegs].[StartDateTime] AS [StartDateTime], 
+    [vwFlightLegs].[EndDateTime] AS [EndDateTime], 
+    [vwFlightLegs].[fkSefLegID] AS [fkSefLegID], 
+    [vwFlightLegs].[Flight Active] AS [Flight Active], 
+    [vwFlightLegs].[Leg Description] AS [Leg Description], 
+    [vwFlightLegs].[Leg Date] AS [Leg Date]
+    FROM [dbo].[vwFlightLegs] AS [vwFlightLegs]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vwLocations" EntityType="Self.vwLocations" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwLocations].[pkLocationId] AS [pkLocationId], 
+    [vwLocations].[fkLocationCode] AS [fkLocationCode], 
+    [vwLocations].[fkCountryId] AS [fkCountryId], 
+    [vwLocations].[NAME] AS [NAME], 
+    [vwLocations].[Description] AS [Description]
+    FROM [dbo].[vwLocations] AS [vwLocations]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__tbCharter_fkForPrincipal" Association="Self.FK__tbCharter_fkForPrincipal">
+            <End Role="tbPrincipals" EntitySet="tbPrincipals" />
+            <End Role="tbCharterBookings" EntitySet="tbCharterBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCharter_fkSectorBooking" Association="Self.FK__tbCharter_fkSectorBooking">
+            <End Role="tbSectorBookings" EntitySet="tbSectorBookings" />
+            <End Role="tbCharterBookings" EntitySet="tbCharterBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbBookingFiles_tbUsers" Association="Self.FK_tbBookingFiles_tbUsers">
+            <End Role="tbUsers" EntitySet="tbUsers" />
+            <End Role="tbBookingFiles" EntitySet="tbBookingFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbBookingFiles_tbUsers1" Association="Self.FK_tbBookingFiles_tbUsers1">
+            <End Role="tbUsers" EntitySet="tbUsers" />
+            <End Role="tbBookingFiles" EntitySet="tbBookingFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbCharter_fkExPrincipal" Association="Self.FK_tbCharter_fkExPrincipal">
+            <End Role="tbPrincipals" EntitySet="tbPrincipals" />
+            <End Role="tbCharterBookings" EntitySet="tbCharterBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbFlightLeg_tbFlightSchedule" Association="Self.FK_tbFlightLeg_tbFlightSchedule">
+            <End Role="tbSefFlightSchedule" EntitySet="tbSefFlightSchedule" />
+            <End Role="tbSefFlightLeg" EntitySet="tbSefFlightLeg" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbFlightLeg_tbLeg" Association="Self.FK_tbFlightLeg_tbLeg">
+            <End Role="tbSefLeg" EntitySet="tbSefLeg" />
+            <End Role="tbSefFlightLeg" EntitySet="tbSefFlightLeg" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbLeg_tbAirstrips" Association="Self.FK_tbLeg_tbAirstrips">
+            <End Role="tbAirstrips" EntitySet="tbAirstrips" />
+            <End Role="tbSefLeg" EntitySet="tbSefLeg" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbLeg_tbAirstrips1" Association="Self.FK_tbLeg_tbAirstrips1">
+            <End Role="tbAirstrips" EntitySet="tbAirstrips" />
+            <End Role="tbSefLeg" EntitySet="tbSefLeg" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbLeg_tbPrincipals" Association="Self.FK_tbLeg_tbPrincipals">
+            <End Role="tbPrincipals" EntitySet="tbPrincipals" />
+            <End Role="tbSefLeg" EntitySet="tbSefLeg" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbLegSchedule_tbLeg" Association="Self.FK_tbLegSchedule_tbLeg">
+            <End Role="tbSefLeg" EntitySet="tbSefLeg" />
+            <End Role="tbSefLegSchedule" EntitySet="tbSefLegSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbLodgeBookings_tbLodges" Association="Self.FK_tbLodgeBookings_tbLodges">
+            <End Role="tbLodges" EntitySet="tbLodges" />
+            <End Role="tbLodgeBookings" EntitySet="tbLodgeBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbLodgeBookings_tbSectorBookings" Association="Self.FK_tbLodgeBookings_tbSectorBookings">
+            <End Role="tbSectorBookings" EntitySet="tbSectorBookings" />
+            <End Role="tbLodgeBookings" EntitySet="tbLodgeBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbLodges_tbAirstrips" Association="Self.FK_tbLodges_tbAirstrips">
+            <End Role="tbAirstrips" EntitySet="tbAirstrips" />
+            <End Role="tbLodges" EntitySet="tbLodges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPartyGroupGuests_tbGuests" Association="Self.FK_tbPartyGroupGuests_tbGuests">
+            <End Role="tbGuests" EntitySet="tbGuests" />
+            <End Role="tbPartyGroupGuests" EntitySet="tbPartyGroupGuests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPartyGroupGuests_tbPartyGroups" Association="Self.FK_tbPartyGroupGuests_tbPartyGroups">
+            <End Role="tbPartyGroups" EntitySet="tbPartyGroups" />
+            <End Role="tbPartyGroupGuests" EntitySet="tbPartyGroupGuests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbPartyGroupNames_tbBookingFiles" Association="Self.FK_tbPartyGroupNames_tbBookingFiles">
+            <End Role="tbBookingFiles" EntitySet="tbBookingFiles" />
+            <End Role="tbPartyGroups" EntitySet="tbPartyGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSectorBookings_tbAircraftTypes" Association="Self.FK_tbSectorBookings_tbAircraftTypes">
+            <End Role="tbAircraftTypes" EntitySet="tbAircraftTypes" />
+            <End Role="tbSectorBookings" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSectorBookings_tbAirstrips" Association="Self.FK_tbSectorBookings_tbAirstrips">
+            <End Role="tbAirstrips" EntitySet="tbAirstrips" />
+            <End Role="tbSectorBookings" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSectorBookings_tbBookingFiles" Association="Self.FK_tbSectorBookings_tbBookingFiles">
+            <End Role="tbBookingFiles" EntitySet="tbBookingFiles" />
+            <End Role="tbSectorBookings" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSectorBookings_tbPartyGroups" Association="Self.FK_tbSectorBookings_tbPartyGroups">
+            <End Role="tbPartyGroups" EntitySet="tbPartyGroups" />
+            <End Role="tbSectorBookings" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSectorBookings_tbPrincipals" Association="Self.FK_tbSectorBookings_tbPrincipals">
+            <End Role="tbPrincipals" EntitySet="tbPrincipals" />
+            <End Role="tbSectorBookings" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSectorBookings_tbSectorBookings" Association="Self.FK_tbSectorBookings_tbSectorBookings">
+            <End Role="tbSectorBookings" EntitySet="tbSectorBookings" />
+            <End Role="tbSectorBookings1" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSectorBookings_tbSectorBookings1" Association="Self.FK_tbSectorBookings_tbSectorBookings1">
+            <End Role="tbSectorBookings" EntitySet="tbSectorBookings" />
+            <End Role="tbSectorBookings1" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSefBookings_tbPrincipalsEx" Association="Self.FK_tbSefBookings_tbPrincipalsEx">
+            <End Role="tbPrincipals" EntitySet="tbPrincipals" />
+            <End Role="tbSefBookings" EntitySet="tbSefBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSefBookings_tbPrincipalsFor" Association="Self.FK_tbSefBookings_tbPrincipalsFor">
+            <End Role="tbPrincipals" EntitySet="tbPrincipals" />
+            <End Role="tbSefBookings" EntitySet="tbSefBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSefBookings_tbSectorBookings" Association="Self.FK_tbSefBookings_tbSectorBookings">
+            <End Role="tbSectorBookings" EntitySet="tbSectorBookings" />
+            <End Role="tbSefBookings" EntitySet="tbSefBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSefBookings_tbSefFlight" Association="Self.FK_tbSefBookings_tbSefFlight">
+            <End Role="tbSefFlight" EntitySet="tbSefFlight" />
+            <End Role="tbSefBookings" EntitySet="tbSefBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSefFlight_tbPrincipals" Association="Self.FK_tbSefFlight_tbPrincipals">
+            <End Role="tbPrincipals" EntitySet="tbPrincipals" />
+            <End Role="tbSefFlight" EntitySet="tbSefFlight" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSefFlightSchedule_tbFlight" Association="Self.FK_tbSefFlightSchedule_tbFlight">
+            <End Role="tbSefFlight" EntitySet="tbSefFlight" />
+            <End Role="tbSefFlightSchedule" EntitySet="tbSefFlightSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tset_WishSchedwinLink_tbLodges" Association="Self.FK_tset_WishSchedwinLink_tbLodges">
+            <End Role="tbLodges" EntitySet="tbLodges" />
+            <End Role="tset_WishSchedwinLink" EntitySet="tset_WishSchedwinLink" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WISHModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="WISHEntities" annotation:LazyLoadingEnabled="false" >
+          <FunctionImport Name="spSchedwinCharterRetrievalNew" ReturnType="Collection(WISHModel.spSchedwinCharterRetrieval_Result)">
+            <Parameter Name="PrincipalID" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="New" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="tbLodges" EntityType="WISHModel.tbLodge" />
+          <EntitySet Name="tset_WishSchedwinLink" EntityType="WISHModel.tset_WishSchedwinLink" />
+          <AssociationSet Name="FK_tset_WishSchedwinLink_tbLodges" Association="WISHModel.FK_tset_WishSchedwinLink_tbLodges">
+            <End Role="tbLodge" EntitySet="tbLodges" />
+            <End Role="tset_WishSchedwinLink" EntitySet="tset_WishSchedwinLink" />
+          </AssociationSet>
+          <EntitySet Name="tbSectorBookings" EntityType="WISHModel.tbSectorBooking" />
+          <AssociationSet Name="FK_tbSectorBookings_tbSectorBookings" Association="WISHModel.FK_tbSectorBookings_tbSectorBookings">
+            <End Role="tbSectorBooking" EntitySet="tbSectorBookings" />
+            <End Role="tbSectorBooking1" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSectorBookings_tbSectorBookings1" Association="WISHModel.FK_tbSectorBookings_tbSectorBookings1">
+            <End Role="tbSectorBooking" EntitySet="tbSectorBookings" />
+            <End Role="tbSectorBooking1" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <EntitySet Name="tbLodgeBookings" EntityType="WISHModel.tbLodgeBooking" />
+          <AssociationSet Name="FK_tbLodgeBookings_tbLodges" Association="WISHModel.FK_tbLodgeBookings_tbLodges">
+            <End Role="tbLodge" EntitySet="tbLodges" />
+            <End Role="tbLodgeBooking" EntitySet="tbLodgeBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbLodgeBookings_tbSectorBookings" Association="WISHModel.FK_tbLodgeBookings_tbSectorBookings">
+            <End Role="tbSectorBooking" EntitySet="tbSectorBookings" />
+            <End Role="tbLodgeBooking" EntitySet="tbLodgeBookings" />
+          </AssociationSet>
+          <EntitySet Name="tbBookingFiles" EntityType="WISHModel.tbBookingFile" />
+          <AssociationSet Name="FK_tbSectorBookings_tbBookingFiles" Association="WISHModel.FK_tbSectorBookings_tbBookingFiles">
+            <End Role="tbBookingFile" EntitySet="tbBookingFiles" />
+            <End Role="tbSectorBooking" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <EntitySet Name="tbSefFlightSchedules" EntityType="WISHModel.tbSefFlightSchedule" />
+          <EntitySet Name="tbSefLegs" EntityType="WISHModel.tbSefLeg" />
+          <EntitySet Name="tbSefBookings" EntityType="WISHModel.tbSefBooking" />
+          <AssociationSet Name="FK_tbSefBookings_tbSectorBookings" Association="WISHModel.FK_tbSefBookings_tbSectorBookings">
+            <End Role="tbSectorBooking" EntitySet="tbSectorBookings" />
+            <End Role="tbSefBooking" EntitySet="tbSefBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSefBookings_tbSefBookings" Association="WISHModel.FK_tbSefBookings_tbSefBookings">
+            <End Role="tbSefBooking" EntitySet="tbSefBookings" />
+            <End Role="tbSefBooking1" EntitySet="tbSefBookings" />
+          </AssociationSet>
+          <EntitySet Name="tbSefLegSchedules" EntityType="WISHModel.tbSefLegSchedule" />
+          <AssociationSet Name="FK_tbLegSchedule_tbLeg" Association="WISHModel.FK_tbLegSchedule_tbLeg">
+            <End Role="tbSefLeg" EntitySet="tbSefLegs" />
+            <End Role="tbSefLegSchedule" EntitySet="tbSefLegSchedules" />
+          </AssociationSet>
+          <EntitySet Name="tbSefFlightLegs" EntityType="WISHModel.tbSefFlightLeg" />
+          <AssociationSet Name="FK_tbFlightLeg_tbFlightSchedule" Association="WISHModel.FK_tbFlightLeg_tbFlightSchedule">
+            <End Role="tbSefFlightSchedule" EntitySet="tbSefFlightSchedules" />
+            <End Role="tbSefFlightLeg" EntitySet="tbSefFlightLegs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbFlightLeg_tbLeg" Association="WISHModel.FK_tbFlightLeg_tbLeg">
+            <End Role="tbSefLeg" EntitySet="tbSefLegs" />
+            <End Role="tbSefFlightLeg" EntitySet="tbSefFlightLegs" />
+          </AssociationSet>
+          <EntitySet Name="tbAirstrips" EntityType="WISHModel.tbAirstrip" />
+          <AssociationSet Name="FK_tbLeg_tbAirstrips" Association="WISHModel.FK_tbLeg_tbAirstrips">
+            <End Role="tbAirstrip" EntitySet="tbAirstrips" />
+            <End Role="tbSefLeg" EntitySet="tbSefLegs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbLeg_tbAirstrips1" Association="WISHModel.FK_tbLeg_tbAirstrips1">
+            <End Role="tbAirstrip" EntitySet="tbAirstrips" />
+            <End Role="tbSefLeg" EntitySet="tbSefLegs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbLodges_tbAirstrips" Association="WISHModel.FK_tbLodges_tbAirstrips">
+            <End Role="tbAirstrip" EntitySet="tbAirstrips" />
+            <End Role="tbLodge" EntitySet="tbLodges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSectorBookings_tbAirstrips" Association="WISHModel.FK_tbSectorBookings_tbAirstrips">
+            <End Role="tbAirstrip" EntitySet="tbAirstrips" />
+            <End Role="tbSectorBooking" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <EntitySet Name="tbPrincipals" EntityType="WISHModel.tbPrincipal" />
+          <AssociationSet Name="FK_tbLeg_tbPrincipals" Association="WISHModel.FK_tbLeg_tbPrincipals">
+            <End Role="tbPrincipal" EntitySet="tbPrincipals" />
+            <End Role="tbSefLeg" EntitySet="tbSefLegs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSectorBookings_tbPrincipals" Association="WISHModel.FK_tbSectorBookings_tbPrincipals">
+            <End Role="tbPrincipal" EntitySet="tbPrincipals" />
+            <End Role="tbSectorBooking" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSefBookings_tbPrincipalsEx" Association="WISHModel.FK_tbSefBookings_tbPrincipalsEx">
+            <End Role="tbPrincipal" EntitySet="tbPrincipals" />
+            <End Role="tbSefBooking" EntitySet="tbSefBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSefBookings_tbPrincipalsFor" Association="WISHModel.FK_tbSefBookings_tbPrincipalsFor">
+            <End Role="tbPrincipal" EntitySet="tbPrincipals" />
+            <End Role="tbSefBooking" EntitySet="tbSefBookings" />
+          </AssociationSet>
+          <EntitySet Name="tbSefFlights" EntityType="WISHModel.tbSefFlight" />
+          <AssociationSet Name="FK_tbSefFlight_tbPrincipals" Association="WISHModel.FK_tbSefFlight_tbPrincipals">
+            <End Role="tbPrincipal" EntitySet="tbPrincipals" />
+            <End Role="tbSefFlight" EntitySet="tbSefFlights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSefBookings_tbSefFlight" Association="WISHModel.FK_tbSefBookings_tbSefFlight">
+            <End Role="tbSefFlight" EntitySet="tbSefFlights" />
+            <End Role="tbSefBooking" EntitySet="tbSefBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSefFlightSchedule_tbFlight" Association="WISHModel.FK_tbSefFlightSchedule_tbFlight">
+            <End Role="tbSefFlight" EntitySet="tbSefFlights" />
+            <End Role="tbSefFlightSchedule" EntitySet="tbSefFlightSchedules" />
+          </AssociationSet>
+          <EntitySet Name="tbGuests" EntityType="WISHModel.tbGuest" />
+          <EntitySet Name="tbPartyGroups" EntityType="WISHModel.tbPartyGroup" />
+          <AssociationSet Name="FK_tbPartyGroupNames_tbBookingFiles" Association="WISHModel.FK_tbPartyGroupNames_tbBookingFiles">
+            <End Role="tbBookingFile" EntitySet="tbBookingFiles" />
+            <End Role="tbPartyGroup" EntitySet="tbPartyGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbSectorBookings_tbPartyGroups" Association="WISHModel.FK_tbSectorBookings_tbPartyGroups">
+            <End Role="tbPartyGroup" EntitySet="tbPartyGroups" />
+            <End Role="tbSectorBooking" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <AssociationSet Name="tbPartyGroupGuests" Association="WISHModel.tbPartyGroupGuests">
+            <End Role="tbGuest" EntitySet="tbGuests" />
+            <End Role="tbPartyGroup" EntitySet="tbPartyGroups" />
+          </AssociationSet>
+          <EntitySet Name="tbCharterBookings" EntityType="WISHModel.tbCharterBooking" />
+          <AssociationSet Name="FK__tbCharter_fkForPrincipal" Association="WISHModel.FK__tbCharter_fkForPrincipal">
+            <End Role="tbPrincipal" EntitySet="tbPrincipals" />
+            <End Role="tbCharterBooking" EntitySet="tbCharterBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tbCharter_fkSectorBooking" Association="WISHModel.FK__tbCharter_fkSectorBooking">
+            <End Role="tbSectorBooking" EntitySet="tbSectorBookings" />
+            <End Role="tbCharterBooking" EntitySet="tbCharterBookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbCharter_fkExPrincipal" Association="WISHModel.FK_tbCharter_fkExPrincipal">
+            <End Role="tbPrincipal" EntitySet="tbPrincipals" />
+            <End Role="tbCharterBooking" EntitySet="tbCharterBookings" />
+          </AssociationSet>
+          <EntitySet Name="tbUsers" EntityType="WISHModel.tbUser" />
+          <AssociationSet Name="FK_tbBookingFiles_tbUsers" Association="WISHModel.FK_tbBookingFiles_tbUsers">
+            <End Role="tbUser" EntitySet="tbUsers" />
+            <End Role="tbBookingFile" EntitySet="tbBookingFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbBookingFiles_tbUsers1" Association="WISHModel.FK_tbBookingFiles_tbUsers1">
+            <End Role="tbUser" EntitySet="tbUsers" />
+            <End Role="tbBookingFile" EntitySet="tbBookingFiles" />
+          </AssociationSet>
+          <EntitySet Name="vwLocations" EntityType="WISHModel.vwLocation" />
+          <EntitySet Name="tbAircraftTypes" EntityType="WISHModel.tbAircraftType" />
+          <AssociationSet Name="FK_tbSectorBookings_tbAircraftTypes" Association="WISHModel.FK_tbSectorBookings_tbAircraftTypes">
+            <End Role="tbAircraftType" EntitySet="tbAircraftTypes" />
+            <End Role="tbSectorBooking" EntitySet="tbSectorBookings" />
+          </AssociationSet>
+          <EntitySet Name="vwFlightLegs" EntityType="WISHModel.vwFlightLeg" />
+          </EntityContainer>
+        <ComplexType Name="spSchedwinCharterRetrieval_Result">
+          <Property Type="DateTime" Name="StartDate" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="pkBookingId" Nullable="false" />
+          <Property Type="Int32" Name="fkPartyGroupId" Nullable="true" />
+          <Property Type="String" Name="BookingStatus" Nullable="false" MaxLength="4" />
+          <Property Type="DateTime" Name="DateBookingMade" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="pkSectorBookingId" Nullable="false" />
+          <Property Type="String" Name="PartyNotes" Nullable="false" />
+          <Property Type="String" Name="PGRepeatYN" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="SectorNotes" Nullable="false" />
+          <Property Type="String" Name="PartyName" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Guests" Nullable="true" MaxLength="21" />
+          <Property Type="String" Name="PGNames" Nullable="true" MaxLength="2000" />
+          <Property Type="String" Name="CHType" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PersonCode" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="From" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ActualFrom" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Ex" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ActualEx" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ByTransport" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="To" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ActualTo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="For" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ActualFor" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="ETD" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="ETA" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="fkAgencyCode" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="Modified" Nullable="true" MaxLength="8" />
+          <Property Type="Int32" Name="GuestCount" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="tbLodge">
+          <Key>
+            <PropertyRef Name="pkLodgeId" />
+          </Key>
+          <Property Name="pkLodgeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="fkConcessionId" Type="Int32" />
+          <Property Name="fkLocationId" Type="Int32" />
+          <Property Name="fkAirstripId" Type="Int32" />
+          <Property Name="DisplayInTree" Type="Boolean" />
+          <Property Name="DisplayInAWISH" Type="Boolean" />
+          <Property Name="ExpiryTime" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Expiry" Type="Int32" Nullable="false" />
+          <Property Name="fkGroupDivisionId" Type="Int32" Nullable="false" />
+          <Property Name="Ownership" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fkRegionId" Type="Int32" Nullable="false" />
+          <Property Name="IsNew" Type="Boolean" Nullable="false" />
+          <Property Name="GPKey" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="GF_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GF_Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GF_Ownership" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GF_Management" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GF_Market" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GF_Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GF_GPDB" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GF_TGKPC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GF_Region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GF_Comment" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="GF_ReturnData" Type="Boolean" />
+          <Property Name="GF_BrandRate" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="GF_ReportBeds" Type="Int16" />
+          <Property Name="GF_TotalBeds" Type="Int16" />
+          <Property Name="QV_Marketing" Type="Boolean" />
+          <Property Name="QV_TPCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="Latitude" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="GF_Price_CCY" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="GF_Lessor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExclusiveUse" Type="Boolean" />
+          <NavigationProperty Name="tset_WishSchedwinLink" Relationship="WISHModel.FK_tset_WishSchedwinLink_tbLodges" FromRole="tbLodge" ToRole="tset_WishSchedwinLink" />
+          <NavigationProperty Name="tbLodgeBookings" Relationship="WISHModel.FK_tbLodgeBookings_tbLodges" FromRole="tbLodge" ToRole="tbLodgeBooking" />
+          <NavigationProperty Name="tbAirstrip" Relationship="WISHModel.FK_tbLodges_tbAirstrips" FromRole="tbLodge" ToRole="tbAirstrip" />
+        </EntityType>
+        <EntityType Name="tset_WishSchedwinLink">
+          <Key>
+            <PropertyRef Name="pkSchedLinkID" />
+          </Key>
+          <Property Name="pkSchedLinkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkLodgeId" Type="Int32" />
+          <Property Name="CampName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ActualCampName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TPCode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbLodge" Relationship="WISHModel.FK_tset_WishSchedwinLink_tbLodges" FromRole="tset_WishSchedwinLink" ToRole="tbLodge" />
+        </EntityType>
+        <Association Name="FK_tset_WishSchedwinLink_tbLodges">
+          <End Type="WISHModel.tbLodge" Role="tbLodge" Multiplicity="0..1" />
+          <End Type="WISHModel.tset_WishSchedwinLink" Role="tset_WishSchedwinLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLodge">
+              <PropertyRef Name="pkLodgeId" />
+            </Principal>
+            <Dependent Role="tset_WishSchedwinLink">
+              <PropertyRef Name="fkLodgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbSectorBooking">
+          <Key>
+            <PropertyRef Name="pkSectorBookingId" />
+          </Key>
+          <Property Name="pkSectorBookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkBookingId" Type="Int32" />
+          <Property Name="fkSafariId" Type="Int32" />
+          <Property Name="fkSectorClass" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="fkFromSector" Type="Int32" />
+          <Property Name="fkToSector" Type="Int32" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="ReminderDate" Type="DateTime" Precision="3" />
+          <Property Name="fkPartyGroupId" Type="Int32" />
+          <Property Name="fkMealBasisId" Type="Int32" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="StartDate" Type="DateTime" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmedDate" Type="DateTime" Precision="3" />
+          <Property Name="fkPrincipalId" Type="Int32" />
+          <Property Name="fkLocation" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="fkAirstripId" Type="Int32" />
+          <Property Name="PrincipalReference" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fkAircraftTypeId" Type="Int32" />
+          <Property Name="fkTransportTypeId" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ExclusiveUse" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="StatusModDate" Type="DateTime" Precision="3" />
+          <Property Name="Seq" Type="Int32" />
+          <Property Name="isAgent" Type="Boolean" />
+          <Property Name="RateOption" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="AllowGuestsMax" Type="Boolean" />
+          <NavigationProperty Name="tbSectorBookings1" Relationship="WISHModel.FK_tbSectorBookings_tbSectorBookings" FromRole="tbSectorBooking" ToRole="tbSectorBooking1" />
+          <NavigationProperty Name="tbSectorBooking1" Relationship="WISHModel.FK_tbSectorBookings_tbSectorBookings" FromRole="tbSectorBooking1" ToRole="tbSectorBooking" />
+          <NavigationProperty Name="tbSectorBookings11" Relationship="WISHModel.FK_tbSectorBookings_tbSectorBookings1" FromRole="tbSectorBooking" ToRole="tbSectorBooking1" />
+          <NavigationProperty Name="tbSectorBooking2" Relationship="WISHModel.FK_tbSectorBookings_tbSectorBookings1" FromRole="tbSectorBooking1" ToRole="tbSectorBooking" />
+          <NavigationProperty Name="tbLodgeBookings" Relationship="WISHModel.FK_tbLodgeBookings_tbSectorBookings" FromRole="tbSectorBooking" ToRole="tbLodgeBooking" />
+          <NavigationProperty Name="tbBookingFile" Relationship="WISHModel.FK_tbSectorBookings_tbBookingFiles" FromRole="tbSectorBooking" ToRole="tbBookingFile" />
+          <NavigationProperty Name="tbSefBookings" Relationship="WISHModel.FK_tbSefBookings_tbSectorBookings" FromRole="tbSectorBooking" ToRole="tbSefBooking" />
+          <NavigationProperty Name="tbAirstrip" Relationship="WISHModel.FK_tbSectorBookings_tbAirstrips" FromRole="tbSectorBooking" ToRole="tbAirstrip" />
+          <NavigationProperty Name="tbPrincipal" Relationship="WISHModel.FK_tbSectorBookings_tbPrincipals" FromRole="tbSectorBooking" ToRole="tbPrincipal" />
+          <NavigationProperty Name="tbPartyGroup" Relationship="WISHModel.FK_tbSectorBookings_tbPartyGroups" FromRole="tbSectorBooking" ToRole="tbPartyGroup" />
+          <NavigationProperty Name="tbCharterBookings" Relationship="WISHModel.FK__tbCharter_fkSectorBooking" FromRole="tbSectorBooking" ToRole="tbCharterBooking" />
+          <NavigationProperty Name="tbAircraftType" Relationship="WISHModel.FK_tbSectorBookings_tbAircraftTypes" FromRole="tbSectorBooking" ToRole="tbAircraftType" />
+        </EntityType>
+        <Association Name="FK_tbSectorBookings_tbSectorBookings">
+          <End Type="WISHModel.tbSectorBooking" Role="tbSectorBooking" Multiplicity="0..1" />
+          <End Type="WISHModel.tbSectorBooking" Role="tbSectorBooking1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSectorBooking">
+              <PropertyRef Name="pkSectorBookingId" />
+            </Principal>
+            <Dependent Role="tbSectorBooking1">
+              <PropertyRef Name="fkFromSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSectorBookings_tbSectorBookings1">
+          <End Type="WISHModel.tbSectorBooking" Role="tbSectorBooking" Multiplicity="0..1" />
+          <End Type="WISHModel.tbSectorBooking" Role="tbSectorBooking1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSectorBooking">
+              <PropertyRef Name="pkSectorBookingId" />
+            </Principal>
+            <Dependent Role="tbSectorBooking1">
+              <PropertyRef Name="fkToSector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbLodgeBooking">
+          <Key>
+            <PropertyRef Name="pkLodgeBookingId" />
+          </Key>
+          <Property Name="pkLodgeBookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkLodgeId" Type="Int32" />
+          <Property Name="fkSectorBookingId" Type="Int32" />
+          <NavigationProperty Name="tbLodge" Relationship="WISHModel.FK_tbLodgeBookings_tbLodges" FromRole="tbLodgeBooking" ToRole="tbLodge" />
+          <NavigationProperty Name="tbSectorBooking" Relationship="WISHModel.FK_tbLodgeBookings_tbSectorBookings" FromRole="tbLodgeBooking" ToRole="tbSectorBooking" />
+        </EntityType>
+        <Association Name="FK_tbLodgeBookings_tbLodges">
+          <End Type="WISHModel.tbLodge" Role="tbLodge" Multiplicity="0..1" />
+          <End Type="WISHModel.tbLodgeBooking" Role="tbLodgeBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbLodge">
+              <PropertyRef Name="pkLodgeId" />
+            </Principal>
+            <Dependent Role="tbLodgeBooking">
+              <PropertyRef Name="fkLodgeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbLodgeBookings_tbSectorBookings">
+          <End Type="WISHModel.tbSectorBooking" Role="tbSectorBooking" Multiplicity="0..1" />
+          <End Type="WISHModel.tbLodgeBooking" Role="tbLodgeBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSectorBooking">
+              <PropertyRef Name="pkSectorBookingId" />
+            </Principal>
+            <Dependent Role="tbLodgeBooking">
+              <PropertyRef Name="fkSectorBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbBookingFile">
+          <Key>
+            <PropertyRef Name="pkBookingId" />
+          </Key>
+          <Property Name="pkBookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GuestCount" Type="Int16" Nullable="false" />
+          <Property Name="DefaultRooms" Type="Int16" />
+          <Property Name="DateBookingMade" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fkUserId" Type="Int32" Nullable="false" />
+          <Property Name="fkLockedByUserId" Type="Int32" />
+          <Property Name="fkAgentId" Type="Int32" />
+          <Property Name="fkAgencyCode" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="fkOrgAgencyCode" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="fkRate" Type="Int32" />
+          <Property Name="RulesCheckRequired" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="RulesViolated" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="RepeatParty" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ExclusiveCamps" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="SpecialAllocation" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ItineraryNotes" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="BookingStatus" Type="String" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="Locked" Type="Boolean" />
+          <Property Name="TPRef" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="GuideCount" Type="Int32" />
+          <Property Name="TransactionId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Paid" Type="Boolean" Nullable="false" />
+          <Property Name="PCMRef" Type="Int32" />
+          <Property Name="DontAsk" Type="Boolean" />
+          <Property Name="WishVersion" Type="Double" />
+          <Property Name="TPBranchCluster" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsReverted" Type="Boolean" />
+          <Property Name="AllowGuestsMax" Type="Boolean" />
+          <NavigationProperty Name="tbSectorBookings" Relationship="WISHModel.FK_tbSectorBookings_tbBookingFiles" FromRole="tbBookingFile" ToRole="tbSectorBooking" />
+          <NavigationProperty Name="tbPartyGroups" Relationship="WISHModel.FK_tbPartyGroupNames_tbBookingFiles" FromRole="tbBookingFile" ToRole="tbPartyGroup" />
+          <NavigationProperty Name="tbUser" Relationship="WISHModel.FK_tbBookingFiles_tbUsers" FromRole="tbBookingFile" ToRole="tbUser" />
+          <NavigationProperty Name="tbUser1" Relationship="WISHModel.FK_tbBookingFiles_tbUsers1" FromRole="tbBookingFile" ToRole="tbUser" />
+        </EntityType>
+        <Association Name="FK_tbSectorBookings_tbBookingFiles">
+          <End Type="WISHModel.tbBookingFile" Role="tbBookingFile" Multiplicity="0..1" />
+          <End Type="WISHModel.tbSectorBooking" Role="tbSectorBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbBookingFile">
+              <PropertyRef Name="pkBookingId" />
+            </Principal>
+            <Dependent Role="tbSectorBooking">
+              <PropertyRef Name="fkBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbSefFlightSchedule">
+          <Key>
+            <PropertyRef Name="pkSefFlightScheduleID" />
+          </Key>
+          <Property Name="pkSefFlightScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkSefFlightID" Type="Int32" Nullable="false" />
+          <Property Name="WeekStartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tbSefFlightLegs" Relationship="WISHModel.FK_tbFlightLeg_tbFlightSchedule" FromRole="tbSefFlightSchedule" ToRole="tbSefFlightLeg" />
+          <NavigationProperty Name="tbSefFlight" Relationship="WISHModel.FK_tbSefFlightSchedule_tbFlight" FromRole="tbSefFlightSchedule" ToRole="tbSefFlight" />
+        </EntityType>
+        <EntityType Name="tbSefLeg">
+          <Key>
+            <PropertyRef Name="pkSefLegID" />
+          </Key>
+          <Property Name="pkSefLegID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkLocationID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fkDepartureAirstripID" Type="Int32" Nullable="false" />
+          <Property Name="fkArrivalAirstripID" Type="Int32" Nullable="false" />
+          <Property Name="fkPrincipalId" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbSefLegSchedules" Relationship="WISHModel.FK_tbLegSchedule_tbLeg" FromRole="tbSefLeg" ToRole="tbSefLegSchedule" />
+          <NavigationProperty Name="tbSefFlightLegs" Relationship="WISHModel.FK_tbFlightLeg_tbLeg" FromRole="tbSefLeg" ToRole="tbSefFlightLeg" />
+          <NavigationProperty Name="tbAirstrip" Relationship="WISHModel.FK_tbLeg_tbAirstrips" FromRole="tbSefLeg" ToRole="tbAirstrip" />
+          <NavigationProperty Name="tbAirstrip1" Relationship="WISHModel.FK_tbLeg_tbAirstrips1" FromRole="tbSefLeg" ToRole="tbAirstrip" />
+          <NavigationProperty Name="tbPrincipal" Relationship="WISHModel.FK_tbLeg_tbPrincipals" FromRole="tbSefLeg" ToRole="tbPrincipal" />
+        </EntityType>
+        <EntityType Name="tbSefBooking">
+          <Key>
+            <PropertyRef Name="pkSefBookingId" />
+          </Key>
+          <Property Name="pkSefBookingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkSefFlightId" Type="Int32" Nullable="false" />
+          <Property Name="fkSectorBookingId" Type="Int32" Nullable="false" />
+          <Property Name="ExPrincipalId" Type="Int32" />
+          <Property Name="ForPrincipalId" Type="Int32" />
+          <NavigationProperty Name="tbSectorBooking" Relationship="WISHModel.FK_tbSefBookings_tbSectorBookings" FromRole="tbSefBooking" ToRole="tbSectorBooking" />
+          <NavigationProperty Name="tbSefBookings1" Relationship="WISHModel.FK_tbSefBookings_tbSefBookings" FromRole="tbSefBooking" ToRole="tbSefBooking1" />
+          <NavigationProperty Name="tbSefBooking1" Relationship="WISHModel.FK_tbSefBookings_tbSefBookings" FromRole="tbSefBooking1" ToRole="tbSefBooking" />
+          <NavigationProperty Name="tbPrincipal" Relationship="WISHModel.FK_tbSefBookings_tbPrincipalsEx" FromRole="tbSefBooking" ToRole="tbPrincipal" />
+          <NavigationProperty Name="tbPrincipal1" Relationship="WISHModel.FK_tbSefBookings_tbPrincipalsFor" FromRole="tbSefBooking" ToRole="tbPrincipal" />
+          <NavigationProperty Name="tbSefFlight" Relationship="WISHModel.FK_tbSefBookings_tbSefFlight" FromRole="tbSefBooking" ToRole="tbSefFlight" />
+        </EntityType>
+        <Association Name="FK_tbSefBookings_tbSectorBookings">
+          <End Type="WISHModel.tbSectorBooking" Role="tbSectorBooking" Multiplicity="1" />
+          <End Type="WISHModel.tbSefBooking" Role="tbSefBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSectorBooking">
+              <PropertyRef Name="pkSectorBookingId" />
+            </Principal>
+            <Dependent Role="tbSefBooking">
+              <PropertyRef Name="fkSectorBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSefBookings_tbSefBookings">
+          <End Type="WISHModel.tbSefBooking" Role="tbSefBooking" Multiplicity="1" />
+          <End Type="WISHModel.tbSefBooking" Role="tbSefBooking1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="tbSefBooking">
+              <PropertyRef Name="pkSefBookingId" />
+            </Principal>
+            <Dependent Role="tbSefBooking1">
+              <PropertyRef Name="pkSefBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbSefLegSchedule">
+          <Key>
+            <PropertyRef Name="pkSefLegScheduleID" />
+          </Key>
+          <Property Name="pkSefLegScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkSefLegID" Type="Int32" Nullable="false" />
+          <Property Name="WeekStartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tbSefLeg" Relationship="WISHModel.FK_tbLegSchedule_tbLeg" FromRole="tbSefLegSchedule" ToRole="tbSefLeg" />
+        </EntityType>
+        <Association Name="FK_tbLegSchedule_tbLeg">
+          <End Type="WISHModel.tbSefLeg" Role="tbSefLeg" Multiplicity="1" />
+          <End Type="WISHModel.tbSefLegSchedule" Role="tbSefLegSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSefLeg">
+              <PropertyRef Name="pkSefLegID" />
+            </Principal>
+            <Dependent Role="tbSefLegSchedule">
+              <PropertyRef Name="fkSefLegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbSefFlightLeg">
+          <Key>
+            <PropertyRef Name="pkSefFlightLegID" />
+          </Key>
+          <Property Name="pkSefFlightLegID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkSefFlightScheduleID" Type="Int32" Nullable="false" />
+          <Property Name="fkSefLegID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tbSefFlightSchedule" Relationship="WISHModel.FK_tbFlightLeg_tbFlightSchedule" FromRole="tbSefFlightLeg" ToRole="tbSefFlightSchedule" />
+          <NavigationProperty Name="tbSefLeg" Relationship="WISHModel.FK_tbFlightLeg_tbLeg" FromRole="tbSefFlightLeg" ToRole="tbSefLeg" />
+        </EntityType>
+        <Association Name="FK_tbFlightLeg_tbFlightSchedule">
+          <End Type="WISHModel.tbSefFlightSchedule" Role="tbSefFlightSchedule" Multiplicity="1" />
+          <End Type="WISHModel.tbSefFlightLeg" Role="tbSefFlightLeg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSefFlightSchedule">
+              <PropertyRef Name="pkSefFlightScheduleID" />
+            </Principal>
+            <Dependent Role="tbSefFlightLeg">
+              <PropertyRef Name="fkSefFlightScheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbFlightLeg_tbLeg">
+          <End Type="WISHModel.tbSefLeg" Role="tbSefLeg" Multiplicity="1" />
+          <End Type="WISHModel.tbSefFlightLeg" Role="tbSefFlightLeg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSefLeg">
+              <PropertyRef Name="pkSefLegID" />
+            </Principal>
+            <Dependent Role="tbSefFlightLeg">
+              <PropertyRef Name="fkSefLegID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbAirstrip">
+          <Key>
+            <PropertyRef Name="pkAirstripId" />
+          </Key>
+          <Property Name="pkAirstripId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AirstripCode" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbSefLegs" Relationship="WISHModel.FK_tbLeg_tbAirstrips" FromRole="tbAirstrip" ToRole="tbSefLeg" />
+          <NavigationProperty Name="tbSefLegs1" Relationship="WISHModel.FK_tbLeg_tbAirstrips1" FromRole="tbAirstrip" ToRole="tbSefLeg" />
+          <NavigationProperty Name="tbLodges" Relationship="WISHModel.FK_tbLodges_tbAirstrips" FromRole="tbAirstrip" ToRole="tbLodge" />
+          <NavigationProperty Name="tbSectorBookings" Relationship="WISHModel.FK_tbSectorBookings_tbAirstrips" FromRole="tbAirstrip" ToRole="tbSectorBooking" />
+        </EntityType>
+        <Association Name="FK_tbLeg_tbAirstrips">
+          <End Type="WISHModel.tbAirstrip" Role="tbAirstrip" Multiplicity="1" />
+          <End Type="WISHModel.tbSefLeg" Role="tbSefLeg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAirstrip">
+              <PropertyRef Name="pkAirstripId" />
+            </Principal>
+            <Dependent Role="tbSefLeg">
+              <PropertyRef Name="fkDepartureAirstripID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbLeg_tbAirstrips1">
+          <End Type="WISHModel.tbAirstrip" Role="tbAirstrip" Multiplicity="1" />
+          <End Type="WISHModel.tbSefLeg" Role="tbSefLeg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAirstrip">
+              <PropertyRef Name="pkAirstripId" />
+            </Principal>
+            <Dependent Role="tbSefLeg">
+              <PropertyRef Name="fkArrivalAirstripID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbLodges_tbAirstrips">
+          <End Type="WISHModel.tbAirstrip" Role="tbAirstrip" Multiplicity="0..1" />
+          <End Type="WISHModel.tbLodge" Role="tbLodge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAirstrip">
+              <PropertyRef Name="pkAirstripId" />
+            </Principal>
+            <Dependent Role="tbLodge">
+              <PropertyRef Name="fkAirstripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSectorBookings_tbAirstrips">
+          <End Type="WISHModel.tbAirstrip" Role="tbAirstrip" Multiplicity="0..1" />
+          <End Type="WISHModel.tbSectorBooking" Role="tbSectorBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAirstrip">
+              <PropertyRef Name="pkAirstripId" />
+            </Principal>
+            <Dependent Role="tbSectorBooking">
+              <PropertyRef Name="fkAirstripId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbPrincipal">
+          <Key>
+            <PropertyRef Name="pkPrincipalId" />
+          </Key>
+          <Property Name="pkPrincipalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fkPrincipalCode" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="fkLocationCode" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="fkPrincipalName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UsedForWishCharters" Type="Boolean" />
+          <NavigationProperty Name="tbSefLegs" Relationship="WISHModel.FK_tbLeg_tbPrincipals" FromRole="tbPrincipal" ToRole="tbSefLeg" />
+          <NavigationProperty Name="tbSectorBookings" Relationship="WISHModel.FK_tbSectorBookings_tbPrincipals" FromRole="tbPrincipal" ToRole="tbSectorBooking" />
+          <NavigationProperty Name="tbSefBookings" Relationship="WISHModel.FK_tbSefBookings_tbPrincipalsEx" FromRole="tbPrincipal" ToRole="tbSefBooking" />
+          <NavigationProperty Name="tbSefBookings1" Relationship="WISHModel.FK_tbSefBookings_tbPrincipalsFor" FromRole="tbPrincipal" ToRole="tbSefBooking" />
+          <NavigationProperty Name="tbSefFlights" Relationship="WISHModel.FK_tbSefFlight_tbPrincipals" FromRole="tbPrincipal" ToRole="tbSefFlight" />
+          <NavigationProperty Name="tbCharterBookings" Relationship="WISHModel.FK__tbCharter_fkForPrincipal" FromRole="tbPrincipal" ToRole="tbCharterBooking" />
+          <NavigationProperty Name="tbCharterBookings1" Relationship="WISHModel.FK_tbCharter_fkExPrincipal" FromRole="tbPrincipal" ToRole="tbCharterBooking" />
+          <Property Name="FK_PrincipalTypeID" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_tbLeg_tbPrincipals">
+          <End Type="WISHModel.tbPrincipal" Role="tbPrincipal" Multiplicity="1" />
+          <End Type="WISHModel.tbSefLeg" Role="tbSefLeg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipal">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbSefLeg">
+              <PropertyRef Name="fkPrincipalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSectorBookings_tbPrincipals">
+          <End Type="WISHModel.tbPrincipal" Role="tbPrincipal" Multiplicity="0..1" />
+          <End Type="WISHModel.tbSectorBooking" Role="tbSectorBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipal">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbSectorBooking">
+              <PropertyRef Name="fkPrincipalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSefBookings_tbPrincipalsEx">
+          <End Type="WISHModel.tbPrincipal" Role="tbPrincipal" Multiplicity="0..1" />
+          <End Type="WISHModel.tbSefBooking" Role="tbSefBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipal">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbSefBooking">
+              <PropertyRef Name="ExPrincipalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSefBookings_tbPrincipalsFor">
+          <End Type="WISHModel.tbPrincipal" Role="tbPrincipal" Multiplicity="0..1" />
+          <End Type="WISHModel.tbSefBooking" Role="tbSefBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipal">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbSefBooking">
+              <PropertyRef Name="ForPrincipalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbSefFlight">
+          <Key>
+            <PropertyRef Name="pkSefFlightID" />
+          </Key>
+          <Property Name="pkSefFlightID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="fkLocationID" Type="Int32" Nullable="false" />
+          <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Expiry" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="User" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fkPrincipalID" Type="Int32" />
+          <NavigationProperty Name="tbPrincipal" Relationship="WISHModel.FK_tbSefFlight_tbPrincipals" FromRole="tbSefFlight" ToRole="tbPrincipal" />
+          <NavigationProperty Name="tbSefBookings" Relationship="WISHModel.FK_tbSefBookings_tbSefFlight" FromRole="tbSefFlight" ToRole="tbSefBooking" />
+          <NavigationProperty Name="tbSefFlightSchedules" Relationship="WISHModel.FK_tbSefFlightSchedule_tbFlight" FromRole="tbSefFlight" ToRole="tbSefFlightSchedule" />
+        </EntityType>
+        <Association Name="FK_tbSefFlight_tbPrincipals">
+          <End Type="WISHModel.tbPrincipal" Role="tbPrincipal" Multiplicity="0..1" />
+          <End Type="WISHModel.tbSefFlight" Role="tbSefFlight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipal">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbSefFlight">
+              <PropertyRef Name="fkPrincipalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSefBookings_tbSefFlight">
+          <End Type="WISHModel.tbSefFlight" Role="tbSefFlight" Multiplicity="1" />
+          <End Type="WISHModel.tbSefBooking" Role="tbSefBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSefFlight">
+              <PropertyRef Name="pkSefFlightID" />
+            </Principal>
+            <Dependent Role="tbSefBooking">
+              <PropertyRef Name="fkSefFlightId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSefFlightSchedule_tbFlight">
+          <End Type="WISHModel.tbSefFlight" Role="tbSefFlight" Multiplicity="1" />
+          <End Type="WISHModel.tbSefFlightSchedule" Role="tbSefFlightSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSefFlight">
+              <PropertyRef Name="pkSefFlightID" />
+            </Principal>
+            <Dependent Role="tbSefFlightSchedule">
+              <PropertyRef Name="fkSefFlightID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbGuest">
+          <Key>
+            <PropertyRef Name="pkGuestId" />
+          </Key>
+          <Property Name="pkGuestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Firstname" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="fkResidenceCode" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="fkNationalityCode" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Weight" Type="Int16" />
+          <Property Name="Age" Type="Int16" />
+          <Property Name="Sharing" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="IsGuide" Type="Int16" />
+          <Property Name="TPGuestId" Type="Int32" />
+          <Property Name="PassportNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PassportName" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="PassportNationality" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PassportIssued" Type="DateTime" Precision="3" />
+          <Property Name="PassportPlace" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PassportExpiry" Type="DateTime" Precision="3" />
+          <Property Name="IsRepeatGuest" Type="Boolean" />
+          <NavigationProperty Name="tbPartyGroups" Relationship="WISHModel.tbPartyGroupGuests" FromRole="tbGuest" ToRole="tbPartyGroup" />
+          <Property Name="IsPrivateGuide" Type="Boolean" />
+          <Property Name="FK_PrivateGuidID" Type="Int32" />
+          <Property Name="TPNationality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbPartyGroup">
+          <Key>
+            <PropertyRef Name="pkPartyGroupId" />
+          </Key>
+          <Property Name="pkPartyGroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="fkBookingId" Type="Int32" />
+          <NavigationProperty Name="tbBookingFile" Relationship="WISHModel.FK_tbPartyGroupNames_tbBookingFiles" FromRole="tbPartyGroup" ToRole="tbBookingFile" />
+          <NavigationProperty Name="tbSectorBookings" Relationship="WISHModel.FK_tbSectorBookings_tbPartyGroups" FromRole="tbPartyGroup" ToRole="tbSectorBooking" />
+          <NavigationProperty Name="tbGuests" Relationship="WISHModel.tbPartyGroupGuests" FromRole="tbPartyGroup" ToRole="tbGuest" />
+          <Property Name="IsDefault" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_tbPartyGroupNames_tbBookingFiles">
+          <End Type="WISHModel.tbBookingFile" Role="tbBookingFile" Multiplicity="0..1" />
+          <End Type="WISHModel.tbPartyGroup" Role="tbPartyGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbBookingFile">
+              <PropertyRef Name="pkBookingId" />
+            </Principal>
+            <Dependent Role="tbPartyGroup">
+              <PropertyRef Name="fkBookingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbSectorBookings_tbPartyGroups">
+          <End Type="WISHModel.tbPartyGroup" Role="tbPartyGroup" Multiplicity="0..1" />
+          <End Type="WISHModel.tbSectorBooking" Role="tbSectorBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPartyGroup">
+              <PropertyRef Name="pkPartyGroupId" />
+            </Principal>
+            <Dependent Role="tbSectorBooking">
+              <PropertyRef Name="fkPartyGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tbPartyGroupGuests">
+          <End Type="WISHModel.tbGuest" Role="tbGuest" Multiplicity="*" />
+          <End Type="WISHModel.tbPartyGroup" Role="tbPartyGroup" Multiplicity="*" />
+        </Association>
+        <EntityType Name="tbCharterBooking">
+          <Key>
+            <PropertyRef Name="CharterBookingID" />
+          </Key>
+          <Property Name="CharterBookingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_SectorBookingID" Type="Int32" Nullable="false" />
+          <Property Name="FK_ExPrincipalID" Type="Int32" Nullable="false" />
+          <Property Name="FK_ForPrincipalID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbPrincipal" Relationship="WISHModel.FK__tbCharter_fkForPrincipal" FromRole="tbCharterBooking" ToRole="tbPrincipal" />
+          <NavigationProperty Name="tbSectorBooking" Relationship="WISHModel.FK__tbCharter_fkSectorBooking" FromRole="tbCharterBooking" ToRole="tbSectorBooking" />
+          <NavigationProperty Name="tbPrincipal1" Relationship="WISHModel.FK_tbCharter_fkExPrincipal" FromRole="tbCharterBooking" ToRole="tbPrincipal" />
+        </EntityType>
+        <Association Name="FK__tbCharter_fkForPrincipal">
+          <End Type="WISHModel.tbPrincipal" Role="tbPrincipal" Multiplicity="1" />
+          <End Type="WISHModel.tbCharterBooking" Role="tbCharterBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipal">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbCharterBooking">
+              <PropertyRef Name="FK_ForPrincipalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tbCharter_fkSectorBooking">
+          <End Type="WISHModel.tbSectorBooking" Role="tbSectorBooking" Multiplicity="1" />
+          <End Type="WISHModel.tbCharterBooking" Role="tbCharterBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbSectorBooking">
+              <PropertyRef Name="pkSectorBookingId" />
+            </Principal>
+            <Dependent Role="tbCharterBooking">
+              <PropertyRef Name="FK_SectorBookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbCharter_fkExPrincipal">
+          <End Type="WISHModel.tbPrincipal" Role="tbPrincipal" Multiplicity="1" />
+          <End Type="WISHModel.tbCharterBooking" Role="tbCharterBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbPrincipal">
+              <PropertyRef Name="pkPrincipalId" />
+            </Principal>
+            <Dependent Role="tbCharterBooking">
+              <PropertyRef Name="FK_ExPrincipalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tbUser">
+          <Key>
+            <PropertyRef Name="pkUserId" />
+          </Key>
+          <Property Name="pkUserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PersonCode" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ADirectoryGUID" Type="Guid" />
+          <Property Name="LastAccess" Type="DateTime" Precision="3" />
+          <Property Name="UserLoggedIn" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="UsedResSysCount" Type="Int32" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tbBookingFiles" Relationship="WISHModel.FK_tbBookingFiles_tbUsers" FromRole="tbUser" ToRole="tbBookingFile" />
+          <NavigationProperty Name="tbBookingFiles1" Relationship="WISHModel.FK_tbBookingFiles_tbUsers1" FromRole="tbUser" ToRole="tbBookingFile" />
+        </EntityType>
+        <Association Name="FK_tbBookingFiles_tbUsers">
+          <End Type="WISHModel.tbUser" Role="tbUser" Multiplicity="1" />
+          <End Type="WISHModel.tbBookingFile" Role="tbBookingFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUser">
+              <PropertyRef Name="pkUserId" />
+            </Principal>
+            <Dependent Role="tbBookingFile">
+              <PropertyRef Name="fkUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbBookingFiles_tbUsers1">
+          <End Type="WISHModel.tbUser" Role="tbUser" Multiplicity="0..1" />
+          <End Type="WISHModel.tbBookingFile" Role="tbBookingFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUser">
+              <PropertyRef Name="pkUserId" />
+            </Principal>
+            <Dependent Role="tbBookingFile">
+              <PropertyRef Name="fkLockedByUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwLocation">
+          <Key>
+            <PropertyRef Name="pkLocationId" />
+            <PropertyRef Name="fkLocationCode" />
+          </Key>
+          <Property Name="pkLocationId" Type="Int32" Nullable="false" />
+          <Property Name="fkLocationCode" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="fkCountryId" Type="Int32" />
+          <Property Name="NAME" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbAircraftType">
+          <Key>
+            <PropertyRef Name="pkAircraftTypeId" />
+          </Key>
+          <Property Name="pkAircraftTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="tbSectorBookings" Relationship="WISHModel.FK_tbSectorBookings_tbAircraftTypes" FromRole="tbAircraftType" ToRole="tbSectorBooking" />
+        </EntityType>
+        <Association Name="FK_tbSectorBookings_tbAircraftTypes">
+          <End Type="WISHModel.tbAircraftType" Role="tbAircraftType" Multiplicity="0..1" />
+          <End Type="WISHModel.tbSectorBooking" Role="tbSectorBooking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbAircraftType">
+              <PropertyRef Name="pkAircraftTypeId" />
+            </Principal>
+            <Dependent Role="tbSectorBooking">
+              <PropertyRef Name="fkAircraftTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vwFlightLeg">
+          <Key>
+            <PropertyRef Name="pkSefFlightID" />
+            <PropertyRef Name="flight_Description" />
+            <PropertyRef Name="StartDateTime" />
+            <PropertyRef Name="EndDateTime" />
+            <PropertyRef Name="pkSefFlightLegID" />
+          </Key>
+          <Property Name="pkSefFlightLegID" Type="Guid" Nullable="false" />
+          <Property Name="pkSefFlightID" Type="Int32" Nullable="false" />
+          <Property Name="flight_Description" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fkSefLegID" Type="Int32" />
+          <Property Name="Flight_Active" Type="Boolean" />
+          <Property Name="Leg_Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Leg_Date" Type="DateTime" Precision="3" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WISHModelStoreContainer" CdmEntityContainer="WISHEntities" >
+          <FunctionImportMapping FunctionImportName="spSchedwinCharterRetrievalNew" FunctionName="WISHModel.Store.spSchedwinCharterRetrievalNew" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WISHModel.spSchedwinCharterRetrieval_Result">
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="pkBookingId" ColumnName="pkBookingId" />
+                <ScalarProperty Name="fkPartyGroupId" ColumnName="fkPartyGroupId" />
+                <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
+                <ScalarProperty Name="DateBookingMade" ColumnName="DateBookingMade" />
+                <ScalarProperty Name="pkSectorBookingId" ColumnName="pkSectorBookingId" />
+                <ScalarProperty Name="PartyNotes" ColumnName="PartyNotes" />
+                <ScalarProperty Name="PGRepeatYN" ColumnName="PGRepeatYN" />
+                <ScalarProperty Name="SectorNotes" ColumnName="SectorNotes" />
+                <ScalarProperty Name="PartyName" ColumnName="PartyName" />
+                <ScalarProperty Name="Guests" ColumnName="Guests" />
+                <ScalarProperty Name="PGNames" ColumnName="PGNames" />
+                <ScalarProperty Name="CHType" ColumnName="CHType" />
+                <ScalarProperty Name="PersonCode" ColumnName="PersonCode" />
+                <ScalarProperty Name="From" ColumnName="From" />
+                <ScalarProperty Name="ActualFrom" ColumnName="ActualFrom" />
+                <ScalarProperty Name="Ex" ColumnName="Ex" />
+                <ScalarProperty Name="ActualEx" ColumnName="ActualEx" />
+                <ScalarProperty Name="ByTransport" ColumnName="ByTransport" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="ActualTo" ColumnName="ActualTo" />
+                <ScalarProperty Name="For" ColumnName="For" />
+                <ScalarProperty Name="ActualFor" ColumnName="ActualFor" />
+                <ScalarProperty Name="ETD" ColumnName="ETD" />
+                <ScalarProperty Name="ETA" ColumnName="ETA" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="fkAgencyCode" ColumnName="fkAgencyCode" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="GuestCount" ColumnName="GuestCount" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tbLodges">
+            <EntityTypeMapping TypeName="WISHModel.tbLodge">
+              <MappingFragment StoreEntitySet="tbLodges">
+                <ScalarProperty Name="ExclusiveUse" ColumnName="ExclusiveUse" />
+                <ScalarProperty Name="GF_Lessor" ColumnName="GF_Lessor" />
+                <ScalarProperty Name="GF_Price_CCY" ColumnName="GF_Price_CCY" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="QV_TPCode" ColumnName="QV_TPCode" />
+                <ScalarProperty Name="QV_Marketing" ColumnName="QV_Marketing" />
+                <ScalarProperty Name="GF_TotalBeds" ColumnName="GF_TotalBeds" />
+                <ScalarProperty Name="GF_ReportBeds" ColumnName="GF_ReportBeds" />
+                <ScalarProperty Name="GF_BrandRate" ColumnName="GF_BrandRate" />
+                <ScalarProperty Name="GF_ReturnData" ColumnName="GF_ReturnData" />
+                <ScalarProperty Name="GF_Comment" ColumnName="GF_Comment" />
+                <ScalarProperty Name="GF_Region" ColumnName="GF_Region" />
+                <ScalarProperty Name="GF_TGKPC" ColumnName="GF_TGKPC" />
+                <ScalarProperty Name="GF_GPDB" ColumnName="GF_GPDB" />
+                <ScalarProperty Name="GF_Brand" ColumnName="GF_Brand" />
+                <ScalarProperty Name="GF_Market" ColumnName="GF_Market" />
+                <ScalarProperty Name="GF_Management" ColumnName="GF_Management" />
+                <ScalarProperty Name="GF_Ownership" ColumnName="GF_Ownership" />
+                <ScalarProperty Name="GF_Country" ColumnName="GF_Country" />
+                <ScalarProperty Name="GF_Name" ColumnName="GF_Name" />
+                <ScalarProperty Name="GPKey" ColumnName="GPKey" />
+                <ScalarProperty Name="IsNew" ColumnName="IsNew" />
+                <ScalarProperty Name="fkRegionId" ColumnName="fkRegionId" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Ownership" ColumnName="Ownership" />
+                <ScalarProperty Name="fkGroupDivisionId" ColumnName="fkGroupDivisionId" />
+                <ScalarProperty Name="Expiry" ColumnName="Expiry" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ExpiryTime" ColumnName="ExpiryTime" />
+                <ScalarProperty Name="DisplayInAWISH" ColumnName="DisplayInAWISH" />
+                <ScalarProperty Name="DisplayInTree" ColumnName="DisplayInTree" />
+                <ScalarProperty Name="fkAirstripId" ColumnName="fkAirstripId" />
+                <ScalarProperty Name="fkLocationId" ColumnName="fkLocationId" />
+                <ScalarProperty Name="fkConcessionId" ColumnName="fkConcessionId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="pkLodgeId" ColumnName="pkLodgeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tset_WishSchedwinLink">
+            <EntityTypeMapping TypeName="WISHModel.tset_WishSchedwinLink">
+              <MappingFragment StoreEntitySet="tset_WishSchedwinLink">
+                <ScalarProperty Name="TPCode" ColumnName="TPCode" />
+                <ScalarProperty Name="ActualCampName" ColumnName="ActualCampName" />
+                <ScalarProperty Name="CampName" ColumnName="CampName" />
+                <ScalarProperty Name="fkLodgeId" ColumnName="fkLodgeId" />
+                <ScalarProperty Name="pkSchedLinkID" ColumnName="pkSchedLinkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbSectorBookings">
+            <EntityTypeMapping TypeName="WISHModel.tbSectorBooking">
+              <MappingFragment StoreEntitySet="tbSectorBookings">
+                <ScalarProperty Name="AllowGuestsMax" ColumnName="AllowGuestsMax" />
+                <ScalarProperty Name="RateOption" ColumnName="RateOption" />
+                <ScalarProperty Name="isAgent" ColumnName="isAgent" />
+                <ScalarProperty Name="Seq" ColumnName="Seq" />
+                <ScalarProperty Name="StatusModDate" ColumnName="StatusModDate" />
+                <ScalarProperty Name="ExclusiveUse" ColumnName="ExclusiveUse" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="fkTransportTypeId" ColumnName="fkTransportTypeId" />
+                <ScalarProperty Name="fkAircraftTypeId" ColumnName="fkAircraftTypeId" />
+                <ScalarProperty Name="PrincipalReference" ColumnName="PrincipalReference" />
+                <ScalarProperty Name="fkAirstripId" ColumnName="fkAirstripId" />
+                <ScalarProperty Name="fkLocation" ColumnName="fkLocation" />
+                <ScalarProperty Name="fkPrincipalId" ColumnName="fkPrincipalId" />
+                <ScalarProperty Name="ConfirmedDate" ColumnName="ConfirmedDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="fkMealBasisId" ColumnName="fkMealBasisId" />
+                <ScalarProperty Name="fkPartyGroupId" ColumnName="fkPartyGroupId" />
+                <ScalarProperty Name="ReminderDate" ColumnName="ReminderDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="fkToSector" ColumnName="fkToSector" />
+                <ScalarProperty Name="fkFromSector" ColumnName="fkFromSector" />
+                <ScalarProperty Name="fkSectorClass" ColumnName="fkSectorClass" />
+                <ScalarProperty Name="fkSafariId" ColumnName="fkSafariId" />
+                <ScalarProperty Name="fkBookingId" ColumnName="fkBookingId" />
+                <ScalarProperty Name="pkSectorBookingId" ColumnName="pkSectorBookingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbLodgeBookings">
+            <EntityTypeMapping TypeName="WISHModel.tbLodgeBooking">
+              <MappingFragment StoreEntitySet="tbLodgeBookings">
+                <ScalarProperty Name="fkSectorBookingId" ColumnName="fkSectorBookingId" />
+                <ScalarProperty Name="fkLodgeId" ColumnName="fkLodgeId" />
+                <ScalarProperty Name="pkLodgeBookingId" ColumnName="pkLodgeBookingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbBookingFiles">
+            <EntityTypeMapping TypeName="WISHModel.tbBookingFile">
+              <MappingFragment StoreEntitySet="tbBookingFiles">
+                <ScalarProperty Name="AllowGuestsMax" ColumnName="AllowGuestsMax" />
+                <ScalarProperty Name="IsReverted" ColumnName="IsReverted" />
+                <ScalarProperty Name="TPBranchCluster" ColumnName="TPBranchCluster" />
+                <ScalarProperty Name="WishVersion" ColumnName="WishVersion" />
+                <ScalarProperty Name="DontAsk" ColumnName="DontAsk" />
+                <ScalarProperty Name="PCMRef" ColumnName="PCMRef" />
+                <ScalarProperty Name="Paid" ColumnName="Paid" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="GuideCount" ColumnName="GuideCount" />
+                <ScalarProperty Name="TPRef" ColumnName="TPRef" />
+                <ScalarProperty Name="Locked" ColumnName="Locked" />
+                <ScalarProperty Name="BookingStatus" ColumnName="BookingStatus" />
+                <ScalarProperty Name="ItineraryNotes" ColumnName="ItineraryNotes" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="SpecialAllocation" ColumnName="SpecialAllocation" />
+                <ScalarProperty Name="ExclusiveCamps" ColumnName="ExclusiveCamps" />
+                <ScalarProperty Name="RepeatParty" ColumnName="RepeatParty" />
+                <ScalarProperty Name="RulesViolated" ColumnName="RulesViolated" />
+                <ScalarProperty Name="RulesCheckRequired" ColumnName="RulesCheckRequired" />
+                <ScalarProperty Name="fkRate" ColumnName="fkRate" />
+                <ScalarProperty Name="fkOrgAgencyCode" ColumnName="fkOrgAgencyCode" />
+                <ScalarProperty Name="fkAgencyCode" ColumnName="fkAgencyCode" />
+                <ScalarProperty Name="fkAgentId" ColumnName="fkAgentId" />
+                <ScalarProperty Name="fkLockedByUserId" ColumnName="fkLockedByUserId" />
+                <ScalarProperty Name="fkUserId" ColumnName="fkUserId" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="DateBookingMade" ColumnName="DateBookingMade" />
+                <ScalarProperty Name="DefaultRooms" ColumnName="DefaultRooms" />
+                <ScalarProperty Name="GuestCount" ColumnName="GuestCount" />
+                <ScalarProperty Name="PartyName" ColumnName="PartyName" />
+                <ScalarProperty Name="pkBookingId" ColumnName="pkBookingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbSefFlightSchedules">
+            <EntityTypeMapping TypeName="WISHModel.tbSefFlightSchedule">
+              <MappingFragment StoreEntitySet="tbSefFlightSchedule">
+                <ScalarProperty Name="WeekStartDate" ColumnName="WeekStartDate" />
+                <ScalarProperty Name="fkSefFlightID" ColumnName="fkSefFlightID" />
+                <ScalarProperty Name="pkSefFlightScheduleID" ColumnName="pkSefFlightScheduleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbSefLegs">
+            <EntityTypeMapping TypeName="WISHModel.tbSefLeg">
+              <MappingFragment StoreEntitySet="tbSefLeg">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="fkPrincipalId" ColumnName="fkPrincipalId" />
+                <ScalarProperty Name="fkArrivalAirstripID" ColumnName="fkArrivalAirstripID" />
+                <ScalarProperty Name="fkDepartureAirstripID" ColumnName="fkDepartureAirstripID" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="fkLocationID" ColumnName="fkLocationID" />
+                <ScalarProperty Name="pkSefLegID" ColumnName="pkSefLegID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbSefBookings">
+            <EntityTypeMapping TypeName="WISHModel.tbSefBooking">
+              <MappingFragment StoreEntitySet="tbSefBookings">
+                <ScalarProperty Name="ForPrincipalId" ColumnName="ForPrincipalId" />
+                <ScalarProperty Name="ExPrincipalId" ColumnName="ExPrincipalId" />
+                <ScalarProperty Name="fkSectorBookingId" ColumnName="fkSectorBookingId" />
+                <ScalarProperty Name="fkSefFlightId" ColumnName="fkSefFlightId" />
+                <ScalarProperty Name="pkSefBookingId" ColumnName="pkSefBookingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbSefLegSchedules">
+            <EntityTypeMapping TypeName="WISHModel.tbSefLegSchedule">
+              <MappingFragment StoreEntitySet="tbSefLegSchedule">
+                <ScalarProperty Name="WeekStartDate" ColumnName="WeekStartDate" />
+                <ScalarProperty Name="fkSefLegID" ColumnName="fkSefLegID" />
+                <ScalarProperty Name="pkSefLegScheduleID" ColumnName="pkSefLegScheduleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbSefFlightLegs">
+            <EntityTypeMapping TypeName="WISHModel.tbSefFlightLeg">
+              <MappingFragment StoreEntitySet="tbSefFlightLeg">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="fkSefLegID" ColumnName="fkSefLegID" />
+                <ScalarProperty Name="fkSefFlightScheduleID" ColumnName="fkSefFlightScheduleID" />
+                <ScalarProperty Name="pkSefFlightLegID" ColumnName="pkSefFlightLegID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbAirstrips">
+            <EntityTypeMapping TypeName="WISHModel.tbAirstrip">
+              <MappingFragment StoreEntitySet="tbAirstrips">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AirstripCode" ColumnName="AirstripCode" />
+                <ScalarProperty Name="pkAirstripId" ColumnName="pkAirstripId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPrincipals">
+            <EntityTypeMapping TypeName="WISHModel.tbPrincipal">
+              <MappingFragment StoreEntitySet="tbPrincipals">
+                <ScalarProperty Name="FK_PrincipalTypeID" ColumnName="FK_PrincipalTypeID" />
+                <ScalarProperty Name="UsedForWishCharters" ColumnName="UsedForWishCharters" />
+                <ScalarProperty Name="fkPrincipalName" ColumnName="fkPrincipalName" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="fkLocationCode" ColumnName="fkLocationCode" />
+                <ScalarProperty Name="fkPrincipalCode" ColumnName="fkPrincipalCode" />
+                <ScalarProperty Name="pkPrincipalId" ColumnName="pkPrincipalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbSefFlights">
+            <EntityTypeMapping TypeName="WISHModel.tbSefFlight">
+              <MappingFragment StoreEntitySet="tbSefFlight">
+                <ScalarProperty Name="fkPrincipalID" ColumnName="fkPrincipalID" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Expiry" ColumnName="Expiry" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="fkLocationID" ColumnName="fkLocationID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="pkSefFlightID" ColumnName="pkSefFlightID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbGuests">
+            <EntityTypeMapping TypeName="WISHModel.tbGuest">
+              <MappingFragment StoreEntitySet="tbGuests">
+                <ScalarProperty Name="TPNationality" ColumnName="TPNationality" />
+                <ScalarProperty Name="FK_PrivateGuidID" ColumnName="FK_PrivateGuidID" />
+                <ScalarProperty Name="IsPrivateGuide" ColumnName="IsPrivateGuide" />
+                <ScalarProperty Name="IsRepeatGuest" ColumnName="IsRepeatGuest" />
+                <ScalarProperty Name="PassportExpiry" ColumnName="PassportExpiry" />
+                <ScalarProperty Name="PassportPlace" ColumnName="PassportPlace" />
+                <ScalarProperty Name="PassportIssued" ColumnName="PassportIssued" />
+                <ScalarProperty Name="PassportNationality" ColumnName="PassportNationality" />
+                <ScalarProperty Name="PassportName" ColumnName="PassportName" />
+                <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+                <ScalarProperty Name="TPGuestId" ColumnName="TPGuestId" />
+                <ScalarProperty Name="IsGuide" ColumnName="IsGuide" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Sharing" ColumnName="Sharing" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="fkNationalityCode" ColumnName="fkNationalityCode" />
+                <ScalarProperty Name="fkResidenceCode" ColumnName="fkResidenceCode" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="pkGuestId" ColumnName="pkGuestId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbPartyGroups">
+            <EntityTypeMapping TypeName="WISHModel.tbPartyGroup">
+              <MappingFragment StoreEntitySet="tbPartyGroups">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="fkBookingId" ColumnName="fkBookingId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="pkPartyGroupId" ColumnName="pkPartyGroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="tbPartyGroupGuests" TypeName="WISHModel.tbPartyGroupGuests" StoreEntitySet="tbPartyGroupGuests">
+            <EndProperty Name="tbPartyGroup">
+              <ScalarProperty Name="pkPartyGroupId" ColumnName="fkPartyGroupId" />
+            </EndProperty>
+            <EndProperty Name="tbGuest">
+              <ScalarProperty Name="pkGuestId" ColumnName="fkGuestId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="tbCharterBookings">
+            <EntityTypeMapping TypeName="WISHModel.tbCharterBooking">
+              <MappingFragment StoreEntitySet="tbCharterBookings">
+                <ScalarProperty Name="FK_ForPrincipalID" ColumnName="FK_ForPrincipalID" />
+                <ScalarProperty Name="FK_ExPrincipalID" ColumnName="FK_ExPrincipalID" />
+                <ScalarProperty Name="FK_SectorBookingID" ColumnName="FK_SectorBookingID" />
+                <ScalarProperty Name="CharterBookingID" ColumnName="CharterBookingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbUsers">
+            <EntityTypeMapping TypeName="WISHModel.tbUser">
+              <MappingFragment StoreEntitySet="tbUsers">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="UsedResSysCount" ColumnName="UsedResSysCount" />
+                <ScalarProperty Name="UserLoggedIn" ColumnName="UserLoggedIn" />
+                <ScalarProperty Name="LastAccess" ColumnName="LastAccess" />
+                <ScalarProperty Name="ADirectoryGUID" ColumnName="ADirectoryGUID" />
+                <ScalarProperty Name="PersonCode" ColumnName="PersonCode" />
+                <ScalarProperty Name="pkUserId" ColumnName="pkUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwLocations">
+            <EntityTypeMapping TypeName="WISHModel.vwLocation">
+              <MappingFragment StoreEntitySet="vwLocations">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="fkCountryId" ColumnName="fkCountryId" />
+                <ScalarProperty Name="fkLocationCode" ColumnName="fkLocationCode" />
+                <ScalarProperty Name="pkLocationId" ColumnName="pkLocationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbAircraftTypes">
+            <EntityTypeMapping TypeName="WISHModel.tbAircraftType">
+              <MappingFragment StoreEntitySet="tbAircraftTypes">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="pkAircraftTypeId" ColumnName="pkAircraftTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwFlightLegs">
+            <EntityTypeMapping TypeName="WISHModel.vwFlightLeg">
+              <MappingFragment StoreEntitySet="vwFlightLegs">
+                <ScalarProperty Name="Leg_Date" ColumnName="Leg Date" />
+                <ScalarProperty Name="Leg_Description" ColumnName="Leg Description" />
+                <ScalarProperty Name="Flight_Active" ColumnName="Flight Active" />
+                <ScalarProperty Name="fkSefLegID" ColumnName="fkSefLegID" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="flight_Description" ColumnName="flight Description" />
+                <ScalarProperty Name="pkSefFlightID" ColumnName="pkSefFlightID" />
+                <ScalarProperty Name="pkSefFlightLegID" ColumnName="pkSefFlightLegID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

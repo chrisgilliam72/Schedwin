@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ba9ceba10db744678df8f4fb59c8562e" Name="Diagram1" ZoomLevel="64" >
+        <EntityTypeShape EntityType="WISHModel.tbLodge" Width="1.5" PointX="1.25" PointY="0.625" />
+        <EntityTypeShape EntityType="WISHModel.tset_WishSchedwinLink" Width="1.5" PointX="3.625" PointY="4.625" />
+        <AssociationConnector Association="WISHModel.FK_tset_WishSchedwinLink_tbLodges" />
+        <EntityTypeShape EntityType="WISHModel.tbSectorBooking" Width="2.375" PointX="10.75" PointY="0.625" />
+        <AssociationConnector Association="WISHModel.FK_tbSectorBookings_tbSectorBookings" />
+        <AssociationConnector Association="WISHModel.FK_tbSectorBookings_tbSectorBookings1" />
+        <EntityTypeShape EntityType="WISHModel.tbLodgeBooking" Width="1.5" PointX="7.375" PointY="1.625" />
+        <AssociationConnector Association="WISHModel.FK_tbLodgeBookings_tbLodges" />
+        <AssociationConnector Association="WISHModel.FK_tbLodgeBookings_tbSectorBookings" />
+        <EntityTypeShape EntityType="WISHModel.tbBookingFile" Width="2.125" PointX="13.5" PointY="1.25" />
+        <AssociationConnector Association="WISHModel.FK_tbSectorBookings_tbBookingFiles" />
+        <EntityTypeShape EntityType="WISHModel.tbSefFlightSchedule" Width="1.875" PointX="6.375" PointY="7.875" />
+        <EntityTypeShape EntityType="WISHModel.tbSefLeg" Width="1.5" PointX="3.375" PointY="7.375" />
+        <EntityTypeShape EntityType="WISHModel.tbSefBooking" Width="1.5" PointX="11.75" PointY="9.625" />
+        <AssociationConnector Association="WISHModel.FK_tbSefBookings_tbSectorBookings" />
+        <AssociationConnector Association="WISHModel.FK_tbSefBookings_tbSefBookings" />
+        <EntityTypeShape EntityType="WISHModel.tbSefLegSchedule" Width="1.5" PointX="3.75" PointY="11.375" />
+        <AssociationConnector Association="WISHModel.FK_tbLegSchedule_tbLeg" />
+        <EntityTypeShape EntityType="WISHModel.tbSefFlightLeg" Width="1.5" PointX="6.625" PointY="10.75" />
+        <AssociationConnector Association="WISHModel.FK_tbFlightLeg_tbFlightSchedule" />
+        <AssociationConnector Association="WISHModel.FK_tbFlightLeg_tbLeg" />
+        <EntityTypeShape EntityType="WISHModel.tbAirstrip" Width="1.5" PointX="17.75" PointY="11.375" />
+        <AssociationConnector Association="WISHModel.FK_tbLeg_tbAirstrips" />
+        <AssociationConnector Association="WISHModel.FK_tbLeg_tbAirstrips1" />
+        <AssociationConnector Association="WISHModel.FK_tbLodges_tbAirstrips" />
+        <AssociationConnector Association="WISHModel.FK_tbSectorBookings_tbAirstrips" />
+        <EntityTypeShape EntityType="WISHModel.tbPrincipal" Width="1.5" PointX="8.625" PointY="4.375" />
+        <AssociationConnector Association="WISHModel.FK_tbLeg_tbPrincipals" />
+        <AssociationConnector Association="WISHModel.FK_tbSectorBookings_tbPrincipals" />
+        <AssociationConnector Association="WISHModel.FK_tbSefBookings_tbPrincipalsEx" />
+        <AssociationConnector Association="WISHModel.FK_tbSefBookings_tbPrincipalsFor" />
+        <EntityTypeShape EntityType="WISHModel.tbSefFlight" Width="1.5" PointX="7.125" PointY="13.625" />
+        <AssociationConnector Association="WISHModel.FK_tbSefFlight_tbPrincipals" />
+        <AssociationConnector Association="WISHModel.FK_tbSefBookings_tbSefFlight" />
+        <AssociationConnector Association="WISHModel.FK_tbSefFlightSchedule_tbFlight" />
+        <EntityTypeShape EntityType="WISHModel.tbGuest" Width="1.5" PointX="14.125" PointY="9.625" />
+        <EntityTypeShape EntityType="WISHModel.tbPartyGroup" Width="1.5" PointX="16.375" PointY="6.875" />
+        <AssociationConnector Association="WISHModel.FK_tbPartyGroupNames_tbBookingFiles" />
+        <AssociationConnector Association="WISHModel.FK_tbSectorBookings_tbPartyGroups" />
+        <AssociationConnector Association="WISHModel.tbPartyGroupGuests" />
+        <EntityTypeShape EntityType="WISHModel.tbCharterBooking" Width="1.5" PointX="4.125" PointY="1" />
+        <AssociationConnector Association="WISHModel.FK__tbCharter_fkForPrincipal" />
+        <AssociationConnector Association="WISHModel.FK__tbCharter_fkSectorBooking" />
+        <AssociationConnector Association="WISHModel.FK_tbCharter_fkExPrincipal" />
+        <EntityTypeShape EntityType="WISHModel.tbUser" Width="1.5" PointX="11.125" PointY="13.5" />
+        <AssociationConnector Association="WISHModel.FK_tbBookingFiles_tbUsers" />
+        <AssociationConnector Association="WISHModel.FK_tbBookingFiles_tbUsers1" />
+        <EntityTypeShape EntityType="WISHModel.vwLocation" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="WISHModel.tbAircraftType" Width="1.5" PointX="0.75" PointY="13.875" />
+        <AssociationConnector Association="WISHModel.FK_tbSectorBookings_tbAircraftTypes" />
+        <EntityTypeShape EntityType="WISHModel.vwFlightLeg" Width="1.5" PointX="3.375" PointY="14.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

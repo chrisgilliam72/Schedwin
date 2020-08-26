@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D3A9AEC1-F467-46C1-915A-915B4169D837}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Schedwin.WishIntegration</RootNamespace>
+    <AssemblyName>Schedwin.WishIntegration</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telerik.Windows.Controls">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Data">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.GridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Navigation.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Data">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Core">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Documents.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Fixed">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Documents.Fixed.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\WICharterBooking.cs" />
+    <Compile Include="Classes\WICharterBookingPax.cs" />
+    <Compile Include="Classes\WIPartyGroup.cs" />
+    <Compile Include="Classes\WIReservationLeg.cs" />
+    <Compile Include="Classes\WIBookingAgent.cs" />
+    <Compile Include="Classes\WIBookingCompany.cs" />
+    <Compile Include="Classes\WICharterBookingLeg.cs" />
+    <Compile Include="Classes\WIRemovedBooking.cs" />
+    <Compile Include="Classes\WIRemovedBookingLeg.cs" />
+    <Compile Include="Classes\WIReservationHeader.cs" />
+    <Compile Include="Classes\WIReservation.cs" />
+    <Compile Include="Classes\WIReservationPax.cs" />
+    <Compile Include="Classes\WishBookingReference.cs" />
+    <Compile Include="Classes\WishIntegration.cs" />
+    <Compile Include="Classes\WishIntegrationGlobal.cs" />
+    <Compile Include="ViewModels\WishBookingLegsCntrlViewModel.cs" />
+    <Compile Include="Views\RemovedWishBookingHeaderCntrlView.xaml.cs">
+      <DependentUpon>RemovedWishBookingHeaderCntrlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\RemovedWishBookingHeaderCntrlViewModel.cs" />
+    <Compile Include="spSchedwinCharterRetrieval_Result.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbAircraftType.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbAirstrip.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbBookingFile.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbCharterBooking.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbGuest.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbLodge.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbLodgeBooking.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbPartyGroup.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbPrincipal.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbSectorBooking.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbSefBooking.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbSefFlight.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbSefFlightLeg.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbSefFlightSchedule.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbSefLeg.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbSefLegSchedule.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tbUser.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tset_WishSchedwinLink.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwFlightLeg.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vwLocation.cs">
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\WishBookingHeaderCntrlViewModel.cs" />
+    <Compile Include="Controls\WishBookingHeaderCntrViewl.xaml.cs">
+      <DependentUpon>WishBookingHeaderCntrViewl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WishBookingLegsCntrlView.xaml.cs">
+      <DependentUpon>WishBookingLegsCntrlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\WishBookingSearchView.xaml.cs">
+      <DependentUpon>WishBookingSearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\WishBookingSearchViewModel.cs" />
+    <Compile Include="Views\WishIntegrationUI.xaml.cs">
+      <DependentUpon>WishIntegrationUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WishIntegrationUICntrl.xaml.cs">
+      <DependentUpon>WishIntegrationUICntrl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\WishIntegrationUIViewModel.cs" />
+    <Compile Include="WishModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WishModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WishModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WishModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WishModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WishModel.edmx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="WishModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WishModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <None Include="WishModel.edmx.diagram">
+      <DependentUpon>WishModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\isync.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\save.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\plane16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\cancel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\fixnames.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Search-48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Database-64.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Database-32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Content Include="WishModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WishModel.edmx</DependentUpon>
+      <LastGenOutput>WishModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="WishModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WishModel.edmx</DependentUpon>
+      <LastGenOutput>WishModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\RemovedWishBookingHeaderCntrlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WishBookingHeaderCntrViewl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WishBookingLegsCntrlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WishBookingSearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WishIntegrationUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WishIntegrationUICntrl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Schedwin.Common\Schedwin.Common.csproj">
+      <Project>{641b45db-09f8-41ba-8a50-1679fe6b0cc9}</Project>
+      <Name>Schedwin.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Schedwin.Data\Schedwin.Data.csproj">
+      <Project>{71ef1439-ae8e-486f-9dfb-ff28cfe81ba0}</Project>
+      <Name>Schedwin.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Schedwin.Reservations\Schedwin.Reservations.csproj">
+      <Project>{2c16bf79-b4d4-4b62-b423-e0f69554e7de}</Project>
+      <Name>Schedwin.Reservations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Schedwin.Tourplan\Schedwin.Tourplan.csproj">
+      <Project>{0d8db81d-92df-411f-9b16-cf86517c0591}</Project>
+      <Name>Schedwin.Tourplan</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
