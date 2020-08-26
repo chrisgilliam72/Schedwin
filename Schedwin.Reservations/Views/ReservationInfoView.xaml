@@ -1,0 +1,305 @@
+﻿<telerik:RadWindow x:Class="Schedwin.Reservations.ReservationInfoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Schedwin.Reservations"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" WindowStartupLocation="CenterOwner" HideMinimizeButton="True"
+             mc:Ignorable="d" Height="700" Width="1250" Header="Reservation details" Loaded="RadWindow_Loaded" Background="LightBlue" >
+
+    <telerik:RadWindow.DataContext>
+        <local:ReservationInfoViewModel/>
+    </telerik:RadWindow.DataContext>
+    <telerik:RadWindow.Resources>
+        <local:ReservationInfoViewModel x:Key="ViewModel"/>
+    </telerik:RadWindow.Resources>
+    <Grid>
+         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <GroupBox Margin="5"  Header="Reservation Information" Grid.Row="0"  HorizontalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0">Reservation Name:</Label>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Width="250" Height="25"  HorizontalAlignment="Left" Text="{Binding ReservationName}"  VerticalContentAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="0">Date Captured</Label>
+                <telerik:RadDatePicker Grid.Row="1" Grid.Column="1" Height="25" Width="150"  HorizontalAlignment="Left"   Margin="5" SelectedValue="{Binding CaptureDate}" VerticalContentAlignment="Center" IsEnabled="{Binding CanChangeDate}"/>
+                <Label Grid.Row="2" Grid.Column="0" Margin="5" >Operator</Label>
+                <telerik:RadComboBox Grid.Row="2" Grid.Column="1" Height="25" Width="200"   Margin="5"  HorizontalAlignment="Left" ItemsSource="{Binding Operators}" 
+                                                                                            DisplayMemberPath="Description" SelectedItem="{Binding SelectedOperator}"
+                                                                                            SelectionChanged="Operator_SelectionChanged"/>
+                <Label Grid.Row="3" Grid.Column="0"  Margin="5">Consultant</Label>
+                <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1"  >
+                    <TextBox Width="150"   Margin="5" Height="25"  HorizontalAlignment="Left"  Text="{Binding Consultant}" VerticalContentAlignment="Center"  IsReadOnly="True"/>
+                    <telerik:RadButton Height=" 25" Width="30" Click="Button_SelectConsultant_Click">...</telerik:RadButton>
+                    <!--<telerik:RadButton Height=" 25" Width="30" Click="Button_SelectWishConsultant_Click" Margin="5" CornerRadius="1">
+                        <telerik:RadButton.Content>
+                            <Image Source="../Images/wish.jpg" ToolTip="wish consultants "/>
+                        </telerik:RadButton.Content>
+                       
+                    </telerik:RadButton>-->
+                </StackPanel>
+
+                <Label Grid.Row="0" Grid.Column="2"  Margin="5"  HorizontalAlignment="Left">Default Currency</Label>
+                <telerik:RadComboBox Grid.Row="0" Grid.Column="3"  Margin="5"  Height="25" Width="120" HorizontalAlignment="Left"  ItemsSource="{Binding CurrenciesLst}" DisplayMemberPath="Description" SelectedItem="{Binding SelectedCurrency}"/>
+                <Label Grid.Row="1" Grid.Column="2"  Margin="5"  HorizontalAlignment="Left">Number of Passengers</Label>
+                <TextBox Grid.Row="1" Grid.Column="3" Margin="5" Width="120" Height="25"  HorizontalAlignment="Left" Text="{Binding NoPax,Mode=OneWay}"  VerticalContentAlignment="Center" IsReadOnly="True"/>
+                <Label Grid.Row="2" Grid.Column="2"  Margin="5"  HorizontalAlignment="Left">Schdewin Agent</Label>
+                <TextBox Grid.Row="2" Grid.Column="3" Margin="5" Width="120" Height="25"  HorizontalAlignment="Left"  Text="{Binding SefofaneAgent}"  VerticalContentAlignment="Center" IsReadOnly="True"/>
+              
+                <Label Grid.Row="7" Grid.Column="0"  Margin="5"  HorizontalAlignment="Left">Reservation Type</Label>
+                <telerik:RadComboBox Grid.Row="7" Grid.Column="1"  Margin="5"  Height="25" Width="150" HorizontalAlignment="Left"  ItemsSource="{Binding ReservationTypes}" DisplayMemberPath="Description" SelectedItem="{Binding SelectedResType}"/>
+                <Label Grid.Row="7" Grid.Column="2"  Margin="5"  HorizontalAlignment="Left">Reservation Status</Label>
+                <telerik:RadComboBox Grid.Row="7" Grid.Column="3" Margin ="5" Height="25" Width="120" HorizontalAlignment="Left"  ItemsSource="{Binding ReservationStatus}" DisplayMemberPath="Description" SelectedItem="{Binding SelectedReStatus}"/>
+
+                <Label Grid.Row="9" Grid.Column="0" Margin="5"  VerticalContentAlignment="Center">Ticket Information</Label>
+                <StackPanel Margin="5" Grid.Row="9"  Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <CheckBox  Margin="5" IsChecked="{Binding TicketPrinted}">Ticket Printed</CheckBox>
+                    <CheckBox  Grid.Column="0"  Margin="5" IsChecked="{Binding TicketRequired}">Ticket Required</CheckBox>
+                </StackPanel>
+
+                <Label Grid.Row="10" Grid.Column="0"  Margin="5" VerticalContentAlignment="Center"> Booking Flags</Label>
+                <StackPanel Margin="5" Grid.Row="10" Grid.Column="1" Orientation="Horizontal " VerticalAlignment="Center">
+                    <CheckBox  Margin="5" IsChecked="{Binding IsActive}">Active</CheckBox>
+                    <CheckBox Margin="5" IsChecked="{Binding IsSplit}" IsEnabled="False">Split Booking</CheckBox>
+                    <CheckBox Margin="5" IsChecked="{Binding IsMaster}" IsEnabled="False">Is Master</CheckBox>
+                </StackPanel>
+                <Label Grid.Row="11" Grid.Column="0" Margin="5" >Reservation Note</Label>
+                <TextBox Grid.Row="11"  Grid.Column="1" Grid.ColumnSpan="3" Margin="5" Height="100"  HorizontalAlignment="Stretch" VerticalContentAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Notes}"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="0" Grid.Column="1"  Header="Passengers" Margin="5">
+            <telerik:RadGridView  Name="gridPax"  Margin="5" VerticalAlignment="Stretch"  ShowGroupPanel="False" SelectionMode="Multiple"
+                                  ItemsSource="{Binding Passengers,Mode=TwoWay}" AutoGenerateColumns="False"  IsFilteringAllowed="False"  >
+                <telerik:RadGridView.Resources>
+                    <Style TargetType="telerik:GridViewCell" x:Key="textFont">
+                        <Setter Property="FontSize" Value="9" />
+                    </Style>
+                </telerik:RadGridView.Resources>
+                <telerik:RadContextMenu.ContextMenu>
+                    <telerik:RadContextMenu x:Name="radContextMenu2"  IsEnabled="{Binding CanAddPax}">
+                        <telerik:RadMenuItem Header="Add Passengers" Click="AddNewPax_Click">
+                            <telerik:RadMenuItem.IconTemplate>
+                                <DataTemplate>
+                                    <Image Source="../Images/add.png"/>
+                                </DataTemplate>
+                            </telerik:RadMenuItem.IconTemplate>
+                        </telerik:RadMenuItem>
+                        <telerik:RadMenuItem Header="Remove Passenger(s)"  Click="RemovePax_Click"  IsEnabled="{Binding GuestsSelected}">
+                            <telerik:RadMenuItem.IconTemplate>
+                                <DataTemplate>
+                                    <Image Source="../Images/delete.png"/>
+                                </DataTemplate>
+                            </telerik:RadMenuItem.IconTemplate>
+                        </telerik:RadMenuItem>
+                        <telerik:RadMenuItem Header="Refresh Passengers" Click="RefreshPax_Click">
+                            <telerik:RadMenuItem.IconTemplate>
+                                <DataTemplate>
+                                    <Image Source="../Images/isync.png"/>
+                                </DataTemplate>
+                            </telerik:RadMenuItem.IconTemplate>
+                        </telerik:RadMenuItem>
+                        <telerik:RadMenuItem Header="Split Passengers" Click="SplitPax_Click" IsEnabled="{Binding GuestsSelected}">
+                            <telerik:RadMenuItem.IconTemplate>
+                                <DataTemplate>
+                                    <Image Source="../Images/Split48.png"/>
+                                </DataTemplate>
+                            </telerik:RadMenuItem.IconTemplate>
+                        </telerik:RadMenuItem>
+                    </telerik:RadContextMenu>
+
+                </telerik:RadContextMenu.ContextMenu>
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn Header="Firstname" Width="auto" DataMemberBinding="{Binding FirstName }"/>
+                    <telerik:GridViewDataColumn Header="Surname" Width="auto" DataMemberBinding="{Binding Surname }"/>
+                    <telerik:GridViewDataColumn Header="Passport #" Width="auto" DataMemberBinding="{Binding PassportNo }"/>
+                    <telerik:GridViewDataColumn Header="Nationality " Width="auto" DataMemberBinding="{Binding Nationality }"/>
+                    <telerik:GridViewDataColumn Header="Age" Width="auto" DataMemberBinding="{Binding Age }"/>
+                    <telerik:GridViewDataColumn Header="Sex" Width="auto" DataMemberBinding="{Binding Sex }"/>
+                    <telerik:GridViewDataColumn Header="Weight" Width="auto" DataMemberBinding="{Binding Weight }"/>
+                    <telerik:GridViewDataColumn Header="Luggage" Width="auto" DataMemberBinding="{Binding LuggageWeight }"/>
+                    <telerik:GridViewCheckBoxColumn Header="Printed" Width="auto" DataMemberBinding="{Binding TicketPrinted }"/>
+                    <telerik:GridViewDataColumn Header="" Width="*"  IsReadOnly="True"/>
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
+        </GroupBox>
+        <GroupBox  Margin="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Height="auto" Header="Flight Itinerary">
+            <telerik:RadGridView   ShowGroupPanel="False" VerticalAlignment="Stretch" Margin="5"
+                                        ItemsSource="{Binding Legs,Mode=TwoWay}" AutoGenerateColumns="False" IsFilteringAllowed="False" CanUserInsertRows="False" 
+                                         SelectedItem="{Binding SelectedLeg}"  RowEditEnded="RadGridView_RowEditEnded">
+                <telerik:RadGridView.RowStyle>
+                    <Style TargetType="{x:Type telerik:GridViewRow}">
+                        <Setter Property="Background" Value="{Binding RowColor}"/>
+                    </Style>
+                </telerik:RadGridView.RowStyle>
+                <telerik:RadGridView.Resources>
+                    <Style TargetType="telerik:GridViewCell" x:Key="textFont">
+                        <Setter Property="FontSize" Value="9" />
+                    </Style>
+                </telerik:RadGridView.Resources>
+                <telerik:RadContextMenu.ContextMenu>
+                    <telerik:RadContextMenu x:Name="radContextMenu" >
+                        <telerik:RadMenuItem Header="New Leg" Click="AddNewLeg_Click" >
+                            <telerik:RadMenuItem.IconTemplate>
+                                <DataTemplate>
+                                    <Image Source="../Images/add.png"/>
+                                </DataTemplate>
+                            </telerik:RadMenuItem.IconTemplate>
+                        </telerik:RadMenuItem>
+                        <telerik:RadMenuItem Header="Cancel Leg" Click="CancelLeg_Click"  IsEnabled="{Binding LegSelected}">
+                            <telerik:RadMenuItem.IconTemplate>
+                                <DataTemplate>
+                                    <Image Source="../Images/cancel.png"/>
+                                </DataTemplate>
+                            </telerik:RadMenuItem.IconTemplate>
+                        </telerik:RadMenuItem>
+                        <telerik:RadMenuItem Header="Remove Leg" Click="RemoveLeg_Click"  IsEnabled="{Binding LegSelected}">
+                            <telerik:RadMenuItem.IconTemplate>
+                                <DataTemplate>
+                                    <Image Source="../Images/delete.png"/>
+                                </DataTemplate>
+                            </telerik:RadMenuItem.IconTemplate>
+                        </telerik:RadMenuItem>
+                        <telerik:RadMenuItem Header="Budget Info" Click="BudgetInfo_Click"  IsEnabled="{Binding ItemSelected}">
+                            <telerik:RadMenuItem.IconTemplate>
+                                <DataTemplate>
+                                    <Image Source="../Images/money.png"/>
+                                </DataTemplate>
+                            </telerik:RadMenuItem.IconTemplate>
+                        </telerik:RadMenuItem>
+                    </telerik:RadContextMenu>
+                </telerik:RadContextMenu.ContextMenu>
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn  Header="Date" Width="100" DataMemberBinding="{Binding Leg.BookingDate}"  DataFormatString="yyyy-MM-dd"  IsReadOnlyBinding="{Binding IsReadOnly}" />
+                    <telerik:GridViewDataColumn Header="From" DataMemberBinding="{Binding FromAP}">
+                        <telerik:GridViewDataColumn.CellEditTemplate>
+                            <DataTemplate>
+                                <telerik:RadComboBox  ItemsSource= "{Binding AirportList}" SelectedValue="{Binding IDX_FromAP}" 
+                                                              SelectedValuePath="IDX"  DisplayMemberPath="DisplayString"  SelectionChanged="AirportFrom_SelectionChanged">
+                                    <telerik:RadComboBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel/>
+                                        </ItemsPanelTemplate>
+                                    </telerik:RadComboBox.ItemsPanel>
+                                </telerik:RadComboBox>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellEditTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="Ex" Width="auto" DataMemberBinding="{Binding Leg.ExField}">
+                        <telerik:GridViewDataColumn.CellEditTemplate>
+                            <DataTemplate>
+                                <telerik:RadComboBox  ItemsSource= "{Binding ExList}"   SelectedValuePath="Description"  SelectedValue="{Binding Leg.ExField}"
+                                                              DisplayMemberPath="Description">
+                                    <telerik:RadComboBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel/>
+                                        </ItemsPanelTemplate>
+                                    </telerik:RadComboBox.ItemsPanel>
+                                </telerik:RadComboBox>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellEditTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="To " Width="auto" DataMemberBinding="{Binding ToAP}">
+                        <telerik:GridViewDataColumn.CellEditTemplate>
+                            <DataTemplate>
+                                <telerik:RadComboBox  ItemsSource= "{Binding AirportList}" SelectedValue="{Binding IDX_ToAP}" 
+                                                              SelectedValuePath="IDX"  DisplayMemberPath="DisplayString"  SelectionChanged="AirportTo_SelectionChanged">
+                                    <telerik:RadComboBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel/>
+                                        </ItemsPanelTemplate>
+                                    </telerik:RadComboBox.ItemsPanel>
+                                </telerik:RadComboBox>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellEditTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="For" Width="auto" DataMemberBinding="{Binding Leg.ForField}">
+                        <telerik:GridViewDataColumn.CellEditTemplate>
+                            <DataTemplate>
+                                <telerik:RadComboBox  ItemsSource= "{Binding ForList}"   SelectedValuePath="Description" SelectedValue="{Binding Leg.ForField}"
+                                                              DisplayMemberPath="Description" >
+                                    <telerik:RadComboBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel/>
+                                        </ItemsPanelTemplate>
+                                    </telerik:RadComboBox.ItemsPanel>
+                                </telerik:RadComboBox>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellEditTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="Earliest Ex" Width="auto" DataFormatString="HH:mm"  DataMemberBinding="{Binding Leg.EarliestEx}">
+                        <telerik:GridViewDataColumn.CellEditTemplate>
+                            <DataTemplate>
+                                <telerik:RadTimePicker  TimeInterval="0:15:0"  StartTime="06:00:00" EndTime="18:00:00" DisplayFormat="Short" SelectedValue="{Binding Leg.EarliestEx}" >
+                                </telerik:RadTimePicker>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellEditTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="Latest Ex" Width="auto" DataFormatString="HH:mm" DataMemberBinding="{Binding Leg.LatestEx}">
+                        <telerik:GridViewDataColumn.CellEditTemplate>
+                            <DataTemplate>
+                                <telerik:RadTimePicker  TimeInterval="0:15:0"  StartTime="06:00:00" EndTime="18:00:00" DisplayFormat="Short" SelectedValue="{Binding Leg.LatestEx}" >
+                                </telerik:RadTimePicker>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellEditTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="Earliest For" Width="auto" DataFormatString="HH:mm" DataMemberBinding="{Binding Leg.EarliestFor}">
+                        <telerik:GridViewDataColumn.CellEditTemplate>
+                            <DataTemplate>
+                                <telerik:RadTimePicker  TimeInterval="0:15:0"  StartTime="06:00:00" EndTime="18:00:00" DisplayFormat="Short" SelectedValue="{Binding Leg.EarliestFor}" >
+                                </telerik:RadTimePicker>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellEditTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="Latest For" Width="auto" DataFormatString="HH:mm" DataMemberBinding="{Binding Leg.LatestFor}">
+                        <telerik:GridViewDataColumn.CellEditTemplate>
+                            <DataTemplate>
+                                <telerik:RadTimePicker  TimeInterval="0:15:0"  StartTime="06:00:00" EndTime="18:00:00" DisplayFormat="Short" SelectedValue="{Binding Leg.LatestFor}" >
+                                </telerik:RadTimePicker>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellEditTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="Direct Dist(km)" Width="auto" IsReadOnly="True" DataMemberBinding="{Binding Distance}"/>
+                    <telerik:GridViewDataColumn Header="Canc" Width="auto" IsReadOnly="True" DataMemberBinding="{Binding Leg.Canceled}"/>
+                    <telerik:GridViewDataColumn Header="Ticket Printed" Width="auto" IsReadOnly="True" DataMemberBinding="{Binding Leg.TicketPrinted}"/>
+                    <telerik:GridViewDataColumn Header="Aircraft Type" Width="auto" IsReadOnly="True" DataMemberBinding="{Binding Leg.ACType}"/>
+                    <telerik:GridViewDataColumn Header="Sole Use" Width="auto"  DataMemberBinding="{Binding Leg.SoleUse}"/>
+                    <telerik:GridViewDataColumn Header="Voucher" Width="auto" DataMemberBinding="{Binding Leg.Voucher}"/>
+                    <telerik:GridViewDataColumn Header="Invoice #" Width="auto"  DataMemberBinding="{Binding Leg.InvNumber}"/>
+                    <telerik:GridViewDataColumn Header="Notes" MinWidth="200" Width="auto"  DataMemberBinding="{Binding Leg.Notes}"  />
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
+        </GroupBox>
+        <StackPanel Grid.Column="1" Grid.Row="2"  Margin="5" Orientation="Horizontal" HorizontalAlignment="right"  >
+            <Button x:Name="btnSave" Height="20" Width="60" Margin="0,0,5,0" VerticalAlignment="Center" IsDefault="True" Click="ButtonSave_Click" >Save</Button>
+            <Button Height="20" Width="60" Margin="0,0,5,0" VerticalAlignment="Center" Click="ButtonCancel_Click">Cancel</Button>
+        </StackPanel>
+    </Grid>
+
+</telerik:RadWindow>

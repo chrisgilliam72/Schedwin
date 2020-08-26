@@ -1,0 +1,97 @@
+﻿<telerik:RadWindow x:Class="Schedwin.Reservations.ReservationBudgetView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:local="clr-namespace:Schedwin.Reservations" Background="LightBlue"
+            Header="Budget Information" ResizeMode="CanResizeWithGrip" Height="300" WindowStartupLocation="CenterScreen"
+                   Loaded="RadWindow_Loaded">
+    <telerik:RadWindow.DataContext>
+        <local:ReservationBudgetViewModel/>
+    </telerik:RadWindow.DataContext>
+
+    <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+                 <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0"  Margin="5" Orientation="Horizontal" HorizontalAlignment="Left"  >
+            <Button Height="20" Width="80" Margin="0,0,5,0" VerticalAlignment="Center" Click="NewLine_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/add.png"  ToolTip="Save selection"/>
+                    <TextBlock Margin="2,0,0,0">Add Line</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button Height="20" Width="90" Margin="0,0,5,0" VerticalAlignment="Center" Click="DelLine_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/delete.png"  ToolTip="Save selection"/>
+                    <TextBlock Margin="2,0,0,0">Delete Line</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+        <telerik:RadGridView  Margin="5" Grid.Row="1" Grid.Column="0"  Height="250" Width="550" VerticalAlignment="Top"  ShowGroupPanel="False"
+                                  ItemsSource="{Binding ListBudgets}" AutoGenerateColumns="False"  IsFilteringAllowed="False" SelectedItem="{Binding SelectedBudget}">
+            <telerik:RadGridView.Resources>
+                <Style TargetType="telerik:GridViewCell" x:Key="textFont">
+                    <Setter Property="FontSize" Value="9" />
+                </Style>
+            </telerik:RadGridView.Resources>
+
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="Date" Width="auto" DataMemberBinding="{Binding Date }" DataFormatString="yyyy-MM-dd"/>
+                <telerik:GridViewDataColumn Header="From" Width="auto" DataMemberBinding="{Binding FromAP }">
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource= "{Binding AirportList}" SelectedValue="{Binding IDX_From}" 
+                                                              SelectedValuePath="IDX"  DisplayMemberPath="DisplayString" >
+                                <telerik:RadComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel/>
+                                    </ItemsPanelTemplate>
+                                </telerik:RadComboBox.ItemsPanel>
+                            </telerik:RadComboBox>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+
+                <telerik:GridViewDataColumn Header="To" Width="auto" DataMemberBinding="{Binding ToAP }">
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource= "{Binding AirportList}" SelectedValue="{Binding IDX_To}" 
+                                                              SelectedValuePath="IDX"  DisplayMemberPath="DisplayString" >
+                                <telerik:RadComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel/>
+                                    </ItemsPanelTemplate>
+                                </telerik:RadComboBox.ItemsPanel>
+                            </telerik:RadComboBox>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <!--<telerik:GridViewComboBoxColumn Header="Aircraft" Width="auto" ItemsSourceBinding="{Binding ACTypeList}"  DisplayMemberPath="TypeName" SelectedValueMemberPath="IDX" 
+                                                                               DataMemberBinding="{Binding IDX_AC_Type}"/>-->
+                <telerik:GridViewComboBoxColumn Header="Currency" Width="auto" ItemsSourceBinding="{Binding CurrencyList}"  DisplayMemberPath="Code" 
+                                                                                SelectedValueMemberPath="Code" DataMemberBinding="{Binding LegBudget.Currency}"/>
+                <telerik:GridViewComboBoxColumn Header="Rate Type" Width="auto" ItemsSourceBinding="{Binding RateTypes}" DataMemberBinding="{Binding RateType}"/>
+                <telerik:GridViewDataColumn Header="Rate" Width="auto" DataMemberBinding="{Binding Rate }"/>
+                <telerik:GridViewDataColumn Header="Qty" Width="auto" DataMemberBinding="{Binding Qty }"/>
+                <telerik:GridViewDataColumn Header="Total" Width="auto" DataMemberBinding="{Binding Budget }"/>
+                <telerik:GridViewCheckBoxColumn Header="FOC" Width="auto" DataMemberBinding="{Binding LegBudget.FOC }"/>
+                <telerik:GridViewCheckBoxColumn Header="Invoiced" Width="auto" DataMemberBinding="{Binding LegBudget.Invoiced }"/>
+                <telerik:GridViewDataColumn Header="" Width="*"  IsReadOnly="True"/>
+            </telerik:RadGridView.Columns>
+            
+            
+        </telerik:RadGridView>
+        <StackPanel Grid.Column="0" Grid.Row="2"  Margin="5" Orientation="Horizontal" HorizontalAlignment="Right"  >
+            <Button Height="20" Width="60" Margin="0,0,5,0" VerticalAlignment="Center" IsDefault="True" Click="OK_Click">Ok</Button>
+            <Button Height="20" Width="60" Margin="0,0,5,0" VerticalAlignment="Center" Click="Cancel_Click">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</telerik:RadWindow>
