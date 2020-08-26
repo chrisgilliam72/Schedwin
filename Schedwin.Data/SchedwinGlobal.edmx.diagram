@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="47a124742c91424ba5b63f03327402ea" Name="Diagram1" ZoomLevel="89">
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbRole" Width="2.75" PointX="2.125" PointY="3.5" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbUserRole" Width="1.5" PointX="2.5" PointY="0.5" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbUserRoles_tbRoles" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbCanLogIn" Width="1.5" PointX="7.125" PointY="3" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbMininumVersionBuild" Width="1.5" PointX="5.25" PointY="3.5" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbUserLogonDetail" Width="1.5" PointX="6.625" PointY="0.5" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbUserSetting" Width="1.5" PointX="8.625" PointY="0.625" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbDBRegionInfo" Width="1.5" PointX="0.5" PointY="0.5" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbUserRoles_tbDBRegionInfo" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbAirstrip" Width="1.5" PointX="8.875" PointY="3.375" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbCountry" Width="1.5" PointX="2.625" PointY="5.5" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbCurrency" Width="1.5" PointX="5.375" PointY="6.5" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbLodge" Width="1.5" PointX="11" PointY="3.625" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbAirstrips_tbCountries" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbLodges_tbCountries" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbCountries_tbCurrencies" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbAirstrips_tbCurrencies" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbFlight" Width="1.5" PointX="4.125" PointY="9.25" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbFlights_tbAirstrips" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbFlights_tbCountries" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbAircraftType" Width="1.5" PointX="7.875" PointY="12.875" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbModulePermission" Width="1.5" PointX="6.625" PointY="9.875" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbPassenger" Width="1.5" PointX="15.25" PointY="0.5" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbReservationStatus" Width="2.125" PointX="14.875" PointY="5.5" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbReservationType" Width="1.5" PointX="17.75" PointY="13" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbReservationLeg" Width="1.5" PointX="21" PointY="4.125" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbReservationLeg_tbAirstrips" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbReservationLeg_tbAirstrips1" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbOperator" Width="1.5" PointX="4.875" PointY="13.25" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbOperators_tbCountries" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbStandardPaxWeight" Width="1.5" PointX="4.875" PointY="18" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbStandardPaxWeights_tbCountries" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbAirportFeeType" Width="1.5" PointX="7.875" PointY="18.375" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbAirportFeeType_tbAircraftType" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbAircraft" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbOperatorAgent" Width="1.5" PointX="7.125" PointY="21" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbOperatorAgents_tbOperators" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbReservationHeader" Width="1.5" PointX="24" PointY="5.5" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbReservationHeader_tbCountries" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbReservationHeader_tbOperators" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbPassengers_tbReservationHeader" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbReservationHeader_tbReservationHeader" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbReservationHeader_tbReservationType" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbReservationLeg_tbReservationHeader1" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbPassengerType" Width="1.5" PointX="11.375" PointY="0.875" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbPassengers_tbPassengerType" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbAirportFee" Width="1.5" PointX="11.125" PointY="10.625" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbAirportFees_tbAirportFeeType" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbAirportFees_tbAirstrips" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbAirportFees_tbCurrencies" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbReservationLegBudget" Width="1.5" PointX="26.25" PointY="8" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbReservationLegBudget_tbAircraftType" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbReservationLegBudget_tbAirstrips" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbReservationLegBudget_tbAirstrips1" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbReservationLegBudget_tbReservationLeg" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbWISHIntegrationHeader" Width="1.5" PointX="26.25" PointY="3" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbWISHIntegrationHeader_tbReservationHeader" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbWishIntegrationLeg" Width="1.5" PointX="28.5" PointY="6" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbWishIntegrationLeg_tbWishIntegrationLeg" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbWishIntegrationLeg_tbWISHIntegrationHeader" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbRosterDutyType" Width="1.5" PointX="13.375" PointY="8.75" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbPilotRoster" Width="1.5" PointX="15.625" PointY="8.75" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbPilotRoster_tbRosterDutyTypes" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbUser" Width="1.5" PointX="0.75" PointY="9.875" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbModulePermissions_tbModulePermissions" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbReservationHeader_tbUsers" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbUserRoles_tbUsers" />
+        <EntityTypeShape EntityType="SchedwinGlobalModel.tbPilot" Width="1.5" PointX="13.875" PointY="12.25" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbPilots_tbCountries" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbPilotRoster_tbPilotRoster" />
+        <AssociationConnector Association="SchedwinGlobalModel.FK_tbPilots_tbUsers" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
