@@ -1,0 +1,207 @@
+﻿<Window x:Class="SchedwinWPF.SchedwinFrameWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:local="clr-namespace:SchedwinWPF" 
+          xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"  
+        mc:Ignorable="d" Loaded="Window_Loaded"
+        Title="{Binding Title}"  WindowState="Maximized" Background="SteelBlue" Icon="/Images/img_sefo.ico" >
+    <Window.DataContext>
+        <local:SchedwinFrameWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <telerik:RadMenu Grid.Column="0" Grid.Row="0" >
+            <telerik:RadMenuItem Header="Reservation">
+                <telerik:RadMenuItem Header="Reservations" Click="RadReservationNewTest_Click" IsEnabled="{Binding CanViewReservations}">
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/Train Ticket-16.png" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem Header="Wish Integration" Click="WishIntegration_Click" IsEnabled="{Binding CanViewIntegration}">
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/WISH.jpg" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem Header="GP Invoicing" Click="GPInvoicing_Click" IsEnabled="{Binding CanViewInvoicing}">
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/Invoice-16.png" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem Header="GP Invoicing New" Click="GPInvoicingNew_Click" IsEnabled="{Binding CanViewInvoicing}">
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/Invoice-16.png" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>
+            </telerik:RadMenuItem>
+            <telerik:RadMenuItem Header="Scheduling" IsEnabled="{Binding CanViewScheduling}">
+                <telerik:RadMenuItem Header="Scheduling" Click="SchedTest_Click" >
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/Day View-16.png" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem Header="Unlock Schedules" Click="UnlockSchedules_Click">
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/lock.png" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem Header="Pilot Roster" Click="PilotRoster_Click" >
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/Calendar Plus-16.png" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>
+                <!--<telerik:RadMenuItem Header="New Test" Click="SchedTest_Click" />-->
+            </telerik:RadMenuItem>
+            <telerik:RadMenuItem Header="Prep" IsEnabled="{Binding CanViewPrep}">
+                <telerik:RadMenuItem Header="Weight and Balance" Click="WeightBalance_Click">
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/Weight-16.png" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>
+                <!--<telerik:RadMenuItem Header="Aircraft Prep" Click="AircraftPrep_Click">
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/Airplane Take Off-16.png" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>-->
+                <telerik:RadMenuItem Header="Tickets" Click="TicketsNew_Click">
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/Ticket-16.png" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem Header="Baggage Tags" Click="BaggageTags_Click">
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/Price Tag-16.png" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>
+                <!--<telerik:RadMenuItem Header="Tickets New" Click="TicketsNew_Click">
+                    
+                </telerik:RadMenuItem>-->
+            </telerik:RadMenuItem>
+            <telerik:RadMenuItem Header="Flight Following" HorizontalAlignment="Right" Width="100" IsEnabled="{Binding CanViewFlightFollowing}">
+                <telerik:RadMenuItem Header="Indigo Track Data" Click="IndigoTrackNew_Click" >
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/radericn.png" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>
+            </telerik:RadMenuItem>
+            <telerik:RadMenuItem Header="Tech Logs" IsEnabled="{Binding CanViewTechlogs}">
+                <telerik:RadMenuItem Header="Register" Click="NewTechlogRegister_Click" >
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/Ingredients List-16.png" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>
+                <!--<telerik:RadMenuItem Header="New" Click="NewTechlogRegister_Click" />-->
+            </telerik:RadMenuItem>
+            <telerik:RadMenuItem Header="Setup" IsEnabled="{Binding CanViewSetup}">
+                <!--<telerik:RadMenuItem Header="Ex/For configuration" Click="SetupExFor_Click"/>-->
+                <telerik:RadMenuItem Header="Setup" Click="Setup_Click" >
+                    <telerik:RadMenuItem.Icon>
+                        <Image Source="/Images/Settings-16.png" Stretch="None" />
+                    </telerik:RadMenuItem.Icon>
+                </telerik:RadMenuItem>
+                <!--<telerik:RadMenuItem Header="New Setup" Click="NewSetup_Click"/>-->
+                <telerik:RadMenuItem Header="Great Plains" Click="GPSetup_Click">
+                </telerik:RadMenuItem>
+            </telerik:RadMenuItem>
+            <telerik:RadMenuItem Header="Reporting" IsEnabled="{Binding CanViewReports}">
+                <telerik:RadMenuItem Header="Schedules">
+                    <telerik:RadMenuItem Header="Flight Movements" Click="RptFlightMovement_Click"/>
+                    <telerik:RadMenuItem Header="Invoicing for Flight Movements" Click="RptInvoiceFlightmovement_Click"/>
+                    <telerik:RadMenuItem Header="Flight Following" Click="RptFlightFollowing_Click"/>
+                    <telerik:RadMenuItem Header="Flight Date Range" Click="RptFlightDateRange_Click"/>
+                    <telerik:RadMenuItem Header="Schedule By Airport" Click="RptScheduleByAirport_Click"/>
+                    <telerik:RadMenuItem Header="Schedule By Operator" Click="RptScheduleByOperator_Click"/>
+                    <telerik:RadMenuItem Header="Summary By Aircraft" Click="RptScheduleByAircraft_Click"/>
+                </telerik:RadMenuItem>
+
+                <telerik:RadMenuItem Header="Manifest">
+                    <telerik:RadMenuItem Header="Passenger">
+                        <telerik:RadMenuItem Header="Botswana" Click="PassManBots_Click"/>
+                        <telerik:RadMenuItem Header="Namibia" Click="PassManNam_Click"/>
+                        <telerik:RadMenuItem Header="Zimbabwe" Click="PassManZimClick"/>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="Cargo">
+                        <telerik:RadMenuItem Header="Botswana" Click="CargoManBots_Click"/>
+                        <telerik:RadMenuItem Header="Namibia" Click="CargoManNam_Click"/>
+                        <telerik:RadMenuItem Header="Zimbabwe" Click="CargoManZim_Click"/>
+                    </telerik:RadMenuItem>
+                </telerik:RadMenuItem>
+
+                <telerik:RadMenuItem Header="Passengers" >
+                    <telerik:RadMenuItem Header="Load Factor" Click="PassengerLoad_Click"/>
+                    <telerik:RadMenuItem Header="Excel Ready">
+                        <telerik:RadMenuItem Header="Passenger Daily ReservationMovement" Click="PassListDailyReservation_Click"/>
+                        <telerik:RadMenuItem Header="Passenger List by operator totals" Click="PassListOperator_Click"/>
+                        <telerik:RadMenuItem Header="Passenger Seat KMs by month" Click="PassSeatKMs_Click"/>
+                        <telerik:RadMenuItem Header="Passenger count by Month" Click="PassCountMonth_Click"/>
+                        <telerik:RadMenuItem Header="Passenger FOC" Click="PassFOC_Click"/>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="Passenger">
+                        <telerik:RadMenuItem Header="Operator Summary" Click="Pass_OperatorSummary_Click"/>
+                        <telerik:RadMenuItem Header="Operator by Airstrip Pairs" Click="Pass_Operator_Airstrip_Click"/>
+                        <telerik:RadMenuItem Header="Operator By Date" Click="Pass_OperatorDate_Click"/>
+                        <telerik:RadMenuItem Header="List All Operators One Day" Click="Pass_OperatorAllOneDay_Click"/>
+                        <telerik:RadMenuItem Header="List Invoicing" Click="Pass_ListInvoicing_Click"/>
+                    </telerik:RadMenuItem>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem Header="Aircraft">
+                    <telerik:RadMenuItem Header="Flying Summary" Click="Aircraft_FlyingSummary_Click"/>
+                    <telerik:RadMenuItem Header="Flying Hours" Click="Aircraft_FlyingHours_Click"/>
+                    <telerik:RadMenuItem Header="Detailed Route Summary" Click="Aircraft_DetailedRoute_Click"/>
+                    <telerik:RadMenuItem Header="Techlog Entries" Click="Aircraft_TechlogEntry_Click" />
+                    <telerik:RadMenuItem Header="Techlog Differing from Schedules" Click="Aircraft_DifferentSchedule_Click"/>
+                    <telerik:RadMenuItem Header="Aircraft Technical">
+                        <telerik:RadMenuItem Header="Detailed Technical Summary" Click="Aircaft_Detailed_Tech_Summary_Click"/>
+                        <telerik:RadMenuItem Header="Last Technical Summary" Click="Last_Technical_Summary_Click"/>
+                        <telerik:RadMenuItem Header="Service Records" Click="Aircraft_Service_Records_Click"/>
+                        <telerik:RadMenuItem Header="Time Since Service" Click="Time_Since_Service_Click"/>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="Aircraft Statistical">
+                        <telerik:RadMenuItem Header="Use by Operator" Click="AircraftStat_UseByOperator_Click"/>
+                        <telerik:RadMenuItem Header="Flight Time Count" Click="AircraftFlightTime_Click"/>
+                        <telerik:RadMenuItem Header="Flight Time Count DatePicker Period" Click="AircraftFlightCountDate_Click"/>
+                        <telerik:RadMenuItem Header="Flight Time Count DatePicker Period DOW" Click="AircraftFlightCountDateDOW_Click"/>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="Aircraft Fuel">
+                        <telerik:RadMenuItem Header="Fuel Cost" Click="Aircraft_FuelCost_Click"/>
+                        <telerik:RadMenuItem Header="Fuel uplifts" Click="Aircraft_Fuel_Uplifts_Click"/>
+                    </telerik:RadMenuItem>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem Header="Pilots">
+                    <telerik:RadMenuItem Header="Flight Duty Period" Click="FlightDuty_Period_Click"/>
+                    <telerik:RadMenuItem Header="Pilot Detailed Summary" Click="Pilot_DetailedSummary_Click"/>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem Header="Airports">
+                    <telerik:RadMenuItem Header="Departure Tax - Domestic" Click="Airports_DepartureTaxDomestic_Click"/>
+                    <telerik:RadMenuItem Header="Departure Tax - Domestic - by Airport" Click="Airports_DepartureTaxDomesticByAirport_Click"/>
+                    <telerik:RadMenuItem Header="Departure Tax - International" Click="Airports_DepartureInternational_Click"/>
+                    <telerik:RadMenuItem Header="Landing Fees" Click="Airports_Landing_Fees_Click"/>
+                    <telerik:RadMenuItem Header="Arrival Log Book" Click="Airports_Arrival_Logbook_Click"/>
+                    <telerik:RadMenuItem Header="Departure Log Book" Click="Airports_Departure_Logbook_Click"/>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem Header="Misc">
+                    <telerik:RadMenuItem Header="Business KMs" Click="MiscBusinessKMs_Click"/>
+                </telerik:RadMenuItem>
+            </telerik:RadMenuItem>
+
+            <telerik:RadMenuItem Header="Window" IconColumnWidth="0" ItemsSource="{Binding WindowNameList}" />
+        </telerik:RadMenu>
+        <WindowsFormsHost Grid.Column="0" Grid.Row="1" Name="wndFrmHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="SteelBlue">
+            <wf:UserControl Name="DummyHostParentCntrl"/>
+        </WindowsFormsHost>
+        <StatusBar Grid.Row="2" HorizontalAlignment="Stretch" >
+            <StatusBarItem>
+                <TextBlock Text="{Binding StatusText, Mode=TwoWay}"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
