@@ -1,0 +1,39 @@
+﻿<Telerik:RadWindow x:Class="Schedwin.Common.ReportParametersWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Schedwin.Common.Windows"
+            xmlns:Telerik="http://schemas.telerik.com/2008/xaml/presentation" WindowStartupLocation="CenterScreen"
+             mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}" ResizeMode="NoResize"
+               Header="{Binding WindowTitle}"  SizeToContent="True" Loaded="RadWindow_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" Margin="5" Text="{Binding Date1Label}" />
+        <Telerik:RadDatePicker Grid.Row="0" Grid.Column="1"  Margin="5" SelectedValue="{Binding Date1}" Width="120"/>
+
+        <TextBlock Grid.Row="0" Grid.Column="2"  Margin="5" Text="{Binding Date2Label}"   Visibility="{Binding ShowDate2, Converter={StaticResource BoolToVisConverter}}"/>
+        <Telerik:RadDatePicker Grid.Row="0" Grid.Column="3"   Margin="5" SelectedValue="{Binding Date2}"  Visibility="{Binding ShowDate2, Converter={StaticResource BoolToVisConverter}}"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0"  Margin="5" Text="{Binding List1Label}"/>
+        <Telerik:RadComboBox Grid.Row="1" Grid.Column="1"  Margin="5" SelectedItem="{Binding SelectedItem1}" DisplayMemberPath="Description" ItemsSource="{Binding List1}"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="2"  Margin="5" Text="{Binding List2Label}" Visibility="{Binding ShowList2, Converter={StaticResource BoolToVisConverter}}"/>
+        <Telerik:RadComboBox Grid.Row="1" Grid.Column="3"  Margin="5" SelectedItem="{Binding SelectedItem2}" DisplayMemberPath="Description" ItemsSource="{Binding List2}" Visibility="{Binding ShowList2, Converter={StaticResource BoolToVisConverter}}"/>
+
+        <StackPanel Grid.Row="2" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5">
+            <Button Height="25" Width="60" Margin="0,0,5,0"  IsDefault="True" Click="Button_OKClick" >OK</Button>
+            <Button Height="25" Width="60" Click="Button_CancelClick">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Telerik:RadWindow>
