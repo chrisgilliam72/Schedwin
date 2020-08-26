@@ -1,0 +1,42 @@
+﻿<SchedwinCommon:SchedwinBaseWindow x:Class="Schedwin.Prep.TicketsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Background="LightBlue"
+        xmlns:local="clr-namespace:Schedwin.Prep" 
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+        xmlns:SchedwinCommon="clr-namespace:Schedwin.Common;assembly=Schedwin.Common" 
+        mc:Ignorable="d" Loaded="Window_Loaded" 
+        Title="Tickets" Height="800" Width="auto" >
+    <SchedwinCommon:SchedwinBaseWindow.DataContext>
+        <local:TicketsViewModel/>
+    </SchedwinCommon:SchedwinBaseWindow.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.Column="0" Margin="5" Orientation="Horizontal">
+            <Label  VerticalAlignment="Center" Margin="5">Flight Date:</Label>
+            <telerik:RadDatePicker Width="150" VerticalAlignment="Center" Margin="5" SelectedValue="{Binding TicketDate}" SelectionChanged="RadDatePicker_SelectionChanged"/>
+            <!--<Button  Margin="5" Height="auto" Width="30" Click="BtnPrint_Click">
+                <Image Source="../Images/print24.png" Height="20" ToolTip="Print tickets"/>
+            </Button>
+            <Button  Margin="5" Height="auto" Width="30" Click="BtnView_Click">
+                <Image Source="../Images/view26.png" Height="20" ToolTip="View ticket"/>
+            </Button>-->
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="5" Orientation="Horizontal">
+            <RadioButton Height="20" Margin="5,0,0,0" IsChecked="{Binding ShowReservations}" Click="rdBtnResView_Click_1">Reservation View</RadioButton>
+            <RadioButton Height="20" Margin="5,0,0,0" IsChecked="{Binding ShowLegs}" Click="rdBtnLegsView_Click">Legs View</RadioButton>
+        </StackPanel>
+        <local:TicketsReservationView x:Name="ticketsResView" Grid.Row="2" Grid.Column="0"  Visibility="{Binding Show, Converter={StaticResource BoolToVisConverter}}"/>
+        <local:TicketsLegsView x:Name="ticketsLegsView" Grid.Row="2" Grid.Column="0"  Visibility="{Binding Show, Converter={StaticResource BoolToVisConverter}}"/>
+    </Grid>
+</SchedwinCommon:SchedwinBaseWindow>

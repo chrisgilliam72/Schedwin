@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="Schedwin.Prep.TicketsReservationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             xmlns:SchedwinCommon="clr-namespace:Schedwin.Common;assembly=Schedwin.Common" 
+             xmlns:local="clr-namespace:Schedwin.Prep"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <local:TicketsReservationViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <telerik:RadGridView x:Name="PaxGrd" ShowGroupPanel="False" AutoGenerateColumns="False" ItemsSource="{Binding TicketList}"  
+                                           RowDetailsVisibilityMode="Collapsed"  RowIndicatorVisibility="Hidden"  SelectionMode="Multiple"     EnableRowVirtualization="True" >
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewToggleRowDetailsColumn ExpandMode="Multiple">
+                </telerik:GridViewToggleRowDetailsColumn>
+                <telerik:GridViewDataColumn  Width="auto">
+                    <telerik:GridViewDataColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Height="20" Width="20" Source="..\Images\tick242.png" Visibility="{Binding TicketPrinted, Converter={StaticResource BoolToVisConverter}}"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Reservation" DataMemberBinding="{Binding ReservationName}" IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Name" DataMemberBinding="{Binding FullName}" IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Reference"  DataMemberBinding="{Binding ReferenceNumber}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Issue Date" DataMemberBinding="{Binding IssueDate}"  DataFormatString="yyyy-MM-dd"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Issuer" DataMemberBinding="{Binding Issuer}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Issued By" DataMemberBinding="{Binding IssuePlace}"  IsReadOnly="true"/>
+
+            </telerik:RadGridView.Columns>
+            <telerik:RadContextMenu.ContextMenu>
+                <telerik:RadContextMenu x:Name="radContextMenuPax"  >
+                    <telerik:RadMenuItem Header="View Passenger Ticket" Click="PaxViewTickets_Click" >
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="../Images/view26.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="Print Passenger Ticket" Click="PaxPrintTickets_Click"  >
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="../Images/print24.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+                </telerik:RadContextMenu>
+            </telerik:RadContextMenu.ContextMenu>
+            <telerik:RadGridView.RowDetailsTemplate>
+                <DataTemplate>
+                    <telerik:RadExpander IsExpanded="true" Header="Legs">
+                        <telerik:RadGridView x:Name="gridLegs" ShowGroupPanel="False" SelectionMode="Multiple"  IsReadOnly="True"
+                                             AutoGenerateColumns="False" ItemsSource="{Binding Legs}"  EnableRowVirtualization="True">
+                            <telerik:RadGridView.Columns>
+                                <telerik:GridViewDataColumn Header="Date" DataMemberBinding="{Binding Date}" DataFormatString="yyyy-MM-dd"/>
+                                <telerik:GridViewDataColumn Header="From Airtrip" DataMemberBinding="{Binding From}"/>
+                                <telerik:GridViewDataColumn Header="To AirStrip" DataMemberBinding="{Binding To}"/>
+                                <!--<telerik:GridViewDataColumn Header="Pilot" DataMemberBinding="{Binding Pilot}"/>
+                                <telerik:GridViewDataColumn Header="Aircraft" DataMemberBinding="{Binding Aircraft}"/>-->
+                            </telerik:RadGridView.Columns>
+                        </telerik:RadGridView>
+                    </telerik:RadExpander>
+                </DataTemplate>
+            </telerik:RadGridView.RowDetailsTemplate>
+        </telerik:RadGridView>
+    </Grid>
+</UserControl>

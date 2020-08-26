@@ -1,0 +1,44 @@
+﻿<Window x:Class="Schedwin.Prep.FreightRowAssignmentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Schedwin.Prep" Background="LightBlue"
+        mc:Ignorable="d" WindowStartupLocation="CenterOwner"
+        Title="Freight/Fuel Assignment" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <Window.DataContext>
+        <local:FreightRowAssignmentViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock Margin="5" Grid.Row="1" Grid.Column="1"  Text="Row Name:" VerticalAlignment="Stretch" />
+        <TextBlock Margin="5" Grid.Row="1" Grid.Column="2"  Text="{Binding RowDetails}" MinWidth="50"/>
+        <TextBlock Margin="5" Grid.Row="1" Grid.Column="3" Text="Max Weight:"/>
+        <TextBlock Margin="5"  Grid.Row="1" Grid.Column="4" Text="{Binding MaxWeight}" Width="50"/>
+
+
+        <TextBlock Margin="5" Grid.Row="2" Grid.Column="1" Text="Assigned Weight:" VerticalAlignment="Center"/>
+        <TextBox Margin="5" Grid.Row="2" Grid.Column="2"  Text="{Binding ActualWeight}" MinWidth="50"/>
+       
+        <StackPanel Grid.Column="3" Grid.Row="3"  Margin="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Bottom"  >
+            <Button Height="20" Width="60" Margin="0,0,5,0" VerticalAlignment="Center" IsDefault="True"  Click="OK_Click">OK</Button>
+            <Button Height="20" Width="60" Margin="0,0,5,0" VerticalAlignment="Center"  Click="Clear_Click">Clear</Button>
+        </StackPanel>
+    </Grid>
+</Window>

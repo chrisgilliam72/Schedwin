@@ -1,0 +1,301 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{06190651-0E51-4E29-8D5C-C0FDDC851488}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <RootNamespace>Schedwin.Prep</RootNamespace>
+    <AssemblyName>Schedwin.Prep</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Data">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.GridView.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Controls.Navigation.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Data">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Progress\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Core">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Documents.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Fixed">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Telerik\UI for WPF Q2 2015\Binaries\WPF45\Telerik.Windows.Documents.Fixed.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\PassengerTicket.cs" />
+    <Compile Include="Classes\PassengerTicketLeg.cs" />
+    <Compile Include="Classes\ReservationTicketInfo.cs" />
+    <Compile Include="Classes\ReservationTicketLeg.cs" />
+    <Compile Include="Classes\TicketLegGridItem.cs" />
+    <Compile Include="Classes\WeightBalanceSchedule.cs" />
+    <Compile Include="ViewModels\ArmGraphControlViewBase.cs" />
+    <Compile Include="Controls\C206ArmGraphControlView.xaml.cs">
+      <DependentUpon>C206ArmGraphControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\F406ArmGraphControlView.xaml.cs">
+      <DependentUpon>F406ArmGraphControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\GA8ArmGraphControlView.xaml.cs">
+      <DependentUpon>GA8ArmGraphControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PrintedTicketControlView.xaml.cs">
+      <DependentUpon>PrintedTicketControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WeightBalanceLegPrintView.xaml.cs">
+      <DependentUpon>WeightBalanceLegPrintView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ArmGraphControlViewModelBase.cs" />
+    <Compile Include="ViewModels\C206ArmGraphControlViewModel.cs" />
+    <Compile Include="ViewModels\F406ArmGraphControlViewModel.cs" />
+    <Compile Include="ViewModels\FreightRowAssignmentViewModel.cs" />
+    <Compile Include="Classes\PaxRowSeatAssignment.cs" />
+    <Compile Include="Classes\TicketInfo.cs" />
+    <Compile Include="Classes\WeightBalanceLeg.cs" />
+    <Compile Include="Controls\WeightBlancePositionItem.cs" />
+    <Compile Include="Controls\C208ArmGraphControlView.xaml.cs">
+      <DependentUpon>C208ArmGraphControlView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TicketsLegsView.xaml.cs">
+      <DependentUpon>TicketsLegsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WeightBalanceLegsVIew.xaml.cs">
+      <DependentUpon>WeightBalanceLegsVIew.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\C208ArmGraphControlViewModel.cs" />
+    <Compile Include="ViewModels\GA8ArmGraphControlViewModel.cs" />
+    <Compile Include="ViewModels\PaxRowAssignementViewModel.cs" />
+    <Compile Include="ViewModels\PrintedTicketControlViewModel.cs" />
+    <Compile Include="ViewModels\PrintedTicketsViewModel.cs" />
+    <Compile Include="ViewModels\TicketsLegsViewModel.cs" />
+    <Compile Include="ViewModels\TicketsReservationViewModel.cs" />
+    <Compile Include="Controls\TicketsReservationView.xaml.cs">
+      <DependentUpon>TicketsReservationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\TicketsViewModel.cs" />
+    <Compile Include="ViewModels\WeightBalanceLegPrintViewModel.cs" />
+    <Compile Include="ViewModels\WeightBalanceLegsVIewModel.cs" />
+    <Compile Include="ViewModels\WeightBalancePrintViewModel.cs" />
+    <Compile Include="ViewModels\WeightsBalanceViewModel.cs" />
+    <Compile Include="Views\FreightRowAssignmentView.xaml.cs">
+      <DependentUpon>FreightRowAssignmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PaxRowAssignementView.xaml.cs">
+      <DependentUpon>PaxRowAssignementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PrintedTicketsView.xaml.cs">
+      <DependentUpon>PrintedTicketsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TicketsView.xaml.cs">
+      <DependentUpon>TicketsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WeightBalancePrintView.xaml.cs">
+      <DependentUpon>WeightBalancePrintView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WeightsBalanceView.xaml.cs">
+      <DependentUpon>WeightsBalanceView.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\C206ArmGraphControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\C208ArmGraphControlView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\F406ArmGraphControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\GA8ArmGraphControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PrintedTicketControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TicketsLegsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TicketsReservationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WeightBalanceLegPrintView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WeightBalanceLegsVIew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FreightRowAssignmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PaxRowAssignementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\PrintedTicketsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TicketsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+    </Page>
+    <Page Include="Controls\WeightBalancePrintView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WeightsBalanceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\print24.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\view26.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Schedwin.Common\Schedwin.Common.csproj">
+      <Project>{641b45db-09f8-41ba-8a50-1679fe6b0cc9}</Project>
+      <Name>Schedwin.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Schedwin.Data\Schedwin.Data.csproj">
+      <Project>{71ef1439-ae8e-486f-9dfb-ff28cfe81ba0}</Project>
+      <Name>Schedwin.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Schedwin.Reporting.Crystal\Schedwin.Reporting.vbproj">
+      <Project>{8aef8fe5-3fc1-4a0d-9db7-5256ae952a72}</Project>
+      <Name>Schedwin.Reporting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Schedwin.Scheduling\Schedwin.Scheduling.csproj">
+      <Project>{6ab3cb91-c938-4127-9c43-50be1e0b1fcb}</Project>
+      <Name>Schedwin.Scheduling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Schedwin.Telerik Reports\Telerik Reports\Schedwin.Telerik.Reports.csproj">
+      <Project>{b23fa695-2f27-4c67-a200-eefc7dacd12d}</Project>
+      <Name>Schedwin.Telerik.Reports</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tick24.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tick242.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\save.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\WAir1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\wair2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

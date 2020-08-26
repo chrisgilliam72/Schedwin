@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="Schedwin.Prep.WeightBalanceLegPrintView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             xmlns:local="clr-namespace:Schedwin.Prep" Background="White" mc:Ignorable="d"  >
+    <UserControl.DataContext>
+        <local:WeightBalanceLegPrintViewModel/>
+    </UserControl.DataContext>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <TextBlock Margin="5" Grid.Row="0" Grid.Column="1" Text="{Binding Title}" HorizontalAlignment="Left" FontSize="10"/>
+        <telerik:RadGridView x:Name="LegsGrd" RowDetailsVisibilityMode="Collapsed" RowIndicatorVisibility="Hidden"  MinHeight="150" Grid.Row="1" Grid.Column="0"
+                                ShowGroupPanel="False" AutoGenerateColumns="False" Width="auto" ItemsSource="{Binding Rows}"  RowHeight="20">
+            <telerik:RadGridView.Resources>
+                <Style TargetType="telerik:GridViewCell" x:Key="textFont">
+                    <Setter Property="FontSize" Value="10" />
+                </Style>
+                <Style TargetType="telerik:GridViewHeaderCell" x:Key="headerFont">
+                    <Setter Property="FontSize" Value="10" />
+                </Style>
+            </telerik:RadGridView.Resources>
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn   Header="Row"  Width="auto" DataMemberBinding="{Binding Name}"  IsReadOnly="True"  CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}"/>
+                <telerik:GridViewDataColumn   Header="Lbs" Width="auto"  DataMemberBinding="{Binding  Weight}" IsReadOnly="True"  CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}"/>
+                <telerik:GridViewDataColumn   Header="Arm" Width="auto" DataMemberBinding="{Binding  Arm}"  IsReadOnly="True"  CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}"/>
+                <telerik:GridViewDataColumn   Header="Mom" Width="auto"  DataMemberBinding="{Binding  Mom}"  IsReadOnly="True"  CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}"/>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"  FontSize="10">Last minute changes</Label>
+        <telerik:RadGridView x:Name="changesGrid" RowDetailsVisibilityMode="Collapsed" RowIndicatorVisibility="Hidden"  MinHeight="150" Grid.Row="3" Grid.Column="0"
+                                ShowGroupPanel="False" AutoGenerateColumns="False" Width="auto" ItemsSource="{Binding LastChangesRows}"  RowHeight="20">
+            <telerik:RadGridView.Resources>
+                <Style TargetType="telerik:GridViewCell" x:Key="textFont">
+                    <Setter Property="FontSize" Value="10" />
+                </Style>
+                <Style TargetType="telerik:GridViewHeaderCell" x:Key="headerFont">
+                    <Setter Property="FontSize" Value="10" />
+                </Style>
+            </telerik:RadGridView.Resources>
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn   Header="Row"  Width="auto"  DataMemberBinding="{Binding Name}"  IsReadOnly="True"  CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}"/>
+                <telerik:GridViewDataColumn   Header="Lbs" Width="50"  IsReadOnly="True"  CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}"/>
+                <telerik:GridViewDataColumn   Header="Arm" Width="50"  IsReadOnly="True"  CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}"/>
+                <telerik:GridViewDataColumn   Header="Mom" Width="50"    IsReadOnly="True"  CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}"/>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+        
+        
+        <local:C208ArmGraphControlView x:Name="grphCntrl"  Margin="5" Grid.Row="4" Grid.Column="0" VerticalAlignment="Bottom" Background="White"/>
+    </Grid>
+</UserControl>

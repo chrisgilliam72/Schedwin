@@ -1,0 +1,94 @@
+﻿<Window x:Class="Schedwin.Prep.PaxRowAssignementView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Schedwin.Prep"
+        mc:Ignorable="d"  WindowStartupLocation="CenterOwner"
+        Title="Row Assignement" SizeToContent="WidthAndHeight" 
+        MinWidth="300" MinHeight="200" Background="LightBlue"
+        Loaded="Window_Loaded" ResizeMode="NoResize"  >
+    <Window.DataContext>
+        <local:PaxRowAssignementViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="CharacterCasing" Value="Upper" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <StackPanel  Orientation="Horizontal" Margin="5" Grid.Row="1" Grid.Column="1">
+            <TextBlock Margin="5" Text="Row Name:"/>
+            <TextBlock Margin="5" Text="{Binding RowDetails}"/>
+            <TextBlock Margin="5" Text="Seats:"/>
+            <TextBlock Margin="5" Text="{Binding MaxSeats}"/>
+        </StackPanel>
+        <StackPanel  Orientation="Horizontal" Margin="5" Grid.Row="2" Grid.Column="1">
+            <TextBlock Margin="5"   Text="Total Pax:"/>
+            <TextBlock Margin="5"   Text="{Binding TotalPax}"/>
+            <TextBlock Margin="5"   Text="Men:"/>
+            <TextBlock Margin="5"   Text="{Binding TotalMen}"/>
+            <TextBlock Margin="5"   Text="Women:"/>
+            <TextBlock Margin="5"   Text="{Binding TotalWomen}"/>
+        </StackPanel>
+        <StackPanel  Orientation="Horizontal" Margin="5" Grid.Row="3" Grid.Column="1">
+            <TextBlock Margin="5"   Text="Unnassigned Pax:"/>
+            <TextBlock Margin="5"   Text="{Binding TotalUnassignedPax}"/>
+            <TextBlock Margin="5"   Text="Men:"/>
+            <TextBlock Margin="5"   Text="{Binding TotalUnassignedMen}"/>
+            <TextBlock Margin="5"   Text="Women:"/>
+            <TextBlock Margin="5"   Text="{Binding TotalUnassignedWomen}"/>
+        </StackPanel>
+
+        <StackPanel  Margin="5" Grid.Row="4" Grid.Column="1"  Orientation="Horizontal" >
+            <TextBlock Margin="5"  Text="Pax Assignment:" VerticalAlignment="Center"/>
+            <TextBox Margin="5" Width="20" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding RowPositionItem.PaxSeatAssignments[0].Gender,UpdateSourceTrigger=PropertyChanged}"
+                                Visibility="{Binding RowPositionItem.PaxSeatAssignments[0].Show, Converter={StaticResource BoolToVisibilityConverter}}" KeyDown="TextBox_KeyDown" LostFocus="TextBox_LostFocus"  CharacterCasing="Upper"/>
+            <TextBox Margin="5" Width="20" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding RowPositionItem.PaxSeatAssignments[1].Gender, UpdateSourceTrigger=PropertyChanged}"
+                                Visibility="{Binding RowPositionItem.PaxSeatAssignments[1].Show, Converter={StaticResource BoolToVisibilityConverter}}"  KeyDown="TextBox_KeyDown"  LostFocus="TextBox_LostFocus" CharacterCasing="Upper"/>
+            <TextBox Margin="5" Width="20" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding RowPositionItem.PaxSeatAssignments[2].Gender,UpdateSourceTrigger=PropertyChanged}"
+                                Visibility="{Binding RowPositionItem.PaxSeatAssignments[2].Show, Converter={StaticResource BoolToVisibilityConverter}}"  KeyDown="TextBox_KeyDown"  LostFocus="TextBox_LostFocus" CharacterCasing="Upper"/>
+            <TextBox Margin="5" Width="20" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding RowPositionItem.PaxSeatAssignments[3].Gender,UpdateSourceTrigger=PropertyChanged}"
+                                Visibility="{Binding RowPositionItem.PaxSeatAssignments[3].Show, Converter={StaticResource BoolToVisibilityConverter}}"  KeyDown="TextBox_KeyDown"   LostFocus="TextBox_LostFocus" CharacterCasing="Upper"/>
+            <TextBox Margin="5" Width="20" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding RowPositionItem.PaxSeatAssignments[4].Gender,UpdateSourceTrigger=PropertyChanged}" 
+                                Visibility="{Binding RowPositionItem.PaxSeatAssignments[4].Show, Converter={StaticResource BoolToVisibilityConverter}}"  KeyDown="TextBox_KeyDown"   LostFocus="TextBox_LostFocus" CharacterCasing="Upper"/>
+            <TextBox Margin="5" Width="20" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding RowPositionItem.PaxSeatAssignments[5].Gender,UpdateSourceTrigger=PropertyChanged}"   
+                                Visibility="{Binding RowPositionItem.PaxSeatAssignments[5].Show, Converter={StaticResource BoolToVisibilityConverter}}"  KeyDown="TextBox_KeyDown"  LostFocus="TextBox_LostFocus" CharacterCasing="Upper"/>
+            <TextBox Margin="5" Width="20" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Text="{Binding RowPositionItem.PaxSeatAssignments[6].Gender,UpdateSourceTrigger=PropertyChanged}" 
+                                Visibility="{Binding RowPositionItem.PaxSeatAssignments[6].Show, Converter={StaticResource BoolToVisibilityConverter}}"  KeyDown="TextBox_KeyDown"   LostFocus="TextBox_LostFocus" CharacterCasing="Upper"/>
+            <TextBox Margin="5" Width="20" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding RowPositionItem.PaxSeatAssignments[7].Gender,UpdateSourceTrigger=PropertyChanged}"   
+                                Visibility="{Binding RowPositionItem.PaxSeatAssignments[7].Show, Converter={StaticResource BoolToVisibilityConverter}}"   KeyDown="TextBox_KeyDown"  LostFocus="TextBox_LostFocus" CharacterCasing="Upper"/>
+            <TextBox Margin="5" Width="20" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding RowPositionItem.PaxSeatAssignments[8].Gender,UpdateSourceTrigger=PropertyChanged}"   
+                                Visibility="{Binding RowPositionItem.PaxSeatAssignments[8].Show, Converter={StaticResource BoolToVisibilityConverter}}"   KeyDown="TextBox_KeyDown"  LostFocus="TextBox_LostFocus"  CharacterCasing="Upper"/>
+            <TextBox Margin="5" Width="20" Height="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Text="{Binding RowPositionItem.PaxSeatAssignments[8].Gender,UpdateSourceTrigger=PropertyChanged}" 
+                                Visibility="{Binding RowPositionItem.PaxSeatAssignments[9].Show, Converter={StaticResource BoolToVisibilityConverter}}"   KeyDown="TextBox_KeyDown"  LostFocus="TextBox_LostFocus" CharacterCasing="Upper"/>
+        </StackPanel>
+        <StackPanel  Margin="5" Grid.Row="5" Grid.Column="1"  Orientation="Horizontal" >
+            <TextBlock Margin="5"  Text="Additional Freight (lbs) :" VerticalAlignment="Center"/>
+            <TextBox Margin="5" Width="50" Height="20" Text="{Binding AdditionalFreight}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="6"  Margin="5" Orientation="Horizontal" HorizontalAlignment="Right"  VerticalAlignment="Bottom" >
+            <Button Height="20" Width="60" Margin="0,0,5,0" VerticalAlignment="Center" IsDefault="True" Click="OK_Click">OK</Button>
+            <Button Height="20" Width="60" Margin="0,0,5,0" VerticalAlignment="Center" Click="Cancel_Click">Clear</Button>
+        </StackPanel>
+    </Grid>
+                
+</Window>
