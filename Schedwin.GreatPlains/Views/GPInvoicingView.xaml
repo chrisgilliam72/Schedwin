@@ -1,0 +1,123 @@
+﻿<SchedwinCommon:SchedwinBaseWindow x:Class="Schedwin.GreatPlains.GPInvoicingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             xmlns:local="clr-namespace:Schedwin.GreatPlains"
+             xmlns:SchedwinCommon="clr-namespace:Schedwin.Common;assembly=Schedwin.Common" 
+             mc:Ignorable="d"  Title="Great Plains Invoice Items"
+             d:DesignHeight="450" d:DesignWidth="800" Background="LightBlue" Loaded="SchedwinBaseWindow_Loaded">
+    <SchedwinCommon:SchedwinBaseWindow.DataContext>
+        <local:GPInvoicingViewModel/>
+    </SchedwinCommon:SchedwinBaseWindow.DataContext>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+            <Label Margin="5"> Transaction Date: </Label>
+            <telerik:RadDatePicker Margin="5" Height="25" Width="150" SelectedValue="{Binding TransactionDate}"/>
+            <Button Grid.Row="1" Grid.Column="2" Margin="5" Height="auto" Width="30" Click="btnRefresh_Click"  >
+                <Image Source="../Images/isync.png" Height="20" ToolTip="Refresh data"  />
+            </Button>
+            <!--<Button  Margin="5" Height="auto" Width="30" Click="btnExport_Click"  >
+                <Image Source="../Images/export.png" Height="20" ToolTip="Export selected data" />
+            </Button>-->
+        </StackPanel>
+        <telerik:RadGridView x:Name="gridInvList"  Margin="5" Grid.Row="1" Grid.Column="0" RowDetailsVisibilityMode="Collapsed" RowIndicatorVisibility="Hidden" 
+                                ShowGroupPanel="False" AutoGenerateColumns="False" Width="auto"  VerticalAlignment="Stretch"  SelectionChanged="gridInvList_SelectionChanged"
+                                ItemsSource="{Binding Items}" SelectionMode="Extended"  >
+            
+            <telerik:RadGridView.RowStyle>
+                <Style TargetType="{x:Type telerik:GridViewRow}">
+                    <Setter Property="Background" Value="{Binding RowColor}"/>
+                </Style>
+            </telerik:RadGridView.RowStyle>
+
+            <telerik:RadContextMenu.ContextMenu>
+                <telerik:RadContextMenu x:Name="radContextMenu" IsEnabled="{Binding CanModify}" >
+                    <telerik:RadMenuItem Header="Batch ID" Click="UpdateBatchID_Click" >
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="../Images/batch.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="Invoice" Click="Invoice_Click" >
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="../Images/export.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+                </telerik:RadContextMenu>
+            </telerik:RadContextMenu.ContextMenu>
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="DocType" DataMemberBinding="{Binding DocType}" IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="TypeID" DataMemberBinding="{Binding TypeID}" IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="Status" DataMemberBinding="{Binding ItemStatus}"/>
+                <telerik:GridViewDataColumn Header="Tax Date" DataMemberBinding="{Binding Date}"  IsReadOnly="true"  DataFormatString="yyyy-MM-dd" />
+                <telerik:GridViewDataColumn Header="Reservation" DataMemberBinding="{Binding Reservation}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="BatchID" DataMemberBinding="{Binding BatchID}" />
+                <telerik:GridViewDataColumn Header="Debtor" DataMemberBinding="{Binding Debtor}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Company" DataMemberBinding="{Binding Company}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="SiteID" DataMemberBinding="{Binding SiteID}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Currency" DataMemberBinding="{Binding Currency}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="ItemID" DataMemberBinding="{Binding ItemID}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Profit Center" DataMemberBinding="{Binding ProfitCenter}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="U of M" DataMemberBinding="{Binding UoM}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Qty." DataMemberBinding="{Binding QTY}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Rate" DataMemberBinding="{Binding Rate}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Amount" DataMemberBinding="{Binding Amount}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Voucher #" DataMemberBinding="{Binding VoucherNo}" />
+                <telerik:GridViewDataColumn Header="Tax Amount" DataMemberBinding="{Binding TaxAmount}"  />
+                <telerik:GridViewDataColumn Header="TaxSched" DataMemberBinding="{Binding TaxSchedule}"  />
+                <telerik:GridViewDataColumn Header="Tax Percentage" DataMemberBinding="{Binding TaxPercentage}"  />
+                <telerik:GridViewCheckBoxColumn Header="FOC" DataMemberBinding="{Binding FOC}"  IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="Descripition" DataMemberBinding="{Binding Description}"  />
+            </telerik:RadGridView.Columns>
+
+            <!--<telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="Position" DataMemberBinding="{Binding GroupName}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Status" DataMemberBinding="{Binding ItemStatus}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header=" " DataMemberBinding="{Binding IssuePlace}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Export" DataMemberBinding="{Binding IssuedBy}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Doc Type" DataMemberBinding="{Binding DocType}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Type ID" DataMemberBinding="{Binding TypeID}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Trans Date" DataMemberBinding="{Binding Date}"  IsReadOnly="true"  DataFormatString="yyyy-MM-dd" />
+                <telerik:GridViewDataColumn Header="Batch ID" DataMemberBinding="{Binding tchI}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Company" DataMemberBinding="{Binding Company}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Debtor" DataMemberBinding="{Binding Debtor}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Site ID" DataMemberBinding="{Binding SiteID}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Site in GP" DataMemberBinding="{Binding SiteInGP}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="ItemID" DataMemberBinding="{Binding ItemID}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Reservation" DataMemberBinding="{Binding Reservation}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Cancelled" DataMemberBinding="{Binding Cancelled}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="FOC" DataMemberBinding="{Binding FOC}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Voucher #" DataMemberBinding="{Binding VoucherNo}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Currency" DataMemberBinding="{Binding Currency}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="U of M" DataMemberBinding="{Binding UoM}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Qty." DataMemberBinding="{Binding QTY}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Rate" DataMemberBinding="{Binding Rate}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Tax Schedule" DataMemberBinding="{Binding TaxSchedule}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Tax %" DataMemberBinding="{Binding TaxPercentage}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Invoice Rate" DataMemberBinding="{Binding InvoiceRate}"  IsReadOnly="true"/>
+                <telerik:GridViewDataColumn Header="Descripition" DataMemberBinding="{Binding Description}"  IsReadOnly="true"/>
+            </telerik:RadGridView.Columns>-->
+        </telerik:RadGridView>
+        <StatusBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Stretch" >
+            <StatusBarItem>
+                <TextBlock Text="{Binding Status, Mode=TwoWay}" HorizontalAlignment="Center"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</SchedwinCommon:SchedwinBaseWindow>
