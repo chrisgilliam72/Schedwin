@@ -1,0 +1,252 @@
+﻿<UserControl x:Class="Schedwin.Scheduling.SchedulingLegsListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Schedwin.Scheduling"
+              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" >
+    <UserControl.DataContext>
+        <local:SchedulingLegsListViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <telerik:RadGridView Grid.Row="1" Grid.Column="1" x:Name="legsGridView" ShowGroupPanel="False" AutoGenerateColumns="False"  CanUserReorderColumns="False" CanUserSortColumns="False" IsFilteringAllowed="False"
+                                            ItemsSource="{Binding Legs}" SelectedItem="{Binding SelectedLeg}" AllowDrop="True"  CellEditEnded="legsGridView_CellEditEnded"
+                                            Drop="legsGridView_Drop"  IsReadOnly="{Binding ReadOnly}"  RowHeight="20" MinColumnWidth="25" EditTriggers="CellClick">
+            <telerik:RadGridView.RowStyle>
+                <Style TargetType="{x:Type telerik:GridViewRow}">
+                    <Setter Property="telerik:DragDropManager.AllowCapturedDrag" Value="True" />
+                    <!--<Setter Property="telerik:DragDropManager.TouchDragTrigger" Value="TapAndHold"/>-->
+                </Style>
+               </telerik:RadGridView.RowStyle>
+                <telerik:RadGridView.Resources>
+                <Style TargetType="telerik:GridViewCell" x:Key="textFont">
+                    <Setter Property="FontSize" Value="10" />
+                </Style>
+                <Style TargetType="telerik:GridViewHeaderCell" x:Key="headerFont">
+                    <Setter Property="FontSize" Value="10" />
+                </Style>
+            </telerik:RadGridView.Resources>
+            <telerik:RadContextMenu.ContextMenu> 
+                <telerik:RadContextMenu x:Name="radContextMenu" IsEnabled="{Binding CanModify}" Opening="radContextMenu_Opening">
+                    <telerik:RadMenuItem Header="New Leg" Click="AddNewLeg_Click"  IsEnabled="{Binding CanAddLeg}" >
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="../Images/add.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate> 
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="Add selected groups"  IsEnabled="{Binding LegSelected}"  Click="AddGroups_Click" >
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="../Images/adduser30.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="Remove group"  IsEnabled="{Binding LegSelected}">
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="../Images/removeuser30.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+
+                    <telerik:RadMenuItem Header="Remove Leg" Click="RemoveLeg_Click"  IsEnabled="{Binding CanDelete}" >
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="../Images/delete.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="Update times" Click="UpdateLegTimes_Click" >
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="../Images/stopwatch.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+                </telerik:RadContextMenu>
+            </telerik:RadContextMenu.ContextMenu>
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewMaskedInputColumn CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}" DataMemberBinding="{Binding ETD}"  Width="50"
+                                                    DataFormatString="HH:mm"  UniqueName="ETD" MaskType="DateTime" Mask="HH:mm" >
+                    <telerik:GridViewMaskedInputColumn.Header>
+                        <TextBlock Text=" ETD "  HorizontalAlignment="Center"/>
+                    </telerik:GridViewMaskedInputColumn.Header>
+                </telerik:GridViewMaskedInputColumn>
+                <telerik:GridViewDataColumn  DataMemberBinding="{Binding FromAP}"
+                                                            CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel>
+                            <TextBlock Text=" From "  HorizontalAlignment="Center"/>
+                            <TextBlock Text=" Airport "  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding Airstrips}"  SelectedValue="{Binding FromAP}"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"  SelectionChanged="AirstripFrom_SelectionChanged"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+
+                <telerik:GridViewCheckBoxColumn Header="FP" CellStyle="{StaticResource textFont}" DataMemberBinding="{Binding FromRefuel}" HeaderCellStyle="{StaticResource headerFont}"  IsReadOnly="True"/>
+                <telerik:GridViewMaskedInputColumn  CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}" DataMemberBinding="{Binding ETA}"  Width="50" DataFormatString="HH:mm" 
+                                                    UniqueName="ETA" MaskType="DateTime" Mask="HH:mm" IsReadOnly="True">
+                    <telerik:GridViewMaskedInputColumn.Header>
+                        <TextBlock Text=" ETA "  HorizontalAlignment="Center"/>
+                    </telerik:GridViewMaskedInputColumn.Header>
+                </telerik:GridViewMaskedInputColumn>
+                <telerik:GridViewDataColumn  DataMemberBinding="{Binding ToAP}"  
+                                                    CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel >
+                            <TextBlock Text=" To " HorizontalAlignment="Center"/>
+                            <TextBlock Text=" Airport " HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding Airstrips}"  SelectedValue="{Binding ToAP}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code" DropDownClosed="AirstripTo_DropDownClosed" SelectionChanged="AirstripTo_SelectionChanged"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewCheckBoxColumn Header="FP" CellStyle="{StaticResource textFont}"   DataMemberBinding="{Binding ToRefuel}" HeaderCellStyle="{StaticResource headerFont}" IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="Turnaround" DataMemberBinding="{Binding TurnAroundTime}" TextAlignment="Right" CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}" />
+                <telerik:GridViewDataColumn Header="Distance" DataMemberBinding="{Binding Distance}" TextAlignment="Right" CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}" IsReadOnly="True"/>
+                <telerik:GridViewDataColumn   DataMemberBinding="{Binding GameFT}" TextAlignment="Right" CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}" >
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel>
+                            <TextBlock Text=" Game "  HorizontalAlignment="Center"/>
+                            <TextBlock Text=" Flight "  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Alt " DataMemberBinding="{Binding AltAP}" CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}" IsReadOnly="True"/>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding NumPax}" TextAlignment="Right" CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel >
+                            <TextBlock Text=" Pax " HorizontalAlignment="Center"/>
+                            <TextBlock Text=" Load " HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding FromMTOW}" TextAlignment="Right" CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel>
+                            <TextBlock Text=" From "  HorizontalAlignment="Center"/>
+                            <TextBlock Text=" MTOW "  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding ToMLW}" TextAlignment="Right" CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel >
+                            <TextBlock Text=" To " HorizontalAlignment="Center"/>
+                            <TextBlock Text=" MTOW " HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="MTOW" DataMemberBinding="{Binding MTOW}"  HeaderCellStyle="{StaticResource headerFont}" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding MTOWColor }"></Setter>
+                            <Setter Property="FontSize" Value="10" ></Setter>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="MLW" DataMemberBinding="{Binding MLW}"  Background="LightSalmon" HeaderCellStyle="{StaticResource headerFont}" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding MLWColor }"></Setter>
+                            <Setter Property="FontSize" Value="10" ></Setter>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}" DataMemberBinding="{Binding AvailWT}"  Background="Yellow"  IsReadOnly="True">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel>
+                            <TextBlock Text=" Total "  HorizontalAlignment="Center"/>
+                            <TextBlock Text=" Avail "  HorizontalAlignment="Center"/>
+                            <TextBlock Text=" WT "  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn CellStyle="{StaticResource textFont}" DataMemberBinding="{Binding TotalPaxWeight}" HeaderCellStyle="{StaticResource headerFont}" Background="Yellow"  IsReadOnly="True">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel>
+                            <TextBlock Text=" Total " />
+                            <TextBlock Text=" Pax " />
+                            <TextBlock Text=" WT "  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn CellStyle="{StaticResource textFont}" DataMemberBinding="{Binding TotalTripFuelWT}" HeaderCellStyle="{StaticResource headerFont}"  Background="Yellow" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel>
+                            <TextBlock Text=" Trip "  HorizontalAlignment="Center"/>
+                            <TextBlock Text=" Fuel "  HorizontalAlignment="Center"/>
+                            <TextBlock Text=" WT "  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn CellStyle="{StaticResource textFont}" DataMemberBinding="{Binding TotalFuelWT}" HeaderCellStyle="{StaticResource headerFont}"  Background="Yellow" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel>
+                            <TextBlock Text=" Leg "  HorizontalAlignment="Center"/>
+                            <TextBlock Text=" Fuel "  HorizontalAlignment="Center"/>
+                            <TextBlock Text=" WT "  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn CellStyle="{StaticResource textFont}" DataMemberBinding="{Binding LegFuelWT}" HeaderCellStyle="{StaticResource headerFont}"  Background="LightGreen" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel >
+                            <TextBlock Text=" Fuel " HorizontalAlignment="Center"/>
+                            <TextBlock Text=" WT " HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn CellStyle="{StaticResource textFont}"  DataMemberBinding="{Binding ResFuelWT}" HeaderCellStyle="{StaticResource headerFont}"  Background="LightGreen" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel >
+                            <TextBlock Text=" Reserve " HorizontalAlignment="Center"/>
+                            <TextBlock Text=" Fuel " HorizontalAlignment="Center"/>
+                            <TextBlock Text=" WT " HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  CellStyle="{StaticResource textFont}"  DataMemberBinding="{Binding AltAPFuelWT}" HeaderCellStyle="{StaticResource headerFont}"  Background="LightGreen" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel >
+                            <TextBlock Text=" Alt " HorizontalAlignment="Center"/>
+                            <TextBlock Text=" Fuel " HorizontalAlignment="Center"/>
+                            <TextBlock Text=" WT " HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  CellStyle="{StaticResource textFont}" DataMemberBinding="{Binding ConFuelWT}" HeaderCellStyle="{StaticResource headerFont}" Background="LightGreen" IsReadOnly="True">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel>
+                            <TextBlock Text=" Con "  HorizontalAlignment="Center"/>
+                            <TextBlock Text=" Fuel "  HorizontalAlignment="Center"/>
+                            <TextBlock Text=" WT "  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Groups Scheduled" DataMemberBinding="{Binding ResNames}" CellStyle="{StaticResource textFont}" HeaderCellStyle="{StaticResource headerFont}" IsReadOnly="True" MinWidth="200"/>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+    </Grid>
+</UserControl>

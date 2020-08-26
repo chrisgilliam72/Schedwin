@@ -1,0 +1,40 @@
+﻿<telerik:RadWindow x:Class="Schedwin.Scheduling.FlightDutyHistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Schedwin.Scheduling"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  HideMinimizeButton="True"
+             mc:Ignorable="d"  Header="Pilot duty history" Width="500" Height="500" WindowStartupLocation="CenterScreen">
+
+    <telerik:RadWindow.DataContext>
+        <local:FlightDutyHistoryViewModel/>
+    </telerik:RadWindow.DataContext>
+    <Grid>
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Label Margin="5" Grid.Row="0" Grid.Column="0"> Pilot:</Label>
+        <StackPanel Margin="5" Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+            <TextBlock Text="{Binding Pilot}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+            <Label>From:</Label>
+            <TextBlock Margin="5,0,0,0" Text="{Binding StartDate}"  VerticalAlignment="Center"></TextBlock>
+            <Label>To:</Label>
+            <TextBlock  Margin="5,0,0,0" Text="{Binding EndDate}"  VerticalAlignment="Center"></TextBlock>
+        </StackPanel>
+        <telerik:RadGridView ItemsSource="{Binding Legs}"  Width="400" Margin="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                ShowGroupPanel="False" AutoGenerateColumns="False" HorizontalAlignment="Left">
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="Date" Width="auto" DataMemberBinding="{Binding Date }" DataFormatString="yyyy-MM-dd"/>
+                <telerik:GridViewDataColumn Header="Leg Duty Hours" Width="auto" DataMemberBinding="{Binding LegHours }"/>
+                <telerik:GridViewDataColumn Header="Total Duty Hours" Width="auto" DataMemberBinding="{Binding TotalHours }"/>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+        </Grid>
+</telerik:RadWindow>

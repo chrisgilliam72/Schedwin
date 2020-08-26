@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="Schedwin.Scheduling.ScheduleTotalView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:local="clr-namespace:Schedwin.Scheduling" Background="LightBlue"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <local:ScheduleTotalViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        <telerik:RadGridView Grid.Row="0" Grid.Column="0"  ShowGroupPanel="False" AutoGenerateColumns="False"  ItemsSource="{Binding Items}">
+            <telerik:RadGridView.Resources>
+                <Style TargetType="telerik:GridViewCell" x:Key="textFont">
+                    <Setter Property="FontSize" Value="9" />
+                </Style>
+            </telerik:RadGridView.Resources>
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="This Aircraft" DataMemberBinding="{Binding Description}"  CellStyle="{StaticResource textFont}"  IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="" Width="50" CellStyle="{StaticResource textFont}" DataMemberBinding="{Binding ThisAircraft}" IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="All Aircraft" DataMemberBinding="{Binding Description}" CellStyle="{StaticResource textFont}"  IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="" Width="50" CellStyle="{StaticResource textFont}" DataMemberBinding="{Binding AllAircraft}"  IsReadOnly="True"/>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+    </Grid>
+</UserControl>

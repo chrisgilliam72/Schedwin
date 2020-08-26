@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="Schedwin.Scheduling.SchedulingGrpsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Schedwin.Scheduling"
+             xmlns:localClasses="clr-namespace:Schedwin.Scheduling.Classes"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <local:SchedulingGrpsViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <telerik:RadGridView  x:Name="gridViewGrps" Grid.Row="0" Grid.Column="0"  ShowGroupPanel="False" AutoGenerateColumns="False" ItemsSource="{Binding Groups}" 
+                                           AllowDrop="True" GroupRenderMode="Flat" EnableColumnVirtualization="True" EnableRowVirtualization="True" RowHeight="20" 
+                                            CellEditEnded="gridViewGrps_CellEditEnded" EditTriggers="CellClick" SelectionMode="Multiple" SelectionChanged="gridViewGrps_SelectionChanged">   
+            <telerik:RadGridView.RowStyle>
+                <Style TargetType="{x:Type telerik:GridViewRow}">
+                    <Setter Property="Background" Value="{Binding RowColor}"/>
+                    <Setter Property="telerik:DragDropManager.AllowCapturedDrag" Value="True" />
+                    <Setter Property="telerik:DragDropManager.TouchDragTrigger" Value="TapAndHold"/>
+                </Style>
+            </telerik:RadGridView.RowStyle>
+            <telerik:RadGridView.Resources>
+                <Style TargetType="telerik:GridViewCell" x:Key="textFont">
+                    <Setter Property="FontSize" Value="10" />
+                </Style>
+                <DataTemplate x:Key="DraggedItemTemplate">
+                    <TextBlock Text="{Binding ReservationName}" FontWeight="Bold"/>
+                </DataTemplate>
+            </telerik:RadGridView.Resources>
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="Status" Width="auto" DataMemberBinding="{Binding status}" CellStyle="{StaticResource textFont}" IsReadOnly="True"/>
+                <!--<telerik:GridViewCheckBoxColumn Header="" Width="auto" DataMemberBinding="{Binding Selected}"  CellStyle="{StaticResource textFont}" EditTriggers="CellClick" AutoSelectOnEdit="True"/>-->
+                <telerik:GridViewDataColumn Header="Group" Width="auto" DataMemberBinding="{Binding ReservationName}" CellStyle="{StaticResource textFont}"  IsReadOnly="True">
+                    <telerik:GridViewColumn.ToolTipTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Routing}" />
+                        </DataTemplate>
+                    </telerik:GridViewColumn.ToolTipTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="From" Width="auto" DataMemberBinding="{Binding FromAP}"  CellStyle="{StaticResource textFont}" IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="To" Width="auto"  DataMemberBinding="{Binding ToAP}"  CellStyle="{StaticResource textFont}" IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="#" Width="auto"  DataMemberBinding="{Binding NumPax}"  CellStyle="{StaticResource textFont}" IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="Ex" Width="auto"  DataMemberBinding="{Binding Ex}"  CellStyle="{StaticResource textFont}"  IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="For" Width="auto" DataMemberBinding="{Binding For}"  CellStyle="{StaticResource textFont}" IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="Pax Weight" Width="auto" DataMemberBinding="{Binding PaxWeight}"  CellStyle="{StaticResource textFont}" IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="Luggage Weight" Width="auto" DataMemberBinding="{Binding LuggageWeight}"  CellStyle="{StaticResource textFont}" IsReadOnly="True"/>
+                <telerik:GridViewMaskedInputColumn Header="Earliest EX" Width="auto"  DataMemberBinding="{Binding EarlyEx}" DataFormatString="HH:mm" CellStyle="{StaticResource textFont}" MaskType="DateTime" Mask="HH:mm"/>
+                <telerik:GridViewMaskedInputColumn Header="Latest For" Width="auto"  DataMemberBinding="{Binding LatestFor}"  DataFormatString="HH:mm" CellStyle="{StaticResource textFont}" MaskType="DateTime" Mask="HH:mm"/>
+                <telerik:GridViewDataColumn Header="Notes"  MinWidth="200" Width="auto" DataMemberBinding="{Binding Notes}"  CellStyle="{StaticResource textFont}"  IsReadOnly="True"/>
+                <telerik:GridViewCheckBoxColumn Header="Sole Use" Width="auto" DataMemberBinding="{Binding SoleUse}"  CellStyle="{StaticResource textFont}" IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="Type" Width="auto" DataMemberBinding="{Binding ResType}"  CellStyle="{StaticResource textFont}"  IsReadOnly="True"/>
+                <telerik:GridViewDataColumn Header="Operator" Width="auto" DataMemberBinding="{Binding Operator}"  CellStyle="{StaticResource textFont}" IsReadOnly="True"/>
+
+            </telerik:RadGridView.Columns>
+
+            <telerik:RadContextMenu.ContextMenu  >
+                <telerik:RadContextMenu x:Name="radContextMenu" >
+                    <telerik:RadMenuItem Header="Refresh" Click="RefreshItem_Click" >
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="../Images/isync.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="Unselect all" Click="UnselectAll_Click" >
+
+                    </telerik:RadMenuItem>
+                </telerik:RadContextMenu>
+                
+            </telerik:RadContextMenu.ContextMenu>
+        </telerik:RadGridView>
+    </Grid>
+</UserControl>

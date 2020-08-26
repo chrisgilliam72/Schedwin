@@ -1,0 +1,546 @@
+﻿<SchedwinCommon:SchedwinBaseWindow x:Class="Schedwin.Scheduling.PilotRosterView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Schedwin.Scheduling"
+        mc:Ignorable="d"  Title="Pilot Roster "
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+        xmlns:SchedwinCommon="clr-namespace:Schedwin.Common;assembly=Schedwin.Common" Loaded="Window_Loaded"
+        Height="800" Width="auto" Closed="SchedwinBaseWindow_Closed" Background="LightBlue">
+    <Window.DataContext>
+        <local:PilotRosterViewModel/>
+    </Window.DataContext>
+    <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+            </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label VerticalAlignment="Center">Duty Period:</Label>
+            <telerik:RadDatePicker Margin="5,0,0,0" VerticalAlignment="Center" SelectionChanged="RadDatePicker_SelectionChanged"></telerik:RadDatePicker>
+            <Button x:Name="btnSave" Margin="5" Height="auto" Width="30" Click="btnSave_Click">
+                <Image Source="../Images/save.png" Height="20" ToolTip="Save "/>
+            </Button>
+
+        </StackPanel>
+        <!--<EnableRowVirtualization="True" EnableColumnVirtualization="True"-->
+        <telerik:RadGridView Name="hdrGrid" Grid.Row="2"  Margin="5,5,5,0" ShowGroupPanel="False" IsFilteringAllowed="False" RowIndicatorVisibility="Collapsed" AutoGenerateColumns="False"
+                                   Height="60" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Hidden"  EnableColumnVirtualization="True"
+                                    RowHeight="20"  ItemsSource="{Binding DayHeader}" IsReadOnly="True">
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header="Pilot "  Width="150" IsReadOnly="True"/>
+                    <telerik:GridViewDataColumn Header="1"  Width="35"  DataMemberBinding="{Binding Days[0]}"/>
+                    <telerik:GridViewDataColumn Header="2"  Width="35" DataMemberBinding="{Binding Days[1]}"/>
+                    <telerik:GridViewDataColumn Header="3"  Width="35" DataMemberBinding="{Binding Days[2]}"/>
+                    <telerik:GridViewDataColumn Header="4"  Width="35"  DataMemberBinding="{Binding Days[3]}"/>
+                    <telerik:GridViewDataColumn Header="5"   Width="35" DataMemberBinding="{Binding Days[4]}"/>
+                    <telerik:GridViewDataColumn Header="6"   Width="35" DataMemberBinding="{Binding Days[5]}"/>
+                    <telerik:GridViewDataColumn Header="7"  Width="35" DataMemberBinding="{Binding Days[6]}"/>
+                    <telerik:GridViewDataColumn Header="8"  Width="35" DataMemberBinding="{Binding Days[7]}"/>
+                    <telerik:GridViewDataColumn Header="9"   Width="35" DataMemberBinding="{Binding Days[8]}"/>
+                    <telerik:GridViewDataColumn Header="10"  Width="35" DataMemberBinding="{Binding Days[9]}"/>
+                    <telerik:GridViewDataColumn Header="11"  Width="35" DataMemberBinding="{Binding Days[10]}"/>
+                    <telerik:GridViewDataColumn Header="12"  Width="35" DataMemberBinding="{Binding Days[11]}"/>
+                    <telerik:GridViewDataColumn Header="13"   Width="35" DataMemberBinding="{Binding Days[12]}"/>
+                    <telerik:GridViewDataColumn Header="14"   Width="35" DataMemberBinding="{Binding Days[13]}"/>
+                    <telerik:GridViewDataColumn Header="15"   Width="35" DataMemberBinding="{Binding Days[14]}"/>
+                    <telerik:GridViewDataColumn Header="16"   Width="35" DataMemberBinding="{Binding Days[15]}"/>
+                    <telerik:GridViewDataColumn Header="17"   Width="35" DataMemberBinding="{Binding Days[16]}"/>
+                    <telerik:GridViewDataColumn Header="18"   Width="35" DataMemberBinding="{Binding Days[17]}"/>
+                    <telerik:GridViewDataColumn Header="19"   Width="35" DataMemberBinding="{Binding Days[18]}"/>
+                    <telerik:GridViewDataColumn Header="20"   Width="35" DataMemberBinding="{Binding Days[19]}"/>
+                    <telerik:GridViewDataColumn Header="21"   Width="35" DataMemberBinding="{Binding Days[20]}"/>
+                    <telerik:GridViewDataColumn Header="22"   Width="35" DataMemberBinding="{Binding Days[21]}"/>
+                    <telerik:GridViewDataColumn Header="23"   Width="35" DataMemberBinding="{Binding Days[22]}"/>
+                    <telerik:GridViewDataColumn Header="24"   Width="35" DataMemberBinding="{Binding Days[23]}"/>
+                    <telerik:GridViewDataColumn Header="25"   Width="35" DataMemberBinding="{Binding Days[24]}"/>
+                    <telerik:GridViewDataColumn Header="26"   Width="35" DataMemberBinding="{Binding Days[25]}"/>
+                    <telerik:GridViewDataColumn Header="27"   Width="35" DataMemberBinding="{Binding Days[26]}"/>
+                    <telerik:GridViewDataColumn Header="28"   Width="35" DataMemberBinding="{Binding Days[27]}"/>
+                    <telerik:GridViewDataColumn Header="29"   Width="35" DataMemberBinding="{Binding Days[28]}" IsVisible="{Binding Show29th}"/>
+                    <telerik:GridViewDataColumn Header="30"  Width="35"  DataMemberBinding="{Binding Days[29]}" IsVisible="{Binding Show30th}"/>
+                    <telerik:GridViewDataColumn Header="31"   Width="35" DataMemberBinding="{Binding Days[30]}" IsVisible="{Binding Show31St}"/>
+                </telerik:RadGridView.Columns>
+
+            </telerik:RadGridView>
+        <telerik:RadGridView Name="DetailGrid"  Grid.Row="3" Margin="5,0,5,5" ShowGroupPanel="False" IsFilteringAllowed="False" RowIndicatorVisibility="Collapsed" AutoGenerateColumns="False"
+                                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                                    RowHeight="15"  ItemsSource="{Binding PilotList}" ShowColumnHeaders="False" SelectionChanged="DetailGrid_SelectionChanged" SelectedItem="{Binding SelectedDutyPeriod}" 
+                                    CellEditEnded="DetailGrid_CellEditEnded"  CellValidating="DetailGrid_CellValidating">
+            <telerik:RadContextMenu.ContextMenu>
+                <telerik:RadContextMenu x:Name="radContextMenu" >
+                    <telerik:RadMenuItem Header="Copy" Click="MenuItemCopy_Click"   IsEnabled="{Binding CanCopy}">
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="../Images/Copy.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+                    <telerik:RadMenuItem Header="Paste" Click="MenuItemPaste_Click"  IsEnabled="{Binding CanPaste}">
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="../Images/paste.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+                </telerik:RadContextMenu>
+            </telerik:RadContextMenu.ContextMenu>
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn  Width="150" DataMemberBinding="{Binding PilotFullName}"  IsReadOnly="True"/>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[0].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[0].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding DailyDutyTypeList[0].CanRoster}"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[0].DutyType}"  IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[1].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[1].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding DailyDutyTypeList[1].CanRoster}"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[1].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                   SelectedValuePath="Code"   DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[2].DutyType}"   >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[2].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding DailyDutyTypeList[2].CanRoster}"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[2].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[3].DutyType}" >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[3].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding DailyDutyTypeList[3].CanRoster}"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[3].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[4].DutyType}"   >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[4].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding DailyDutyTypeList[4].CanRoster}"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[4].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[5].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[5].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding DailyDutyTypeList[5].CanRoster}"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[5].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[6].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[6].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding DailyDutyTypeList[6].CanRoster}"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[6].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[7].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[7].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding DailyDutyTypeList[7].CanRoster}"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[7].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[8].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[8].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[8].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[8].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[9].DutyType}" >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[9].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[9].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[9].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[10].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[10].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[10].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding  DailyDutyTypeList[10].DutyType}"  IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[11].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[11].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[11].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[11].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[12].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[12].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[12].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[12].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[13].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[13].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[13].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[13].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[14].DutyType}" >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[14].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[14].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding  DailyDutyTypeList[14].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[15].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[15].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[15].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[15].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[16].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[16].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[16].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[16].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[17].DutyType}" >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[17].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[17].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[17].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[18].DutyType}" >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[18].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[18].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[18].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[19].DutyType}" >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[19].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[19].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[19].DutyType}"  IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[20].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[20].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[20].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[20].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[21].DutyType}" >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[21].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[21].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[21].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[22].DutyType}" >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[22].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[22].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[22].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[23].DutyType}" >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[23].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[23].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[23].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[24].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[24].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[24].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[24].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[25].DutyType}" >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[25].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[25].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding  DailyDutyTypeList[25].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[26].DutyType}"  >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[26].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[26].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[26].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[27].DutyType}" >
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[27].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[27].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding  DailyDutyTypeList[27].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[28].DutyType}"  IsVisible="{Binding Show29Th}">
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[28].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[28].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[28].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35"  DataMemberBinding="{Binding DailyDutyTypeList[29].DutyType}"  IsVisible="{Binding Show30Th}">
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[29].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[29].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"   SelectedValue="{Binding DailyDutyTypeList[29].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[30].DutyType}" IsVisible="{Binding Show31St}">
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[30].Color }"/>
+                            <Setter Property="IsEnabled" Value="{Binding  DailyDutyTypeList[30].CanRoster }"/>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding DutyTypes}"    SelectedValue="{Binding DailyDutyTypeList[30].DutyType}" IsFilteringEnabled="True" OpenDropDownOnFocus="True" TextSearchMode="StartsWith"
+                                                  SelectedValuePath="Code"  DisplayMemberPath="Code"/>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <!--<telerik:GridViewComboBoxColumn     Width="35" DataMemberBinding="{Binding DailyDutyTypeList[31].DutyType}" ItemsSource="{Binding DutyTypes}">
+                    <telerik:GridViewComboBoxColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding  DailyDutyTypeList[31].Color }"></Setter>
+                        </Style>
+                    </telerik:GridViewComboBoxColumn.CellStyle>
+                </telerik:GridViewComboBoxColumn>-->
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+        <StatusBar Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" >
+            <StatusBarItem>
+                <TextBlock Text="{Binding Status, Mode=TwoWay}"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</SchedwinCommon:SchedwinBaseWindow>

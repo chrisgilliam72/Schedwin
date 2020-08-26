@@ -1,0 +1,72 @@
+﻿<SchedwinCommon:SchedwinBaseWindow x:Class="Schedwin.Scheduling.NewSchedulingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Schedwin.Scheduling" Title="Scheduling "
+             xmlns:SchedwinCommon="clr-namespace:Schedwin.Common;assembly=Schedwin.Common" 
+              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             mc:Ignorable="d" Background="LightBlue" Loaded="Window_Loaded"  Closing="Schedule_Closing">
+    <SchedwinCommon:SchedwinBaseWindow.DataContext>
+        <local:NewSchedulingViewModel/>
+    </SchedwinCommon:SchedwinBaseWindow.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
+            <Label HorizontalAlignment="Left" VerticalAlignment="Center">Schedule Date :</Label>
+            <telerik:RadDatePicker Width="150" Height="25" HorizontalAlignment="Right" SelectionChanged="RadDatePicker_SelectionChanged" SelectedValue="{Binding ScheduleDate}"/>
+            <Button  Margin="5,0,0,0"  Height="25" Width="30" Click="btn_ClickRefresh" >
+                <Image Source="../Images/isync.png" Height="20" ToolTip="Refresh schedule"/>
+            </Button>
+            <Button Margin="5,0,0,0"  Height="25" Width="30" Click="Button_ClickSave" >
+                <Image Source="../Images/save.png" Height="20" ToolTip="Save schedule"/>
+            </Button>
+            <Button Margin="5,0,0,0"  Height="25" Width="30" Click="Button_ClickUnlock" IsEnabled="{Binding CanUnlock}">
+                <Image Source="../Images/padlock24.png" Height="20" ToolTip="Unlock schedule"/>
+            </Button>
+        </StackPanel>
+    
+        <GroupBox Header="Aircraft Pilot" Grid.Row="2" Grid.Column="1"  Margin="5">
+            <local:SchedulingPilotListView  x:Name="pilotCntrlView"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </GroupBox>
+        <GroupBox Header="Schedule Legs" Grid.Row="4" Grid.Column="1" Margin="5" >
+            <local:SchedulingLegsListView x:Name="legsCntrlView"   HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </GroupBox>
+        <GridSplitter Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
+        <GridSplitter Grid.Row="1" Grid.Column="2" Grid.RowSpan="6" Width="5" HorizontalAlignment="Stretch"/>
+        <GroupBox Header="Groups"  Grid.Column="3"  Grid.Row="1" Grid.RowSpan="6" Margin="5">
+            <local:SchedulingGrpsView x:Name="grpsCntrlView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5"/>
+        </GroupBox>
+        <GridSplitter Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" />
+        <GroupBox Header="Schedule Totals" Grid.Row="6" Grid.Column="1" Margin="5" >
+            <local:ScheduleTotalView x:Name="totalsCntrlView" VerticalAlignment="Stretch" Margin="5"/>
+        </GroupBox>
+        <StatusBar Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" >
+            <StatusBarItem>
+                <TextBlock Text="{Binding Status, Mode=TwoWay}"/>
+            </StatusBarItem>
+            <StatusBarItem>
+                <TextBlock Text="{Binding RevisionInfo, Mode=TwoWay}"/>
+            </StatusBarItem>
+            <StatusBarItem Margin="10,0,0,0">
+                <TextBlock Text="{Binding OpenedBy, Mode=TwoWay}"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</SchedwinCommon:SchedwinBaseWindow>

@@ -1,0 +1,324 @@
+﻿<UserControl x:Class="Schedwin.Scheduling.SchedulingPilotListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Schedwin.Scheduling"
+              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" >
+    <UserControl.DataContext>
+        <local:SchedulingPilotListViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <telerik:RadGridView Grid.Row="1" Grid.Column="1"  ShowGroupPanel="False" AutoGenerateColumns="False" ItemsSource="{Binding ScheduledPilots}" EnableColumnVirtualization="True" SelectedItem="{Binding SelectedPilot}"
+                             RowHeight="20" SelectionChanged="RadGridView_SelectionChanged" CanUserReorderColumns="False" CanUserSortColumns="False" IsReadOnly="{Binding ReadOnly}" IsFilteringAllowed="False">
+            <telerik:RadGridView.Resources>
+                <Style TargetType="telerik:GridViewCell" x:Key="textFont">
+                    <Setter Property="FontSize" Value="10" />
+                </Style>
+                <Style TargetType="telerik:GridViewHeaderCell" x:Key="headerFont">
+                    <Setter Property="FontSize" Value="10" />
+                </Style>
+            </telerik:RadGridView.Resources>
+            
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn Header=" "  DataMemberBinding="{Binding RowNumber}"  CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}" />
+                <telerik:GridViewDataColumn Header="Pilot 1"  DataMemberBinding="{Binding Pilot1Name}"
+                                                CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}">
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding PilotList}"  
+                                                  SelectedValuePath="IDX_Personnel"  DisplayMemberPath="Name"  SelectionChanged="Pilot1Info_SelectionChanged">
+                            </telerik:RadComboBox>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Comment"  Width="auto"  DataMemberBinding="{Binding Comment}" CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}"/>
+                <telerik:GridViewComboBoxColumn ItemsSource="{Binding PilotTypes}" SelectedValueMemberPath="IDX" DisplayMemberPath="Description"  Width="auto"
+                                                DataMemberBinding="{Binding IDX_PilotType_1}" CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}">
+                    <telerik:GridViewComboBoxColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Pilot 1"/>
+                            <TextBlock Text="Type"/>
+                        </StackPanel>
+                    </telerik:GridViewComboBoxColumn.Header>
+                </telerik:GridViewComboBoxColumn>
+                <telerik:GridViewDataColumn  DataMemberBinding="{Binding Pilot1_AP}" IsReadOnly="True" Width="auto"
+                                                CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Pilot 1"/>
+                            <TextBlock Text="Airport"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  Width="auto"  HeaderCellStyle="{StaticResource headerFont}" DataMemberBinding="{Binding Pilot1EstFT}">
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding Pilot1ESTFTColor }"></Setter>
+                            <Setter Property="FontSize" Value="10" ></Setter>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Pilot 1"/>
+                            <TextBlock Text="Est FT"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+
+                <telerik:GridViewDataColumn   DataMemberBinding="{Binding PilotWeight}" Width="auto"   CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel >
+                            <TextBlock Text="Pilot 1"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Weight"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Pilot 2 "  
+                                                DataMemberBinding="{Binding Pilot2Name,Mode=TwoWay}"  CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}" >
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding PilotList}"  
+                                                  SelectedValuePath="IDX_Personnel"  DisplayMemberPath="Name"  SelectionChanged="Pilot2Info_SelectionChanged">
+                            </telerik:RadComboBox>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewComboBoxColumn ItemsSource="{Binding PilotTypes}" SelectedValueMemberPath="IDX" DisplayMemberPath="Description"  Width="auto"  
+                                                DataMemberBinding="{Binding IDX_PilotType_2,Mode=TwoWay}"  CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}">
+                    <telerik:GridViewComboBoxColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Pilot 2"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Type"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewComboBoxColumn.Header>
+                </telerik:GridViewComboBoxColumn>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding Pilot2_AP,Mode=TwoWay}"  Width="auto"   CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}"  IsReadOnly="True">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Pilot 2"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Airport"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  Width="auto"    HeaderCellStyle="{StaticResource headerFont}" DataMemberBinding="{Binding Pilot2EstFT}"  IsReadOnly="True">
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding Pilot2ESTFTColor }"></Setter>
+                            <Setter Property="FontSize" Value="10" ></Setter>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Pilot 2"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Est FT"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn Header="Aircraft"  DataMemberBinding="{Binding AircraftRegistration}"  Width="auto"    CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}">
+                    <telerik:GridViewDataColumn.CellEditTemplate>
+                        <DataTemplate>
+                            <telerik:RadComboBox  ItemsSource="{Binding AircraftList}"  
+                                                  SelectedValuePath="Registration"  DisplayMemberPath="Registration"  SelectionChanged="ACRegistration_SelectionChanged">
+                            </telerik:RadComboBox>
+                        </DataTemplate>
+                    </telerik:GridViewDataColumn.CellEditTemplate>
+
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding AircraftAP}"  Width="auto"   CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}" 
+                                                                IsReadOnly="true" >
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Aircraft"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Airport"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding AircraftType}"  Width="auto"    CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}" 
+                                                                IsReadOnly="true">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Aircraft"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Type"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  Width="auto"    DataMemberBinding="{Binding AircraftService}" HeaderCellStyle="{StaticResource headerFont}" 
+                                                                IsReadOnly="true">
+                    <telerik:GridViewDataColumn.CellStyle>
+                        <Style TargetType="telerik:GridViewCell">
+                            <Setter Property="Background" Value="{Binding ServiceColor }"></Setter>
+                            <Setter Property="FontSize" Value="10" ></Setter>
+                        </Style>
+                    </telerik:GridViewDataColumn.CellStyle>
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Aircraft"  HorizontalAlignment="Center"/>
+                            <TextBlock Text=" Service"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding AircraftWeight}"  Width="auto"    CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}" 
+                                                                IsReadOnly="true">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Aircraft"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Weight"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  DataMemberBinding="{Binding BuyRate}"  Width="auto"   CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}" 
+                                                                IsReadOnly="true">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Buy"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Rate"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding SellRate}"  Width="auto"   CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}"  
+                                                                IsReadOnly="true">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Sell"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Rate"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding RangeKM}"  Width="auto"   CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}" 
+                                                            IsReadOnly="true">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Range"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Km"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  DataMemberBinding="{Binding RangeHours}"  Width="auto"   CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}"
+                                                             IsReadOnly="true">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel >
+                            <TextBlock Text="Range"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Hours"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding AircraftSpeed}"  Width="auto"   CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}"
+                                                                IsReadOnly="true">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Aircraft"/>
+                            <TextBlock Text="Speed"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding Pax}"  Width="auto"    CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}"  IsReadOnly="true">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Pax"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="#"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <!--<telerik:GridViewDataColumn Header="Turnaround Time" DataMemberBinding="{Binding TurnAroundTime}"  CellStyle="{StaticResource textFont}"/>-->
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding EmptyWeight}"  CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}"
+                                                                 IsReadOnly="true">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Empty"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Weight"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding FuelFlow}"  Width="auto"   CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}" 
+                                                                 IsReadOnly="true">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Fuel"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Flow"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  DataMemberBinding="{Binding ReserveFuel}"  Width="auto"   CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}"
+                                                                 IsReadOnly="true">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Reserve"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Fuel"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewComboBoxColumn ItemsSource="{Binding FuelTypes}" SelectedValueMemberPath="IDX" DisplayMemberPath="TypeName"  
+                                                DataMemberBinding="{Binding IDX_FuelType}" CellStyle="{StaticResource textFont}"  HeaderCellStyle="{StaticResource headerFont}"  IsReadOnly="true">
+                    <telerik:GridViewComboBoxColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Fuel"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Type"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewComboBoxColumn.Header>
+                </telerik:GridViewComboBoxColumn>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding TechLogID }"  Width="auto"   CellStyle="{StaticResource textFont}" >
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Techlog"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="ID" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+                <telerik:GridViewDataColumn  CellStyle="{StaticResource textFont}"  Width="auto"   HeaderCellStyle="{StaticResource headerFont}"  IsReadOnly="true">
+                    <telerik:GridViewDataColumn.Header>
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="Signed"  HorizontalAlignment="Center"/>
+                            <TextBlock Text="Off"  HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </telerik:GridViewDataColumn.Header>
+                </telerik:GridViewDataColumn>
+            </telerik:RadGridView.Columns>
+        </telerik:RadGridView>
+        <telerik:RadContextMenu.ContextMenu  >
+            <telerik:RadContextMenu x:Name="radContextMenu"  IsEnabled="{Binding CanModify}">
+                <telerik:RadMenuItem Header="Add Pilot" Click="AddPilot_Click" >
+                    <telerik:RadMenuItem.IconTemplate>
+                        <DataTemplate>
+                            <Image Source="../Images/add.png"/>
+                        </DataTemplate>
+                    </telerik:RadMenuItem.IconTemplate>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem Header="Clear Pilot" Click="ClearPilot_Click"  IsEnabled="{Binding CanRemovePilot}">
+                    <telerik:RadMenuItem.IconTemplate>
+                        <DataTemplate>
+                            <Image Source="../Images/eraser16.png"/>
+                        </DataTemplate>
+                    </telerik:RadMenuItem.IconTemplate>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem Header="Remove Pilot" Click="RemovePilot_Click"  IsEnabled="{Binding CanRemovePilot}">
+                    <telerik:RadMenuItem.IconTemplate>
+                        <DataTemplate>
+                            <Image Source="../Images/delete.png"/>
+                        </DataTemplate>
+                    </telerik:RadMenuItem.IconTemplate>
+                </telerik:RadMenuItem>
+                <telerik:RadMenuItem Header="Remove Pilot 2" Click="RemovePilot2_Click"  IsEnabled="{Binding CanRemovePilot}">
+                    <telerik:RadMenuItem.IconTemplate>
+                        <DataTemplate>
+                            <Image Source="../Images/delete.png"/>
+                        </DataTemplate>
+                    </telerik:RadMenuItem.IconTemplate>
+                </telerik:RadMenuItem>
+            </telerik:RadContextMenu>
+
+        </telerik:RadContextMenu.ContextMenu>
+    </Grid>
+</UserControl>
