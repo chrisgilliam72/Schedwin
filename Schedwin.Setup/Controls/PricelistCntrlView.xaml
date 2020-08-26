@@ -1,0 +1,59 @@
+﻿<local:ItemControlBase x:Class="Schedwin.Setup.PricelistCntrlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             xmlns:local="clr-namespace:Schedwin.Setup"
+             mc:Ignorable="d"  Background="Silver">
+    <local:ItemControlBase.DataContext>
+        <local:PricelistCntrlViewModel/>
+    </local:ItemControlBase.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Price Lists" Margin="5" Grid.Row="1" Grid.Column="1">
+            <telerik:RadGridView  Margin="5"  ShowGroupPanel="False"  AutoGenerateColumns="False" EnableRowVirtualization="True" SelectedItem="{Binding SelectedItem}"
+                                   CanUserInsertRows="True" ItemsSource="{Binding PriceLists}" RowEditEnded="RadGridView_RowEditEnded">
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn Header="Name"    DataMemberBinding="{Binding Name}" Width="100" IsReadOnly="False"/>
+                    <telerik:GridViewDataColumn Header="Type"   Width="75"  DataMemberBinding="{Binding Type}" IsReadOnly="True"/>
+                    <telerik:GridViewComboBoxColumn Header="From"  Width="75"  IsReadOnly="False" ItemsSource="{Binding AirstripCodes}" DisplayMemberPath="Code" 
+                                                                   SelectedValueMemberPath="IDX" DataMemberBinding="{Binding StartIDX}"/>
+
+                    <telerik:GridViewComboBoxColumn Header="To"  Width="75"  IsReadOnly="False"   ItemsSource="{Binding AirstripCodes}" DisplayMemberPath="Code" 
+                                                                   SelectedValueMemberPath="IDX" DataMemberBinding="{Binding DestIDX}"/>
+                    <telerik:GridViewDataColumn Header="Sell Rate"  DataMemberBinding="{Binding BuyRate}"  Width="75"  IsReadOnly="False"/>
+                    <telerik:GridViewDataColumn Header="Buy Rate"  DataMemberBinding="{Binding SellRate}"  Width="75"  IsReadOnly="False"/>
+                </telerik:RadGridView.Columns>
+                <telerik:RadContextMenu.ContextMenu>
+                    <telerik:RadContextMenu x:Name="radContextMenu" >
+                        <telerik:RadMenuItem Header="New Pricelist" Click="AddNewPriceList_Click" >
+                            <telerik:RadMenuItem.IconTemplate>
+                                <DataTemplate>
+                                    <Image Source="../Images/add.png"/>
+                                </DataTemplate>
+                            </telerik:RadMenuItem.IconTemplate>
+                        </telerik:RadMenuItem>
+                        <telerik:RadMenuItem Header="Delete Pricelist" Click="DeletePriceList_Click"  IsEnabled="{Binding CanDelete}">
+                            <telerik:RadMenuItem.IconTemplate>
+                                <DataTemplate>
+                                    <Image Source="../Images/delete.png"/>
+                                </DataTemplate>
+                            </telerik:RadMenuItem.IconTemplate>
+                        </telerik:RadMenuItem>
+                    </telerik:RadContextMenu>
+                </telerik:RadContextMenu.ContextMenu>
+            </telerik:RadGridView>
+        </GroupBox>
+
+    </Grid>
+</local:ItemControlBase>

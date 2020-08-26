@@ -1,0 +1,56 @@
+﻿<local:ItemControlBase x:Class="Schedwin.Setup.FlightInfoCntrlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+               xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             xmlns:local="clr-namespace:Schedwin.Setup"   Background="Silver"
+             mc:Ignorable="d" 
+             Width="auto" Height="auto" >
+    <local:ItemControlBase.DataContext>
+        <local:FlightInfoCntrlViewModel/>
+    </local:ItemControlBase.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Flight details" Grid.ColumnSpan="2" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Margin="5" >Description</Label>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="5"  Width="200" Height="25" Text="{Binding FlightDescription}"  HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="0" Margin="5">Airport:</Label>
+                <telerik:RadComboBox Grid.Row="1" Grid.Column="1" Margin="5" Width="150"  HorizontalAlignment="Left"
+                                                                    ItemsSource="{Binding AirstripList}" DisplayMemberPath="Description" SelectedItem="{Binding SelectedAirstrip}"/>
+                <Label Grid.Row="2" Grid.Column="0" Margin="5" >Arrival /Departure time:</Label>
+                <telerik:RadTimePicker Grid.Row="2"  Grid.Column="1" Margin="5"  Width="150" HorizontalAlignment="Left" SelectedValue="{Binding ArrivalDepart}"/>
+                <Label Grid.Row="3" Grid.Column="0" Margin="5" >Drop-off /Pick up time:</Label>
+                <telerik:RadTimePicker Grid.Row="3"  Grid.Column="1" Margin="5"  Width="150" HorizontalAlignment="Left" SelectedValue="{Binding PickUpDropOff}"/>
+                <Label Grid.Row="4" Grid.Column="0" Margin="5">Direction</Label>
+                <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <RadioButton Margin="5" IsChecked="{Binding IsInbound}">Inbound</RadioButton>
+                    <RadioButton Margin="5" IsChecked="{Binding IsOutbound}">Outbound</RadioButton>
+                </StackPanel>
+                <CheckBox  Grid.Row="5" Grid.Column="0" Margin="5" IsChecked="{Binding IsActive}" >Active</CheckBox>
+            </Grid>
+        </GroupBox>
+    </Grid>
+
+
+</local:ItemControlBase>

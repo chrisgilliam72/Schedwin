@@ -1,0 +1,180 @@
+﻿<local:ItemControlBase x:Class="Schedwin.Setup.AircraftInfoCntrlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Schedwin.Setup"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  
+             mc:Ignorable="d"  Background="Silver">
+    <local:ItemControlBase.DataContext>
+        <local:AircraftInfoCntrlViewModel/>
+    </local:ItemControlBase.DataContext>
+    <telerik:RadTabControl Background="Silver">
+        <telerik:RadTabItem Header="Details" Background="Silver">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0" Margin="5" Header="Details" Grid.Column="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right">Aircraft Type</Label>
+                        <telerik:RadComboBox Grid.Row="1" Grid.Column="1" Width="120" Height="20" HorizontalAlignment="Left" Margin="5" ItemsSource="{Binding ACTypesList}"
+                                                                                DisplayMemberPath="TypeName"  SelectedItem="{Binding SelectedAircraftType}">
+                            <telerik:RadComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel/>
+                                </ItemsPanelTemplate>
+                            </telerik:RadComboBox.ItemsPanel>
+                        </telerik:RadComboBox>
+                        <Label Grid.Column="0" Grid.Row="2"  VerticalAlignment="Center"  HorizontalAlignment="Right">Registration</Label>
+                        <TextBox Grid.Row="2" Grid.Column="1" Width="120" Height="20" Margin="5" Text="{Binding Registration}"/>
+                        <Label Grid.Column="0" Grid.Row="3"  VerticalAlignment="Center"  HorizontalAlignment="Right">Serial Number</Label>
+                        <TextBox Grid.Row="3" Grid.Column="1" Width="120" Height="20" Margin="5" Text="{Binding SerialNumber}"/>
+                        <Label Grid.Column="0" Grid.Row="4"  VerticalAlignment="Center"  HorizontalAlignment="Right">Total Time Airframe</Label>
+                        <TextBox Grid.Row="4" Grid.Column="1" Width="120" Height="20" Margin="5" Text="{Binding TotalTimeAirframe}"/>
+
+                        <Label Grid.Column="2" Grid.Row="1"  VerticalAlignment="Center"  HorizontalAlignment="Right">Profit Center</Label>
+                        <TextBox Grid.Row="1" Grid.Column="3" Width="50" Height="20" HorizontalAlignment="Left" Margin="5" Text="{Binding ProfitCenter}"/>
+                        <Label Grid.Column="2" Grid.Row="2"  VerticalAlignment="Center"  HorizontalAlignment="Right">Owner</Label>
+                        <telerik:RadComboBox Grid.Row="2" Grid.Column="3" MinWidth="120" Width="auto" Height="20" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="5" ItemsSource="{Binding CompanyList}"
+                                                                                                           DisplayMemberPath="Description" SelectedItem="{Binding  SelectedCompany}">
+                            <telerik:RadComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel/>
+                                </ItemsPanelTemplate>
+                            </telerik:RadComboBox.ItemsPanel>
+                        </telerik:RadComboBox>
+                        <Label Grid.Column="2" Grid.Row="3"  VerticalAlignment="Center"  HorizontalAlignment="Right">Year of Manufacture</Label>
+                        <Label Grid.Column="2" Grid.Row="4"  VerticalAlignment="Center"  HorizontalAlignment="Right">Date of Total Time</Label>
+                        <CheckBox Grid.Column="1"  Grid.Row="5" Margin="5" IsChecked="{Binding OwnAircraft}">Own Aircraft</CheckBox>
+                        <CheckBox Grid.Column="3"  Grid.Row="5" Margin="5"  IsChecked="{Binding Active}">Active</CheckBox>
+                        <telerik:RadDatePicker Margin="5" Grid.Row="3" Grid.Column="3" Width="120" Height="20"  HorizontalAlignment="Left" SelectedValue="{Binding YearOfManufacture}"/>
+                        <telerik:RadDatePicker  Margin="5" Grid.Row="4" Grid.Column="3" Width="120" Height="20" HorizontalAlignment="Left" SelectedValue="{Binding DateOfTotalTime}"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="1"  Grid.Column="0"  Margin="5" Header="Specifications"  >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Empty Mass(lb)</Label>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Height="20" VerticalAlignment="Center" VerticalContentAlignment="Center" 
+                                                                   HorizontalAlignment="Left" Width="120" Text="{Binding EmptyMass}"/>
+                        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Colours</Label>
+                        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Height="20" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                                                    HorizontalAlignment="Left" Width="120" Text="{Binding Colours}"/>
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Average Speed</Label>
+                        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Height="20" VerticalAlignment="Center" VerticalContentAlignment="Center" 
+                                                                    HorizontalAlignment="Left" Width="120" Text="{Binding Speed}"/>
+                        <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Short Cycle Fee</Label>
+                        <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Height="20" VerticalAlignment="Center" VerticalContentAlignment="Center" 
+                                                                    HorizontalAlignment="Left" Width="120" Text="{Binding ShortCycleFee}"/>
+                        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">Empty Arm</Label>
+                        <TextBox Grid.Row="1" Grid.Column="3" Margin="5" Height="20" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                                                    HorizontalAlignment="Left" Width="120" Text="{Binding EmptyArm}"/>
+                        <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">Equipment</Label>
+                        <TextBox Grid.Row="2" Grid.Column="3" Margin="5" Height="20" VerticalAlignment="Center" VerticalContentAlignment="Center" 
+                                                                    HorizontalAlignment="Left" Width="120" Text="{Binding Equipment}"/>
+                        <Label Grid.Row="3" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">Demurrage</Label>
+                        <TextBox Grid.Row="3" Grid.Column="3" Margin="5" Height="20" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                                                    HorizontalAlignment="Left" Width="120" Text="{Binding Demurrage}"/>
+                        <Label Grid.Row="4" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">Reserve Fuel(lb)</Label>
+                        <TextBox Grid.Row="4" Grid.Column="3" Margin="5" Height="20" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                                                    HorizontalAlignment="Left" Width="120" Text="{Binding ReserverFuel}"/>
+                        <Label Grid.Row="5" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">Total Fuel(lb)</Label>
+                        <TextBox Grid.Row="5" Grid.Column="3" Margin="5" Height="20" VerticalAlignment="Center" VerticalContentAlignment="Center" 
+                                                                    HorizontalAlignment="Left" Width="120" Text="{Binding TotalFuel}"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="2"  Grid.Column="0"  Margin="5" Header="Insurance Details"  >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="10"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">D.O.C</Label>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Height="20" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                                     HorizontalAlignment="Left" Width="120" Text="{Binding DOC}"/>
+                        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Invoice Code</Label>
+                        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Height="20" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                                     HorizontalAlignment="Left" Width="120" Text="{Binding InvoiceCode}"/>
+                        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Underwriter</Label>
+
+                        <telerik:RadComboBox Grid.Row="3" Grid.Column="1" MinWidth="120" Width="auto" Height="20" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="5" ItemsSource="{Binding CompanyList}"
+                                                                                                           DisplayMemberPath="Description" SelectedItem="{Binding  Underwriter}">
+                            <telerik:RadComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel/>
+                                </ItemsPanelTemplate>
+                            </telerik:RadComboBox.ItemsPanel>
+                        </telerik:RadComboBox>
+                        <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Insurance Expiry Date</Label>
+                        <telerik:RadDatePicker Grid.Row="4" Grid.Column="1" Margin="5" Height="20" VerticalAlignment="Center" VerticalContentAlignment="Center" 
+                                                    HorizontalAlignment="Left" Width="120" SelectedValue="{Binding InsuranceExpiryDate}"/>
+                        <Label Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">Selling Rate</Label>
+                        <TextBox Grid.Row="1" Grid.Column="3" Margin="5" Height="20" VerticalAlignment="Center" VerticalContentAlignment="Center"
+                                                     HorizontalAlignment="Left" Width="120" Text="{Binding SellRate}"/>
+                        <Label Grid.Row="2" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">Liability</Label>
+                        <TextBox Grid.Row="2" Grid.Column="3" Grid.RowSpan="3"  Margin="5"   VerticalAlignment="Stretch" VerticalContentAlignment="Top"
+                                                    HorizontalAlignment="Left" Width="120" Text="{Binding Liability}"/>
+                    </Grid>
+
+                </GroupBox>
+            </Grid>
+        </telerik:RadTabItem>
+        <telerik:RadTabItem Header="Documents" >
+            <local:DataDocumentsCnrlView x:Name="DataDocsView"/>
+        </telerik:RadTabItem>
+    </telerik:RadTabControl>
+
+</local:ItemControlBase>

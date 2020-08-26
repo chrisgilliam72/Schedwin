@@ -1,0 +1,205 @@
+﻿<local:ItemControlBase x:Class="Schedwin.Setup.PilotInfoCntrlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" 
+             xmlns:local="clr-namespace:Schedwin.Setup" Background="Silver"
+             mc:Ignorable="d" >
+    <local:ItemControlBase.DataContext>
+        <local:PilotInfoCntrlViewModel/>
+    </local:ItemControlBase.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        <GroupBox  Header="Pilot Details" Grid.Row="1" Grid.Column="1">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Margin="5" HorizontalAlignment="Right" >Person:</Label>
+                <telerik:RadComboBox Grid.Column="1" Grid.Row="0" Margin="5" Height="25" ItemsSource="{Binding UserList}" DisplayMemberPath="FullName" SelectedValue="{Binding SelectedPerson}"/>
+                <Label Grid.Row="1" Grid.Column="0" Margin="5" HorizontalAlignment="Right">Nationality:</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Width="200" Height="25" Margin="5" Text="{Binding Nationality}"/>
+                <Label Grid.Row="2" Grid.Column="0" Margin="5" HorizontalAlignment="Right">Address:</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Width="200" Height="100" Margin="5" Text="{Binding Address}" VerticalContentAlignment="Top"/>
+                <Label Grid.Row="3" Grid.Column="0" Margin="5" HorizontalAlignment="Right">Passport Number:</Label>
+                <TextBox Grid.Row="3" Grid.Column="1" Width="200" Height="25" Margin="5" VerticalAlignment="Top" Text="{Binding PassportNo}"/>
+                <Label Grid.Row="4" Grid.Column="0" Margin="5" HorizontalAlignment="Right">Residence Permit Number:</Label>
+                <TextBox Grid.Row="4" Grid.Column="1" Width="200" Height="25" Margin="5" Text="{Binding ResidenceNo}"/>
+                <Label Grid.Row="5" Grid.Column="0" Margin="5" HorizontalAlignment="Right">Work Permit Number:</Label>
+                <TextBox Grid.Row="5" Grid.Column="1" Width="200" Height="25" Margin="5" Text="{Binding WorkPermitNo}"/>
+                <Label Grid.Row="6" Grid.Column="0" Margin="5" HorizontalAlignment="Right">Pilot Weight (lb):</Label>
+                <TextBox Grid.Row="6" Grid.Column="1" Width="200" Height="25" Margin="5" Text="{Binding PilotWeight}"/>
+                <Label Grid.Row="2" Grid.Column="2" Margin="5" HorizontalAlignment="Right">Telephone:</Label>
+                <TextBox Grid.Row="2" Grid.Column="4" Width="200" Height="25" Margin="5" VerticalAlignment="Top" Text="{Binding Telephone}"/>
+                <Label Grid.Row="4" Grid.Column="2" Margin="5" HorizontalAlignment="Right">Passport expiry:</Label>
+                <telerik:RadDatePicker Margin="5"  Grid.Row="4" Grid.Column="4" Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding PassportExpiry}"/>
+                <Label Grid.Row="5" Grid.Column="2" Margin="5" HorizontalAlignment="Right">Residence Permit expiry:</Label>
+                <telerik:RadDatePicker Margin="5"  Grid.Row="5" Grid.Column="4" Height="25" Width="150"  HorizontalAlignment="Left" SelectedValue="{Binding ResidencePermitExpiry}"/>
+                <Label Grid.Row="6" Grid.Column="2" Margin="5" HorizontalAlignment="Right">Work Permit expiry:</Label>
+                <telerik:RadDatePicker Margin="5"  Grid.Row="6" Grid.Column="4" Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding WorkPermitExpiry}"/>
+                <CheckBox Grid.Row="7" Grid.Column="1" Margin="5" HorizontalAlignment="Right" IsChecked="{Binding IsActive}">Active</CheckBox>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Licence and Expiry" Grid.Row="2" Grid.Column="1" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="50"/>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center">Pilot Licence Number:</Label>
+                    <TextBox Grid.Row="0" Grid.Column="1" Width="200" Height="25" Margin="5" Text="{Binding PilotLicenceNo}"/>
+                    <Label Grid.Row="0" Grid.Column="2" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center">Pilot licence expiry:</Label>
+                    <telerik:RadDatePicker Margin="5"  Grid.Row="0" Grid.Column="3" Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding PilotLicenceExpiry}"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" Margin="5" HorizontalAlignment="Right" VerticalAlignment="Center">Start flying hours:</Label>
+                    <TextBox Grid.Row="1" Grid.Column="1" Width="200" Height="25" Margin="5" Text="{Binding StartFlyingHours}"  VerticalAlignment="Center"/>
+                    <Label Grid.Row="1" Grid.Column="2" Margin="5" HorizontalAlignment="Right"  VerticalAlignment="Center">Start Date:</Label>
+                    <telerik:RadDatePicker Margin="5"  Grid.Row="1" Grid.Column="3" Height="25" Width="150" HorizontalAlignment="Left"  SelectedValue="{Binding StartDate}"/>
+                    
+                    <telerik:RadGridView Grid.Row="2" Grid.ColumnSpan="4" Margin="5"  Width="620"  HorizontalAlignment="Left"  VerticalAlignment="Top"
+                                     ShowGroupPanel="False"  AutoGenerateColumns="False"  CanUserInsertRows="False"
+                                     ItemsSource="{Binding ExpiryGridItems}">
+                        <telerik:RadGridView.Columns>
+                            <telerik:GridViewCheckBoxColumn Header=""  Width="5*"  DataMemberBinding="{Binding Rating}" IsReadOnlyBinding="{Binding RatingNotApplicable}" />
+                            <telerik:GridViewDataColumn Header=""  Width="45*"  DataMemberBinding="{Binding Name}" IsReadOnly="True"/>
+                            <telerik:GridViewDataColumn Header="Expiry Date"   DataMemberBinding="{Binding Date}" DataFormatString="yyyy-MM-dd" IsReadOnlyBinding="{Binding DateReadOnly}">
+                                <telerik:GridViewDataColumn.CellEditTemplate>
+                                    <DataTemplate>
+                                        <telerik:RadDatePicker  SelectedValue="{Binding Date}" >
+                                        </telerik:RadDatePicker>
+                                    </DataTemplate>
+                                </telerik:GridViewDataColumn.CellEditTemplate>
+                            </telerik:GridViewDataColumn>
+                        </telerik:RadGridView.Columns>
+                    </telerik:RadGridView>
+
+                </Grid>
+                <Border Grid.Column="1" x:Name="brder" Margin="5"  BorderThickness="1" BorderBrush="Black">
+                    <Image Source="{Binding LicenceImgSrc}"  VerticalAlignment="Top" HorizontalAlignment="Left"  Stretch="Fill" Height="300" Width="400"/>
+                </Border>
+                <Button Grid.Column="2" Margin="5" HorizontalAlignment="Center" VerticalAlignment="Bottom"  Height="20" Width="30" Click="btnLoadImageClick" > ... </Button>
+            </Grid>
+       
+        </GroupBox>
+        <GroupBox Header="Contact details" Grid.Row="3" Grid.Column="1" Margin="5">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Margin="5" HorizontalAlignment="Right">Contact Name:</Label>
+                <TextBox Grid.Row="0" Grid.Column="1" Width="200" Height="25" Margin="5" Text="{Binding ContactName}"/>
+                <Label Grid.Row="1" Grid.Column="0" Margin="5" HorizontalAlignment="Right">Contact Company:</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Width="200" Height="25" Margin="5" Text="{ Binding ContactCompany}"/>
+                <Label Grid.Row="2" Grid.Column="0" Margin="5" HorizontalAlignment="Right">Address:</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" Width="200" Height="100" Margin="5" Text="{Binding ContactAddress}" VerticalContentAlignment="Top"/>
+                <Label Grid.Row="2" Grid.Column="2" Margin="5" HorizontalAlignment="Right">Contact Phone:</Label>
+                <TextBox Grid.Row="2" Grid.Column="3" Width="200" Height="25" Margin="5" VerticalAlignment="Top" Text="{ Binding ContactPhone}"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="C of T" Grid.Row="4" Grid.Column="1">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">C of T</Label>
+                <telerik:RadDatePicker Margin="5" Grid.Row="0" Grid.Column="1"  Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding cOfT}"/>
+                <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">C of T C208</Label>
+                <telerik:RadDatePicker Margin="5" Grid.Row="1" Grid.Column="1"  Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding cotC208}"/>
+                <Label Grid.Row="1" Grid.Column="2" VerticalAlignment="Center">C of T GA8</Label>
+                <telerik:RadDatePicker Margin="5" Grid.Row="1" Grid.Column="31"  Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding cotGA8}"/>
+                <Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">C of T C206</Label>
+                <telerik:RadDatePicker Margin="5" Grid.Row="2" Grid.Column="1"  Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding cotC206}"/>
+                <Label Grid.Row="2" Grid.Column="2" VerticalAlignment="Center">C of T C172</Label>
+                <telerik:RadDatePicker Margin="5" Grid.Row="2" Grid.Column="31"  Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding cotC172}"/>
+
+                <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">Route Check</Label>
+                <telerik:RadDatePicker Margin="5" Grid.Row="3" Grid.Column="1"  Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding routeCheck}"/>
+                <Label Grid.Row="3" Grid.Column="2" VerticalAlignment="Center">C of T C210</Label>
+                <telerik:RadDatePicker Margin="5" Grid.Row="3" Grid.Column="31"  Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding cotC210}"/>
+                <Label Grid.Row="5" Grid.Column="0" VerticalAlignment="Center">C of T PC12</Label>
+                <telerik:RadDatePicker Margin="5" Grid.Row="5" Grid.Column="1"  Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding cotPC12}"/>
+                <Label Grid.Row="5" Grid.Column="2" VerticalAlignment="Center">C of T C402</Label>
+                <telerik:RadDatePicker Margin="5" Grid.Row="5" Grid.Column="31"  Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding cotC402}"/>
+                <Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center">C of T C510</Label>
+                <telerik:RadDatePicker Margin="5" Grid.Row="4" Grid.Column="1"  Height="25" Width="150" HorizontalAlignment="Left"  SelectedValue="{Binding cotC510}"/>
+                <Label Grid.Row="4" Grid.Column="2" VerticalAlignment="Center">C of T C310</Label>
+                <telerik:RadDatePicker Margin="5" Grid.Row="4" Grid.Column="31"  Height="25" Width="150" HorizontalAlignment="Left" SelectedValue="{Binding cotC310}"/>
+            </Grid>
+        </GroupBox>
+       
+    </Grid>
+
+</local:ItemControlBase>

@@ -1,0 +1,48 @@
+﻿<Window x:Class="Schedwin.Setup.MapCntrlWindowView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" 
+           xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:local="clr-namespace:Schedwin.Setup" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
+             mc:Ignorable="d"  Height="500" Width="600" Title="{Binding AirstripName}">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:MapCntrlWindowViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" >
+            <Label Margin="5" VerticalContentAlignment="Center" >Search:</Label>
+            <TextBox Margin="5" Width="200" Height="25" Text="{Binding PlaceSearch}" VerticalContentAlignment="Center"/>
+            <Button Height="25" Width="25" Click="btnSearch_Click">
+                <Image Source="../Images/search-48.png" Height="16" />
+            </Button>
+            <TextBox  Margin="5" Width="100" Height="25" Text="{Binding Latitude}" VerticalContentAlignment="Center" IsReadOnly="True"/>
+            <TextBox  Margin="5" Width="100" Height="25" Text="{Binding Longitude}" VerticalContentAlignment="Center"  IsReadOnly="True"/>
+            <Button  Height="25" Width="50" HorizontalAlignment="Right" Click="btnSelect_Click">Select</Button>
+        </StackPanel>
+        <m:Map x:Name="SchedwinMap" Grid.Row="1" Grid.Column="0" CredentialsProvider="C0vx646enR6ewdPZynFd~3EGZlsBuA3NGxFsp_HeJKw~AggciBx1Ya7MXOzjRb3kYPL7A8NNfLv2lTmOkK8p7sISNmes8MyuOVvKVqgEy2KI"
+                    Center="{Binding CenterLoc,Mode=TwoWay}"  ZoomLevel="7"  Culture="en-au"  MouseLeftButtonDown="SchedwinMap_MouseLeftButtonDown" >
+            <m:Map.Mode>
+                <m:RoadMode/>
+            </m:Map.Mode>
+            <m:Map.ContextMenu>
+                <ContextMenu >
+                    <MenuItem Header="Show nearby places" Click="btnShowNearby_Click"/>
+                    <MenuItem Header ="Clear places" Click="btnClearNearby_Click"/>
+                </ContextMenu>
+            </m:Map.ContextMenu>
+            <m:Pushpin Location="{Binding PushPinLoc,Mode=TwoWay}"/>
+        </m:Map>
+    </Grid>
+</Window>

@@ -1,0 +1,188 @@
+﻿<local:ItemControlBase x:Class="Schedwin.Setup.AircraftTypeCntrlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:scheddata="clr-namespace:Schedwin.Data.Classes;assembly=Schedwin.Data"
+             xmlns:local="clr-namespace:Schedwin.Setup" Background="Silver"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" Width="auto" Height="auto" >
+
+    <local:ItemControlBase.DataContext>
+        <local:AircraftTypeCntrlViewModel/>
+    </local:ItemControlBase.DataContext>
+    
+    <telerik:RadTabControl Grid.Row="0" Grid.Column="0" Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Silver" TabStripPlacement="Top" AllTabsEqualHeight="True">
+        <telerik:RadTabItem Header="Details" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1" Grid.Column="1" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" >Aircraft Type:</Label>
+                    <TextBox Margin="5" Grid.Row="0" Grid.Column="1" Width="100"  Text="{Binding AircraftType}"/>
+                    <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right">Passengers:</Label>
+                    <TextBox  Margin="5" Grid.Row="1" Grid.Column="1" Width="100" Text="{Binding NumPax}"/>
+                    <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right">Max Take off Weight (lb):</Label>
+                    <TextBox Margin="5" Grid.Row="2" Grid.Column="1" Width="100" Text="{Binding MaxTakeOffWeight}"/>
+                    <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right">Block Speed (km/h):</Label>
+                    <TextBox Margin="5" Grid.Row="3" Grid.Column="1" Width="100" Text="{Binding BlockSpeed}" />
+                    <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" >Range (km)</Label>
+                    <TextBox Margin="5" Grid.Row="4" Grid.Column="1" Width="100" Text="{Binding Range}"/>
+                    <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right">Demurrage:</Label>
+                    <TextBox  Margin="5" Grid.Row="5" Grid.Column="1" Width="100"  Text="{Binding Demurrage}"/>
+                    <Label Grid.Row="5" Grid.Column="2" HorizontalAlignment="Right">Endurance:</Label>
+                    <TextBox  Margin="5" Grid.Row="5" Grid.Column="3" Width="100" Text="{Binding Endurance}" HorizontalAlignment="Left"/>
+                    <Label Grid.Row="6" Grid.Column="0" HorizontalAlignment="Right">Additional Turnaround Time:</Label>
+                    <TextBox  Margin="6" Grid.Row="6" Grid.Column="1" Width="100" Text="{Binding TurnAroundTime}"/>
+                    <Label Grid.Row="6" Grid.Column="2" HorizontalAlignment="right">Max Stops:</Label>
+                    <TextBox  Margin="6" Grid.Row="6" Grid.Column="3" Width="100" Text="{Binding MaxStops}" HorizontalAlignment="Left"/>
+                    <Label Grid.Row="7" Grid.Column="0"  HorizontalAlignment="Right">Fuel Type:</Label>
+                    <telerik:RadComboBox Margin="5" Grid.Row="7" Grid.Column="1" Width="100"  Text="{Binding SelectedFuelType}"  ItemsSource="{Binding FuelTypes}"  DisplayMemberPath="TypeName"  SelectedItem="{Binding SelectedFuelType}"/>
+                    <Label Grid.Row="7" Grid.Column="2" HorizontalAlignment="Right">Fuel Flow (lb/h):</Label>
+                    <TextBox Margin="5" Grid.Row="7" Grid.Column="3" Width="100" Text="{Binding FuelFlow}" HorizontalAlignment="Left"/>
+                    <CheckBox Margin="5" Grid.Row="9" Grid.Column="1"  IsChecked="{Binding TwinEngine}">Twin Engine</CheckBox>
+                    <Label Margin="5" Grid.Row="10"  Grid.Column="0" HorizontalAlignment="Right">Description:</Label>
+                    <Label Margin="5"  Grid.Row="9"  Grid.Column="2" HorizontalAlignment="Right">Fuel Arm:</Label>
+                    <TextBox  Margin="6" Grid.Row="9" Grid.Column="3" Width="100" Text="{Binding FuelArm}" HorizontalAlignment="Left"/>
+                    <TextBox Margin="5" Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="3" Height="100" VerticalContentAlignment="Top" HorizontalAlignment="Stretch" Text="{Binding Description}"/>
+                </Grid>
+            </Grid>
+        </telerik:RadTabItem>
+        <telerik:RadTabItem Header="Loading Arrangements">
+            <telerik:RadContextMenu.ContextMenu>
+                <telerik:RadContextMenu x:Name="radContextMenu" >
+                    <telerik:RadMenuItem Header="New Loading Arrangement" Click="AddNewLoadingArrangement_Click" >
+                        <telerik:RadMenuItem.IconTemplate>
+                            <DataTemplate>
+                                <Image Source="../Images/add.png"/>
+                            </DataTemplate>
+                        </telerik:RadMenuItem.IconTemplate>
+                    </telerik:RadMenuItem>
+                </telerik:RadContextMenu>
+            </telerik:RadContextMenu.ContextMenu>
+            <Grid>
+                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                </Grid.RowDefinitions>
+                <telerik:RadGridView Grid.Row="1" Grid.Column="1"  ShowGroupPanel="False" AutoGenerateColumns="False"  ItemsSource="{Binding LoadingArrangements}"
+                                       RowDetailsVisibilityMode="Visible"  IsReadOnly="True" SelectedItem="{Binding SelectedArrangement}">
+                    <telerik:RadGridView.Columns>
+                        <telerik:GridViewDataColumn Header="Loading Arrangement" DataMemberBinding="{Binding Name}" />
+                    </telerik:RadGridView.Columns>
+                    <telerik:RadGridView.RowDetailsTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <telerik:RadExpander IsExpanded="False" Header="Pax">
+                                    <telerik:RadGridView ShowGroupPanel="False" AutoGenerateColumns="False"  ItemsSource="{Binding PaxStations}" >
+                                        <telerik:RadGridView.Columns>
+                                            <telerik:GridViewDataColumn Header="Number" DataMemberBinding="{Binding Number}"/>
+                                            <telerik:GridViewDataColumn Header="Name" DataMemberBinding="{Binding Name}"/>
+                                            <telerik:GridViewDataColumn Header="Arm" DataMemberBinding="{Binding Arm}"/>
+                                            <telerik:GridViewDataColumn Header="Weight" DataMemberBinding="{Binding Weight}"/>
+                                            <telerik:GridViewDataColumn Header="Type" DataMemberBinding="{Binding Type}"/>
+                                            <telerik:GridViewDataColumn Header="Max Seats" DataMemberBinding="{Binding MaxSeats}"/>
+                                            <telerik:GridViewDataColumn Header="0 Pax" DataMemberBinding="{Binding PaxStations[0]}"/>
+                                            <telerik:GridViewDataColumn Header="1 Pax" DataMemberBinding="{Binding  PaxStations[1]}"/>
+                                            <telerik:GridViewDataColumn Header="2 Pax" DataMemberBinding="{Binding  PaxStations[2]}"/>
+                                            <telerik:GridViewDataColumn Header="3 Pax" DataMemberBinding="{Binding  PaxStations[3]}"/>
+                                            <telerik:GridViewDataColumn Header="4 Pax" DataMemberBinding="{Binding  PaxStations[4]}"/>
+                                            <telerik:GridViewDataColumn Header="5 Pax" DataMemberBinding="{Binding  PaxStations[5]}"/>
+                                            <telerik:GridViewDataColumn Header="6 Pax" DataMemberBinding="{Binding  PaxStations[6]}"/>
+                                            <telerik:GridViewDataColumn Header="7 Pax" DataMemberBinding="{Binding  PaxStations[7]}"/>
+                                            <telerik:GridViewDataColumn Header="8 Pax" DataMemberBinding="{Binding  PaxStations[8]}"/>
+                                            <telerik:GridViewDataColumn Header="9 Pax" DataMemberBinding="{Binding  PaxStations[9]}"/>
+                                            <telerik:GridViewDataColumn Header="10 Pax" DataMemberBinding="{Binding PaxStations[10] }"/>
+                                            <telerik:GridViewDataColumn Header="11 Pax" DataMemberBinding="{Binding  PaxStations[11]}"/>
+                                            <telerik:GridViewDataColumn Header="12 Pax" DataMemberBinding="{Binding  PaxStations[12]}"/>
+                                            <telerik:GridViewDataColumn Header="13 Pax" DataMemberBinding="{Binding  PaxStations[13]}"/>
+                                            <telerik:GridViewDataColumn Header="14 Pax" DataMemberBinding="{Binding  PaxStations[14]}"/>
+                                            <telerik:GridViewDataColumn Header="15 Pax" DataMemberBinding="{Binding  PaxStations[15]}"/>
+                                        </telerik:RadGridView.Columns>
+                                        <telerik:RadContextMenu.ContextMenu>
+                                            <telerik:RadContextMenu x:Name="radContextMenu2" Opening="radContextMenu2_Opening" >
+                                                <telerik:RadMenuItem Header="New Pax Row" Click="NewPaxRow_Click" >
+                                                    <telerik:RadMenuItem.IconTemplate>
+                                                        <DataTemplate>
+                                                            <Image Source="../Images/add.png"/>
+                                                        </DataTemplate>
+                                                    </telerik:RadMenuItem.IconTemplate>
+                                                </telerik:RadMenuItem>
+                                                <telerik:RadMenuItem Header="Delete Row" Click="DeletePaxRow_Click" >
+                                                    <telerik:RadMenuItem.IconTemplate>
+                                                        <DataTemplate>
+                                                            <Image Source="../Images/delete.png"/>
+                                                        </DataTemplate>
+                                                    </telerik:RadMenuItem.IconTemplate>
+                                                </telerik:RadMenuItem>
+                                            </telerik:RadContextMenu>
+                                        </telerik:RadContextMenu.ContextMenu>
+                                    </telerik:RadGridView>
+                                </telerik:RadExpander>
+                                <telerik:RadExpander IsExpanded="False" Header="Freight">
+                                    <telerik:RadGridView ShowGroupPanel="False" AutoGenerateColumns="False"  ItemsSource="{Binding WeightStations}" >
+                                        <telerik:RadGridView.Columns>
+                                            <telerik:GridViewDataColumn Header="Number" DataMemberBinding="{Binding Number}"/>
+                                            <telerik:GridViewDataColumn Header="Name" DataMemberBinding="{Binding Name}"/>
+                                            <telerik:GridViewDataColumn Header="Arm" DataMemberBinding="{Binding Arm}"/>
+                                            <telerik:GridViewDataColumn Header="Max Weight" DataMemberBinding="{Binding WeightStation.StationWeight}"/>
+                                            <telerik:GridViewDataColumn Header="Rank" DataMemberBinding="{Binding WeightStation.Rank}"/>
+                                        </telerik:RadGridView.Columns>
+                                        <telerik:RadContextMenu.ContextMenu>
+                                            <telerik:RadContextMenu x:Name="radContextMenu3"  Opening="radContextMenu3_Opening">
+                                                <telerik:RadMenuItem Header="New Freight Row" Click="NewFreightRow_Click " >
+                                                    <telerik:RadMenuItem.IconTemplate>
+                                                        <DataTemplate>
+                                                            <Image Source="../Images/add.png"/>
+                                                        </DataTemplate>
+                                                    </telerik:RadMenuItem.IconTemplate>
+                                                </telerik:RadMenuItem>
+                                            </telerik:RadContextMenu>
+                                        </telerik:RadContextMenu.ContextMenu>
+                                    </telerik:RadGridView>
+                                </telerik:RadExpander>
+                                
+                            </StackPanel>
+
+                        </DataTemplate>
+                    </telerik:RadGridView.RowDetailsTemplate>
+                </telerik:RadGridView>
+            </Grid>
+        </telerik:RadTabItem>
+    </telerik:RadTabControl>
+</local:ItemControlBase>
