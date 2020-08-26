@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TPRegionalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CRM">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="ADDRESS1" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="ADDRESS2" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="ADDRESS3" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="ADDRESS4" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="PCODE" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="ANALYSIS_MASTER1" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="ANALYSIS_MASTER2" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="ANALYSIS_MASTER3" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="CREATED" Type="datetime" Nullable="false" />
+          <Property Name="TAXINDICATOR" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="COMMISSION" Type="numeric" Precision="8" Scale="4" Nullable="false" />
+          <Property Name="MARKUP" Type="numeric" Precision="8" Scale="4" Nullable="false" />
+          <Property Name="LANGUAGE" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="SUPPLIERCHAIN" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="SUPPLIERMASTER" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="DEFAULT_CURRENCY" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="DELETED" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CRM_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PREFER" Type="int" Nullable="false" />
+          <Property Name="IMPORT_FORMAT" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="IMPORT_FILE_LOCATION" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="ADDRESS5" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="UDTEXT1" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="UDTEXT2" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="UDTEXT3" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="UDTEXT4" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="UDTEXT5" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="EDITED_BY" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="EDITED_DATE" Type="datetime" Nullable="false" />
+          <Property Name="INT_ACCESS" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="INT_LOGIN" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="INT_PASSWORD" Type="char" MaxLength="20" Nullable="false" />
+          <Property Name="MAILING_NAME" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="MAILING_ADDRESS1" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="MAILING_ADDRESS2" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="MAILING_ADDRESS3" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="MAILING_ADDRESS4" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="MAILING_ADDRESS5" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="MAILING_PCODE" Type="char" MaxLength="12" />
+          <Property Name="VOUCHER_UPDATE" Type="int" Nullable="false" />
+          <Property Name="SOD_ID" Type="int" Nullable="false" />
+          <Property Name="ANALYSIS_MASTER4" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="ANALYSIS_MASTER5" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="ANALYSIS_MASTER6" Type="char" MaxLength="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOC">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="DST_CODE" Type="char" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'TourplanIS_PAF.dbo.Schedwin_Vouchers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Schedwin_Vouchers">
+          <Key>
+            <PropertyRef Name="CODE" />
+            <PropertyRef Name="SERVICE" />
+            <PropertyRef Name="DATE" />
+            <PropertyRef Name="TRAVELDATE" />
+            <PropertyRef Name="NAME" />
+            <PropertyRef Name="Voucher" />
+            <PropertyRef Name="Currency" />
+            <PropertyRef Name="Reference" />
+          </Key>
+          <Property Name="IDX" Type="uniqueidentifier" />
+          <Property Name="CODE" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="SERVICE" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="DATE" Type="datetime" Nullable="false" />
+          <Property Name="TRAVELDATE" Type="datetime" Nullable="false" />
+          <Property Name="NAME" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Voucher" Type="int" Nullable="false" />
+          <Property Name="Cost" Type="numeric" Precision="38" Scale="6" />
+          <Property Name="Currency" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="Reference" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="TPRegionalModelStoreContainer">
+          <EntitySet Name="CRM" EntityType="Self.CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOC" EntityType="Self.LOC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedwin_Vouchers" EntityType="Self.Schedwin_Vouchers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Schedwin_Vouchers].[IDX] AS [IDX], 
+    [Schedwin_Vouchers].[CODE] AS [CODE], 
+    [Schedwin_Vouchers].[SERVICE] AS [SERVICE], 
+    [Schedwin_Vouchers].[DATE] AS [DATE], 
+    [Schedwin_Vouchers].[TRAVELDATE] AS [TRAVELDATE], 
+    [Schedwin_Vouchers].[NAME] AS [NAME], 
+    [Schedwin_Vouchers].[Voucher] AS [Voucher], 
+    [Schedwin_Vouchers].[Cost] AS [Cost], 
+    [Schedwin_Vouchers].[Currency] AS [Currency], 
+    [Schedwin_Vouchers].[Reference] AS [Reference]
+    FROM [dbo].[Schedwin_Vouchers] AS [Schedwin_Vouchers]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TPRegionalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CRM">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADDRESS1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADDRESS2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADDRESS3" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADDRESS4" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PCODE" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ANALYSIS_MASTER1" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ANALYSIS_MASTER2" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ANALYSIS_MASTER3" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CREATED" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TAXINDICATOR" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="COMMISSION" Type="Decimal" Precision="8" Scale="4" Nullable="false" />
+          <Property Name="MARKUP" Type="Decimal" Precision="8" Scale="4" Nullable="false" />
+          <Property Name="LANGUAGE" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="SUPPLIERCHAIN" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="SUPPLIERMASTER" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DEFAULT_CURRENCY" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="DELETED" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CRM_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PREFER" Type="Int32" Nullable="false" />
+          <Property Name="IMPORT_FORMAT" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IMPORT_FILE_LOCATION" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ADDRESS5" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UDTEXT1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UDTEXT2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UDTEXT3" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UDTEXT4" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UDTEXT5" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EDITED_BY" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EDITED_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="INT_ACCESS" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="INT_LOGIN" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="INT_PASSWORD" Type="String" MaxLength="20" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="MAILING_NAME" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MAILING_ADDRESS1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MAILING_ADDRESS2" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MAILING_ADDRESS3" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MAILING_ADDRESS4" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MAILING_ADDRESS5" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MAILING_PCODE" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+          <Property Name="VOUCHER_UPDATE" Type="Int32" Nullable="false" />
+          <Property Name="SOD_ID" Type="Int32" Nullable="false" />
+          <Property Name="ANALYSIS_MASTER4" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ANALYSIS_MASTER5" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ANALYSIS_MASTER6" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOC">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="NAME" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DST_CODE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="TPRegionalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CRMs" EntityType="Self.CRM" />
+          <EntitySet Name="LOCs" EntityType="Self.LOC" />
+          <EntitySet Name="Schedwin_Vouchers" EntityType="TPRegionalModel.Schedwin_Vouchers" />
+        </EntityContainer>
+        <EntityType Name="Schedwin_Vouchers">
+          <Key>
+            <PropertyRef Name="CODE" />
+            <PropertyRef Name="SERVICE" />
+            <PropertyRef Name="DATE" />
+            <PropertyRef Name="TRAVELDATE" />
+            <PropertyRef Name="NAME" />
+            <PropertyRef Name="Voucher" />
+            <PropertyRef Name="Currency" />
+            <PropertyRef Name="Reference" />
+          </Key>
+          <Property Name="IDX" Type="Guid" />
+          <Property Name="CODE" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Name="SERVICE" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TRAVELDATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Voucher" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="Currency" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="Reference" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TPRegionalModelStoreContainer" CdmEntityContainer="TPRegionalEntities">
+          <EntitySetMapping Name="CRMs">
+            <EntityTypeMapping TypeName="TPRegionalModel.CRM">
+              <MappingFragment StoreEntitySet="CRM">
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="ADDRESS1" ColumnName="ADDRESS1" />
+                <ScalarProperty Name="ADDRESS2" ColumnName="ADDRESS2" />
+                <ScalarProperty Name="ADDRESS3" ColumnName="ADDRESS3" />
+                <ScalarProperty Name="ADDRESS4" ColumnName="ADDRESS4" />
+                <ScalarProperty Name="PCODE" ColumnName="PCODE" />
+                <ScalarProperty Name="ANALYSIS_MASTER1" ColumnName="ANALYSIS_MASTER1" />
+                <ScalarProperty Name="ANALYSIS_MASTER2" ColumnName="ANALYSIS_MASTER2" />
+                <ScalarProperty Name="ANALYSIS_MASTER3" ColumnName="ANALYSIS_MASTER3" />
+                <ScalarProperty Name="CREATED" ColumnName="CREATED" />
+                <ScalarProperty Name="TAXINDICATOR" ColumnName="TAXINDICATOR" />
+                <ScalarProperty Name="COMMISSION" ColumnName="COMMISSION" />
+                <ScalarProperty Name="MARKUP" ColumnName="MARKUP" />
+                <ScalarProperty Name="LANGUAGE" ColumnName="LANGUAGE" />
+                <ScalarProperty Name="SUPPLIERCHAIN" ColumnName="SUPPLIERCHAIN" />
+                <ScalarProperty Name="SUPPLIERMASTER" ColumnName="SUPPLIERMASTER" />
+                <ScalarProperty Name="DEFAULT_CURRENCY" ColumnName="DEFAULT_CURRENCY" />
+                <ScalarProperty Name="DELETED" ColumnName="DELETED" />
+                <ScalarProperty Name="CRM_ID" ColumnName="CRM_ID" />
+                <ScalarProperty Name="PREFER" ColumnName="PREFER" />
+                <ScalarProperty Name="IMPORT_FORMAT" ColumnName="IMPORT_FORMAT" />
+                <ScalarProperty Name="IMPORT_FILE_LOCATION" ColumnName="IMPORT_FILE_LOCATION" />
+                <ScalarProperty Name="ADDRESS5" ColumnName="ADDRESS5" />
+                <ScalarProperty Name="UDTEXT1" ColumnName="UDTEXT1" />
+                <ScalarProperty Name="UDTEXT2" ColumnName="UDTEXT2" />
+                <ScalarProperty Name="UDTEXT3" ColumnName="UDTEXT3" />
+                <ScalarProperty Name="UDTEXT4" ColumnName="UDTEXT4" />
+                <ScalarProperty Name="UDTEXT5" ColumnName="UDTEXT5" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="EDITED_BY" ColumnName="EDITED_BY" />
+                <ScalarProperty Name="EDITED_DATE" ColumnName="EDITED_DATE" />
+                <ScalarProperty Name="INT_ACCESS" ColumnName="INT_ACCESS" />
+                <ScalarProperty Name="INT_LOGIN" ColumnName="INT_LOGIN" />
+                <ScalarProperty Name="INT_PASSWORD" ColumnName="INT_PASSWORD" />
+                <ScalarProperty Name="MAILING_NAME" ColumnName="MAILING_NAME" />
+                <ScalarProperty Name="MAILING_ADDRESS1" ColumnName="MAILING_ADDRESS1" />
+                <ScalarProperty Name="MAILING_ADDRESS2" ColumnName="MAILING_ADDRESS2" />
+                <ScalarProperty Name="MAILING_ADDRESS3" ColumnName="MAILING_ADDRESS3" />
+                <ScalarProperty Name="MAILING_ADDRESS4" ColumnName="MAILING_ADDRESS4" />
+                <ScalarProperty Name="MAILING_ADDRESS5" ColumnName="MAILING_ADDRESS5" />
+                <ScalarProperty Name="MAILING_PCODE" ColumnName="MAILING_PCODE" />
+                <ScalarProperty Name="VOUCHER_UPDATE" ColumnName="VOUCHER_UPDATE" />
+                <ScalarProperty Name="SOD_ID" ColumnName="SOD_ID" />
+                <ScalarProperty Name="ANALYSIS_MASTER4" ColumnName="ANALYSIS_MASTER4" />
+                <ScalarProperty Name="ANALYSIS_MASTER5" ColumnName="ANALYSIS_MASTER5" />
+                <ScalarProperty Name="ANALYSIS_MASTER6" ColumnName="ANALYSIS_MASTER6" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOCs">
+            <EntityTypeMapping TypeName="TPRegionalModel.LOC">
+              <MappingFragment StoreEntitySet="LOC">
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="DST_CODE" ColumnName="DST_CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedwin_Vouchers">
+            <EntityTypeMapping TypeName="TPRegionalModel.Schedwin_Vouchers">
+              <MappingFragment StoreEntitySet="Schedwin_Vouchers">
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Voucher" ColumnName="Voucher" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
+                <ScalarProperty Name="TRAVELDATE" ColumnName="TRAVELDATE" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="SERVICE" ColumnName="SERVICE" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+                <ScalarProperty Name="IDX" ColumnName="IDX" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
